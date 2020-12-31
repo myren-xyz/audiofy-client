@@ -1,8 +1,8 @@
 <template>
     <header>
-        <ion-icon name="menu-outline"></ion-icon>
-        <p>logo</p>
-        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-icon name=""></ion-icon>
+        <img src="@/assets/logo.svg"/>
+        <ion-icon name=""></ion-icon>
     </header>
 </template>
 <style scoped>
@@ -16,5 +16,9 @@
     }
     ion-icon{
         font-size: 25px;
+    }
+    img{
+        height: 48px;
+        padding-top: 8px;
     }
 </style>
