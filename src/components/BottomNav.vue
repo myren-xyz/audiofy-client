@@ -23,7 +23,7 @@
 </template>
 <style scoped>
     nav{
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgb(25,23,34);
         width: 100%;
         height: 48px;
         display: flex;

@@ -59,7 +59,7 @@ a{
   width: 90px;
   height: 90px;
   background-color: #eee;
-  border-radius: 50%;
+  border-radius: 12px;
   display: flex;
   place-items: center;
   place-content: center;

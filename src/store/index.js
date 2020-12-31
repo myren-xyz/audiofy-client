@@ -14,47 +14,50 @@ const store = new Vuex.Store({
       {id: 5,title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
     ],
     song: {},
-    profile: {}
+    profile: {
+      user_firstname: 'Guest',
+      user_lastname: 'User'
+    }
   },
   mutations: {
     setSong (state, song) {
       state.song = song;
     },
 
-    setProfile(state){
-      async function fetchurl(){
-        var res = await makeRequest("GET", "http://localhost:4433/api/v1/getProfile")
-        res = JSON.parse(res)
-        state.profile = res
-      }
-      fetchurl();
-    }
+    // setProfile(state){
+    //   async function fetchurl(){
+    //     var res = await makeRequest("GET", "http://localhost:4433/api/v1/getProfile")
+    //     res = JSON.parse(res)
+    //     state.profile = res
+    //   }
+    //   fetchurl();
+    // }
   }
 })
 
-function makeRequest(method, url) {
-  return new Promise(function (resolve, reject) {
-      let xhr = new XMLHttpRequest();
-      xhr.open(method, url, true);
-      xhr.withCredentials = true;
-      xhr.onload = function () {
-          if (this.status >= 200 && this.status < 300) {
-              resolve(xhr.response);
-          } else {
-              reject({
-                  status: this.status,
-                  statusText: xhr.statusText
-              });
-          }
-      };
-      xhr.onerror = function () {
-          reject({
-              status: this.status,
-              statusText: xhr.statusText
-          });
-      };
-      xhr.send();
-  });
-}
+// function makeRequest(method, url) {
+//   return new Promise(function (resolve, reject) {
+//       let xhr = new XMLHttpRequest();
+//       xhr.open(method, url, true);
+//       xhr.withCredentials = true;
+//       xhr.onload = function () {
+//           if (this.status >= 200 && this.status < 300) {
+//               resolve(xhr.response);
+//           } else {
+//               reject({
+//                   status: this.status,
+//                   statusText: xhr.statusText
+//               });
+//           }
+//       };
+//       xhr.onerror = function () {
+//           reject({
+//               status: this.status,
+//               statusText: xhr.statusText
+//           });
+//       };
+//       xhr.send();
+//   });
+// }
 
 export default store;

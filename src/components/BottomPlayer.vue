@@ -167,7 +167,7 @@ export default {
     width: 100%;
     height: 58px;
     bottom: 48px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgb(42,41,54);
     display: flex;
     /* align-items: center; */
 }

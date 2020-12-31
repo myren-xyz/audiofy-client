@@ -14,6 +14,11 @@
       </div>
     </div>
     
+    <div id="banner">
+      <p>this is</p>
+      <h1>Audiofy</h1>
+      <p>a product by Myren</p>
+    </div>
   </div>
 </template>
 
@@ -39,6 +44,12 @@ export default {
 }
 </script>
 <style>
+#banner{
+  background: linear-gradient(45deg, #2a2a2a, rgb(108, 61, 114));
+  padding: 24px;
+  border-radius: 24px;
+  margin-bottom: 240px;
+}
 .home{
   padding: 0 16px;
 }
