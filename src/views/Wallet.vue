@@ -37,6 +37,7 @@ a{
   color: rgb(110, 110, 255);
 }
 .coin{
+  height: 80px;
   margin-top: 16px;
   margin-bottom: 16px;
   padding: 8px;
@@ -48,7 +49,7 @@ a{
   width: 50%;
 }
 .coin-r{
-  height: 90px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,8 +57,8 @@ a{
   color: #949494
 }
 .round{
-  width: 90px;
-  height: 90px;
+  width: 80px !important;
+  height: 80px !important;
   background-color: #eee;
   border-radius: 12px;
   display: flex;
@@ -69,5 +70,10 @@ a{
 }
 .green{
   background-color: rgb(77, 211, 133);
+}
+@media screen and (min-width: 728px){
+.wallet{
+  padding: 0 64px;
+}
 }
 </style>

@@ -1,10 +1,12 @@
 <template>
-<div v-show="song.title" class="bplayer" @touchmove="touchmove($event)" @touchstart="touchstart($event)" @touchend="touchend($event)">
+<div v-show="song.title" class="bplayer">
     <!-- <audio id="aud" ref="audio" controls></audio> -->
     <div id="audiofy-player">
-        <div id="len"><div id="len-inner"></div></div>
-        <h5 id="song-title">{{song.title}}</h5>
-        <p id="song-by">{{song.by}}</p>
+        <div id="len" @click="seekto($event)"><div id="len-inner"></div></div>
+        <div id="gesture"  @touchmove="touchmove($event)" @touchstart="touchstart($event)" @touchend="touchend($event)">
+            <h5 id="song-title">{{song.title}}</h5>
+            <p id="song-by">{{song.by}}</p>
+        </div>
     </div>
 </div>
 </template>
@@ -12,6 +14,7 @@
 import {mapState} from 'vuex';
 import Hls from 'hls.js';
 const au = new Audio();
+au.preload = "metadata";
 export default {
     data: function(){
         return {
@@ -31,7 +34,7 @@ export default {
         }
     },
     mounted() {
-        const audiofyPlayer = this.$el.querySelector('#audiofy-player');
+        // const audiofyPlayer = this.$el.querySelector('#gesture');
 
         this.$store.subscribe((mutation)=>{
             if(mutation.type === 'setSong') {
@@ -54,7 +57,7 @@ export default {
             }
         })
         au.addEventListener('timeupdate', ()=>{
-            audiofyPlayer.querySelector('#len-inner').style.width = `${(au.currentTime/au.duration)*100}vw`;
+            this.$el.querySelector('#len-inner').style.width = `${(au.currentTime/au.duration)*100}vw`;
         })
         
     },
@@ -134,14 +137,23 @@ export default {
             }
             e.preventDefault()
         
-        }//touch end
+        },//touch end
+        seekto: function(e){
+            au.currentTime = au.duration*e.layerX/this.$el.clientWidth
+            // console.log(this.$el.clientWidth);
+        }
     },
     computed: mapState(["song"])
 }
-
-// au.addEventListener('playing', e=>{
-//     console.log(e);
-// })
+import store from '../store/index'
+au.addEventListener('ended', ()=>{
+    let currentSongId = store.state.song.id +1;
+    let nextSong = store.state.songs.filter(song => song.id == currentSongId);
+    if(nextSong[0] != null){
+        store.commit('setSong', nextSong[0])
+    }
+    console.log(nextSong);
+})
 // setInterval(() => {
 //     console.log(au.currentTime/au.duration * 100);
 //     // console.log(au.duration);
@@ -174,13 +186,6 @@ export default {
 .player{
     width: 100%;
 }
-.progress--bar{
-    transition: all 0.3s ease-in-out;
-}
-.progress--played{
-    background-color: #3aa7ff !important;
-    transition: all 0.3s ease-in-out;
-}
 audio{
     display: block;
     width: 100%;
@@ -192,6 +197,7 @@ audio{
     width: 100vw;
     height: 10px;
     background-color: rgba(238, 238, 238, 0.15);
+    z-index: 150;
 }
 #len-inner{
     width: 0vw;
@@ -214,5 +220,15 @@ audio{
 #song-title{
     text-align: center;
     padding-block-start: 5px;
+}
+#gesture{
+    height: 48px;
+    width: 100%
+}
+
+@media screen and (min-width: 728px){
+.bplayer{
+    bottom: 0px;
+}
 }
 </style>

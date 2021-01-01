@@ -2,16 +2,12 @@
   <div class="home">
     <h2>Hot in Audiofy!</h2>
     <div class="slider">
-      <div class="slider-inner">
         <Song v-for="song in songs" :song="song" :key="song.id"/>
-      </div>
     </div>
 
     <h2>New Uploads</h2>
     <div class="slider">
-      <div class="slider-inner">
         <Song v-for="song in songs" :song="song" :key="song.id"/>
-      </div>
     </div>
     
     <div id="banner">
@@ -19,23 +15,37 @@
       <h1>Audiofy</h1>
       <p>a product by Myren</p>
     </div>
+
+    <h2>Artists</h2>
+    <div class="slider">
+      <div v-for="artist in artists" :key="artist.id">
+        <router-link to="artist/mrshajarian">
+        <Artist :artist="artist"/>
+        </router-link>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Song from '@/components/Song.vue'
+import Artist from '@/components/Artist.vue'
 
 export default {
   name: 'Home',
   
   components: {
-    // HelloWorld
-    Song
+    Song,
+    Artist
   },
   computed: {
     songs: function(){
       return this.$store.state.songs
+    },
+    artists: function(){
+      return this.$store.state.artists
     }
   },
   created(){
@@ -48,7 +58,7 @@ export default {
   background: linear-gradient(45deg, #2a2a2a, rgb(108, 61, 114));
   padding: 24px;
   border-radius: 24px;
-  margin-bottom: 240px;
+  margin-bottom: 32px;
 }
 .home{
   padding: 0 16px;
@@ -59,12 +69,29 @@ export default {
 }
 .slider{
   width: 100%;
-  overflow-x: scroll;
-}
-.slider::-webkit-scrollbar {
-  height: 0px;
-}
-.slider-inner{
   display: flex;
+  overflow-x: scroll;
+  padding: 8px 0 16px 0;
+  margin-bottom: 16px;
+}
+
+@media screen and (min-width:728px){
+.home{
+  padding: 0 64px;
+}
+.slider::-webkit-scrollbar{
+  background-color: rgb(12, 11, 11);
+  height: 8px;
+}
+.slider::-webkit-scrollbar-button{
+  display: none;
+}
+.slider::-webkit-scrollbar-track-piece{
+  background-color: rgb(31, 29, 43);
+}
+.slider::-webkit-scrollbar-thumb{
+  background-color: #707070;
+  border-radius: 4px;
+}
 }
 </style>

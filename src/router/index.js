@@ -7,6 +7,7 @@ import Search from '../views/Search.vue'
 import Wallet from '../views/Wallet.vue'
 import Library from '../views/Library.vue'
 import Profile from '../views/Profile.vue'
+import Artist from '../views/Artist.vue'
 
 
 Vue.use(VueRouter)
@@ -36,6 +37,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/artist/:username',
+    name: 'Artist',
+    component: Artist
   }
 ]
 

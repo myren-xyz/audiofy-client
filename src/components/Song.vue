@@ -31,6 +31,9 @@ export default {
 }
 </script>
 <style>
+h4, .songBy{
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+}
 .song-wrapper{
     margin-right: 16px;
 }
@@ -38,9 +41,9 @@ export default {
     display: flex;
     place-items: center;
     place-content: center;
-    width: 120px;
-    height: 120px;
-    background-size: 120px !important;
+    width: 160px;
+    height: 160px;
+    background-size: 160px !important;
 }
 .songBy{
     font-size: 13px;
@@ -50,10 +53,10 @@ export default {
     display: flex;
     place-content: center;
     place-items: center;
-    widows: 48px;
-    height: 48px;
+    widows: 58px;
+    height: 58px;
 }
 .song span ion-icon{
-    font-size: 38px;
+    font-size: 58px;
 }
 </style>

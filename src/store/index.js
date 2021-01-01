@@ -17,7 +17,10 @@ const store = new Vuex.Store({
     profile: {
       user_firstname: 'Guest',
       user_lastname: 'User'
-    }
+    },
+    artists: [
+      {id: 0, title:'Mohammad Reza Shajariaan', username:'mrshajarian', picURL:'https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg'}
+    ],
   },
   mutations: {
     setSong (state, song) {

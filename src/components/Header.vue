@@ -8,11 +8,14 @@
 <style scoped>
     header{
         height: 48px;
-        background-color: rgba(0, 0, 0, 0.2);
+        width: 100%;
+        z-index: 123;
+        background-color:  rgb(25,23,34);
         display: flex;
         padding: 0 8px;
         place-items: center;
         justify-content: space-between;
+        position: fixed;
     }
     ion-icon{
         font-size: 25px;

@@ -1,18 +1,27 @@
 <template>
   <div id="app">
     <Header/>
+    <div id="wrapper">
+    <div id="side-wrapper">
+    <Side/>
+    </div>
+    <div id="main">
     <router-view/>
+    </div>
+    </div>
     <BottomPlayer/>
     <BottomNav/>
   </div>
 </template>
 <script>
 import Header from './components/Header.vue'
+import Side from './components/Side.vue'
 import BottomPlayer from './components/BottomPlayer.vue';
 import BottomNav from './components/BottomNav.vue'
 export default {
   components: {
     Header,
+    Side,
     BottomPlayer,
     BottomNav
   }
@@ -43,24 +52,28 @@ h1,h2,h3,h4,h5,h6{
 a, p{
   font-family: 'Mulish', sans-serif;
 }
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+#main{
+  padding-top: 48px;
+  padding-bottom: 80px;
 }
-
-#nav {
-  padding: 30px;
+@media screen and (min-width: 728px){
+#wrapper{
+  width: 100%;
+  height: calc(100vh-48px);
+  display: flex;
+  justify-content: space-between;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+#main{
+  position: relative;
+  top:48px;
+  left: 16%;
+  width: 84%;
+  padding: 0 0px 80px 0px ;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
+#side-wrapper{
+  top:48px;
+  width: 16%;
+  position: fixed;
+}
+}
 </style>

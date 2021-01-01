@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav class="bottom-nav">
         <router-link to="/">
             <span><ion-icon name="home-outline"></ion-icon></span>
         </router-link>
@@ -12,9 +12,9 @@
             <span><ion-icon name="wallet-outline"></ion-icon></span>
         </router-link>
 
-        <!-- <router-link to="/library">
+        <router-link to="/library">
             <span><ion-icon name="layers-outline"></ion-icon></span>
-        </router-link> -->
+        </router-link>
 
         <router-link to="/profile">
             <span><ion-icon name="person-outline"></ion-icon></span>
@@ -45,4 +45,10 @@
         place-content: center;
         place-items: center;
     }
+
+@media screen and (min-width: 728px){
+.bottom-nav{
+    display: none;
+}
+}
 </style>
