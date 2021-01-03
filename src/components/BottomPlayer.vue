@@ -149,8 +149,13 @@ import store from '../store/index'
 au.addEventListener('ended', ()=>{
     let currentSongId = store.state.song.id +1;
     let nextSong = store.state.songs.filter(song => song.id == currentSongId);
-    if(nextSong[0] != null){
+    let repeat = store.state.opts.repeat;
+    if(nextSong[0] != null && repeat == false){
         store.commit('setSong', nextSong[0])
+    }
+    if(nextSong[0] != null && repeat == true){
+        au.currentTime = 0;
+        au.play();
     }
     console.log(nextSong);
 })
