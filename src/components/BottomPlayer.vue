@@ -45,13 +45,10 @@ export default {
                 if(Hls.isSupported()){
                     hls.loadSource(stream);
                     hls.attachMedia(audio);
-                }else if(audio.canPlayType('application/application/x-mpegURL')){
+                }else if(audio.canPlayType('application/x-mpegURL') || audio.canPlayType('application/vnd.apple.mpegurl')){
                     audio.src = stream;
                 }
                 
-                // au.addEventListener('loadeddata',()=>{
-                //     audiofyPlayer.textContent = getTimeCodeFromNum(au.duration)
-                // })
                 au.play()
                 this.isPlaying = true;
             }
@@ -98,7 +95,6 @@ export default {
                     let nextSong = this.$store.state.songs.filter(song => song.id == (1+currentSongId));
                     if(nextSong[0] != null){
                         this.$store.commit('setSong', nextSong[0])
-                        // console.log(nextSong[0]);
                         this.isPlaying = true;
                     }
                 }
@@ -159,23 +155,7 @@ au.addEventListener('ended', ()=>{
     }
     console.log(nextSong);
 })
-// setInterval(() => {
-//     console.log(au.currentTime/au.duration * 100);
-//     // console.log(au.duration);
-// }, 1000);
 
-// function getTimeCodeFromNum(num) {
-//   let seconds = parseInt(num);
-//   let minutes = parseInt(seconds / 60);
-//   seconds -= minutes * 60;
-//   const hours = parseInt(minutes / 60);
-//   minutes -= hours * 60;
-
-//   if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-//   return `${String(hours).padStart(2, 0)}:${minutes}:${String(
-//     seconds % 60
-//   ).padStart(2, 0)}`;
-// }
 </script>
 
 <style>

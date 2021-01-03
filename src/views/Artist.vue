@@ -4,6 +4,9 @@
         <div class="artist-data-wrapper">
             <div style="background-image: url('https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg')" id="artist-avatar"></div>
             <h4 class="artist-title">{{artist.title}}</h4>
+            <div class="tracks-wrapper">
+                
+            </div>
         </div>
     </div>
 </template>
