@@ -5,7 +5,9 @@
             <div style="background-image: url('https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg')" id="artist-avatar"></div>
             <h4 class="artist-title">{{artist.title}}</h4>
             <div class="tracks-wrapper">
-                
+                <div v-for="song in songs" :key="song.id">
+                    <p>{{song.title}}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -18,6 +20,11 @@ export default {
                 username: this.$route.params.username,
                 title: 'Mohammad Reza Shajarian'
             }
+        }
+    },
+    computed: {
+        songs(){
+            return this.$store.state.songs.filter(song => song.artist_id == 9121010000)
         }
     }
 }
