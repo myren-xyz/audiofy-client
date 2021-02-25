@@ -26,12 +26,15 @@ export default {
 }
 #avatar{
     border: 2px solid #eee;
-    width: 160px;
-    height: 160px;
+    width: 91px;
+    height: 91px;
     border-radius: 50%;
-    background-size: 160px 160px !important;
+    background-size: 91px !important;
 }
 .artist-title{
-    margin-top: 8px;
+    margin-top: 6px;
+    font-size: 11px;
+    max-width: 91px;
+    color: #c1c1c1;
 }
 </style>

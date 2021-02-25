@@ -34,6 +34,11 @@ export default {
 h4, .songBy{
     -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
 }
+h4 {
+    font-size: 12px;
+    color: #ffffff;
+    margin-top: 6px;
+}
 .song-wrapper{
     margin-right: 16px;
 }
@@ -41,13 +46,14 @@ h4, .songBy{
     display: flex;
     place-items: center;
     place-content: center;
-    width: 160px;
-    height: 160px;
-    background-size: 160px !important;
+    width: 116px;
+    height: 116px;
+    background-size: 116px !important;
+    border-radius: 5px;
 }
 .songBy{
-    font-size: 13px;
-    color: #c3c3c3;
+    font-size: 12px;
+    color: #919191;
 }
 .song span{
     display: flex;

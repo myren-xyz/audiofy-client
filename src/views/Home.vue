@@ -66,6 +66,7 @@ export default {
 .home h2{
   padding-block-start: 16px;
   padding-block-end: 8px;
+  font-size: 18px;
 }
 .slider{
   width: 100%;

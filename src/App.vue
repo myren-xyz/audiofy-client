@@ -34,17 +34,17 @@ export default {
   box-sizing: border-box;
 }
 html{
-  background-color: rgb(31, 29, 43);
-  color: #eee;
+  background-color: #1B1A18;
+  color: #c1c1c1;
 }
 a,router-link{
   text-decoration: none;
 }
 a:visited, router-link:visited{
-  color: #eee;
+  color: #c1c1c1;
 }
 .router-link-exact-active ion-icon{
-    color: #eee !important;
+    color: #ffc857 !important;
 }
 h1,h2,h3,h4,h5,h6{
   font-family: 'Poppins', sams-serif;
@@ -53,7 +53,7 @@ a, p{
   font-family: 'Mulish', sans-serif;
 }
 #main{
-  padding-top: 48px;
+  padding-top: 90px;
   padding-bottom: 80px;
 }
 @media screen and (min-width: 728px){

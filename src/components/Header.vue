@@ -1,24 +1,30 @@
 <template>
     <header>
         <ion-icon name=""></ion-icon>
-        <img src="@/assets/logo.svg"/>
-        <ion-icon name=""></ion-icon>
+        <h1>AUDIOFY</h1>
+        <ion-icon name="notifications"></ion-icon>
     </header>
 </template>
 <style scoped>
     header{
         height: 48px;
         width: 100%;
+        background-color: #1B1A18;
         z-index: 123;
-        background-color:  rgb(25,23,34);
         display: flex;
-        padding: 0 8px;
+        padding: 39px 13px;
         place-items: center;
         justify-content: space-between;
         position: fixed;
     }
+    header h1 {
+        font-size: 11px;
+        letter-spacing: 10px;
+        text-align: center;
+    }
     ion-icon{
-        font-size: 25px;
+        font-size: 22px;
+        color: #ffc857;
     }
     img{
         height: 48px;
