@@ -30,7 +30,7 @@
     a,router-link{
     text-decoration: none;
     }
-    a:visited, router-link:visited{
+    a, a:visited, router-link:visited{
     color: #c1c1c1;
     }
     .router-link-exact-active {
