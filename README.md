@@ -1,4 +1,4 @@
-# audiofy-front
+# audiofy-client
 
 ## Project setup
 ```
