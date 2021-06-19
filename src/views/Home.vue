@@ -1,22 +1,20 @@
 <template>
   <div class="home">
-    <h2>Hot in Audiofy!</h2>
+    <h2>New Songs</h2>
     <div class="slider">
         <Song v-for="song in songs" :song="song" :key="song.id"/>
     </div>
 
-    <h2>New Uploads</h2>
+    <Divider/>
+
+    <h2>Top Playlists</h2>
     <div class="slider">
         <Song v-for="song in songs" :song="song" :key="song.id"/>
     </div>
     
-    <div id="banner">
-      <p>this is</p>
-      <h1>Audiofy</h1>
-      <p>a product by Myren</p>
-    </div>
+    <Divider/>
 
-    <h2>Artists</h2>
+    <h2>Popular Artists</h2>
     <div class="slider">
       <div v-for="artist in artists" :key="artist.id">
         <router-link to="artist/mrshajarian">
@@ -32,13 +30,15 @@
 // @ is an alias to /src
 import Song from '@/components/Song.vue'
 import Artist from '@/components/Artist.vue'
+import Divider from '@/components/Divider.vue'
 
 export default {
   name: 'Home',
   
   components: {
     Song,
-    Artist
+    Artist,
+    Divider
   },
   computed: {
     songs: function(){
