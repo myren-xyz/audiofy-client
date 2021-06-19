@@ -25,7 +25,7 @@ export default {
     margin-right: 16px;
 }
 #avatar{
-    border: 2px solid #eee;
+    /* border: 2px solid #eee; */
     width: 91px;
     height: 91px;
     border-radius: 50%;
