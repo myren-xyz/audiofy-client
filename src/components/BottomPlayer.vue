@@ -1,11 +1,21 @@
 <template>
-<div v-show="song.title" class="bplayer">
+<div v-show="song.title" class="bplayer" id="wrapper-player">
     <!-- <audio id="aud" ref="audio" controls></audio> -->
-    <div id="audiofy-player">
-        <div id="len" @click="seekto($event)"><div id="len-inner"></div></div>
-        <div id="gesture"  @touchmove="touchmove($event)" @touchstart="touchstart($event)" @touchend="touchend($event)">
-            <h5 id="song-title">{{song.title}}</h5>
-            <p id="song-by">{{song.by}}</p>
+    <div id="audiofy-player" @click="expand">
+        <div id="gesture">
+            <div id="darbar" class="flex">
+                <div class="avatar" id="song--avatar">
+                    <img :src="song.picURL" >
+                </div>
+                <div class="center">
+                    <h5 id="song-title">{{song.title}}</h5>
+                    <p id="song-by">{{song.by}}</p>
+                </div>
+            </div>
+            <div id="pp" @click="pp">
+                <ion-icon v-if="!this.isPlaying" name="play"></ion-icon>
+                <ion-icon v-if="this.isPlaying" name="pause"></ion-icon>
+            </div>
         </div>
     </div>
 </div>
@@ -34,8 +44,6 @@ export default {
         }
     },
     mounted() {
-        // const audiofyPlayer = this.$el.querySelector('#gesture');
-
         this.$store.subscribe((mutation)=>{
             if(mutation.type === 'setSong') {
                 var hls = new Hls();
@@ -53,90 +61,35 @@ export default {
                 this.isPlaying = true;
             }
         })
-        au.addEventListener('timeupdate', ()=>{
-            this.$el.querySelector('#len-inner').style.width = `${(au.currentTime/au.duration)*100}vw`;
-        })
+        // au.addEventListener('timeupdate', ()=>{
+        //     this.$el.querySelector('#len-inner').style.width = `${(au.currentTime/au.duration)*100}vw`;
+        // })
         
     },
     methods:{
-        touchstart: function(e){
-            var touchobj = e.changedTouches[0]
-            this.dist = 0
-            this.startX = touchobj.pageX
-            this.startY = touchobj.pageY
-            this.startTime = new Date().getTime()
-            e.preventDefault()
-        },
-        touchmove: function(e){
-            e.preventDefault()
-        },
-        touchend: function(e){
-
-            var touchobj = e.changedTouches[0]
-            this.dist = touchobj.pageX - this.startX
-            this.elapsedTime = new Date().getTime() - this.startTime
-
-            // var swiperightBol = (this.elapsedTime <= this.allowedTime && this.dist >= this.threshold && Math.abs(touchobj.pageY - this.startY) <= 100)
-            if(this.elapsedTime >= 150) {
-                if (this.dist > 0){
-                    console.log('prev track');
-                    au.play;
-                    let currentSongId = this.$store.state.song.id || null;
-                    let prevSong = this.$store.state.songs.filter(song => song.id == (currentSongId-1));
-                    if(prevSong[0] != null){
-                        this.$store.commit('setSong', prevSong[0])
-                        // console.log(prevSong[0]);
-                        this.isPlaying = true;
-                    }
-                }else{
-                    console.log('next track');
-                    au.play;
-                    let currentSongId = this.$store.state.song.id || null;
-                    let nextSong = this.$store.state.songs.filter(song => song.id == (1+currentSongId));
-                    if(nextSong[0] != null){
-                        this.$store.commit('setSong', nextSong[0])
-                        this.isPlaying = true;
-                    }
-                }
-            }else{
-                this.clicks++;
-                if(this.clicks === 1) {
-                    //one click
-                    var self = this
-                    this.timer = setTimeout(function() {
-                    self.result.push(e.type);
-                    self.clicks = 0
-                    }, this.delay);
-                    
-                    if(this.isPlaying){
-                        au.pause();
-                        this.isPlaying = false;
-                    }else{
-                        au.play();
-                        this.isPlaying = true;
-                    }
-
-                } else{
-                    //dbl click
-                    clearTimeout(this.timer);  
-                    this.result.push('dblclick');
-                    this.clicks = 0;
-                    let area = (e.changedTouches[0].clientX > this.$el.clientWidth/2);
-                    au.play();
-                    this.isPlaying = true;
-                    if (area){
-                        au.currentTime = au.currentTime + 7;
-                    }else{
-                        au.currentTime = au.currentTime - 4;
-                    }
-                }
-            }
-            e.preventDefault()
-        
-        },//touch end
         seekto: function(e){
             au.currentTime = au.duration*e.layerX/this.$el.clientWidth
             // console.log(this.$el.clientWidth);
+        },
+        pp: function(){
+            if (this.isPlaying){
+                au.pause()
+                this.isPlaying = false
+            } else {
+                au.play()
+                this.isPlaying = true
+            }
+        },
+
+        expand: function() {
+            let wp = document.getElementById('wrapper-player')
+            let avatar = document.getElementById('song--avatar')
+            wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%";
+            avatar.style = "width: 80%; height: auto; border-radius: 5px";
+            document.getElementById('darbar').classList.add('col')
+            document.getElementById('pp').style = "width: 0; height:0;"
+            document.getElementById('song-title').style = "font-size: 24px;text-align:center"
+            document.getElementById('song-by').style = "text-align:center"
         }
     },
     computed: mapState(["song"])
@@ -159,12 +112,35 @@ au.addEventListener('ended', ()=>{
 </script>
 
 <style>
+#darbar{
+    width: 100%;
+}
+.col {
+    flex-direction: column !important;
+    place-items: center !important;
+}
+#audiofy-player {
+    width: 100%;
+}
+.avatar {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    transition: 1s all ease-in-out;
+}
+.avatar img {
+    height: 100%;
+    width: 100%;
+}
 .bplayer{
+    transition: 1s all ease-in-out;
     position: fixed;
     width: 100%;
-    height: 58px;
+    height: 54px;
     bottom: 48px;
-    background-color: rgb(42,41,54);
+    background-color: #282828;
     display: flex;
     /* align-items: center; */
 }
@@ -178,18 +154,6 @@ audio{
     outline: none;
     border-radius: 0;
 }
-#len{
-    width: 100vw;
-    height: 10px;
-    background-color: rgba(238, 238, 238, 0.15);
-    z-index: 150;
-}
-#len-inner{
-    width: 0vw;
-    transition: all 0.3s;
-    height: 10px;
-    background-color: slateblue;
-}
 #pause {
     width: 48px;
     height: 48px;
@@ -198,19 +162,36 @@ audio{
     font-size: 25px;
 }
 #song-by{
-    text-align: center;
-    opacity: 0.6;
-    font-size: 14px;
+    color: #969696;
+    font-size: 12px;
+    transition: 1s all ease-in-out;
 }
 #song-title{
-    text-align: center;
-    padding-block-start: 5px;
+    font-size: 14px;
+    transition: 1s all ease-in-out;
 }
 #gesture{
-    height: 48px;
-    width: 100%
+    height: 54px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
-
+.flex{
+    display: flex;
+    flex-direction: row;
+}
+.center {
+    padding: 5px;
+}
+#pp {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    font-size: 32px;
+    color: #ffc857
+}
 @media screen and (min-width: 728px){
 .bplayer{
     bottom: 0px;
