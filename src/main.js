@@ -6,9 +6,7 @@ import router from './router'
 
 Vue.use(Vuex)
 
-
-
-
+Vue.config.ignoredElements = [/^ion-/]
 Vue.config.productionTip = false
 
 new Vue({
