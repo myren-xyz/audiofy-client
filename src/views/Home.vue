@@ -47,9 +47,6 @@ export default {
     artists: function(){
       return this.$store.state.artists
     }
-  },
-  created(){
-    this.$store.commit('setProfile');
   }
 }
 </script>
