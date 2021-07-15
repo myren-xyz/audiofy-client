@@ -52,7 +52,7 @@ a:visited, router-link:visited{
 h1,h2,h3,h4,h5,h6{
   font-family: 'Poppins', sams-serif;
 }
-a, p{
+a, p, span{
   font-family: 'Mulish', sans-serif;
 }
 #main{
