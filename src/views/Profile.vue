@@ -7,6 +7,45 @@
       <div class="ffl"><p class="counter">15</p><p class="lbl">Following</p></div>
       <div class="ffl"><p class="counter">15</p><p class="lbl">Likes</p></div>
     </div>
+
+    <div id="switch-section">
+      <h3>Switch To Artist Account</h3>
+      <div id="switch">
+        <div id="switch-btn"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-left">
+        <div class="icon"><ion-icon name="person"></ion-icon></div>
+        <div><p>Edit Account</p></div>
+      </div>
+      <div class="arrow"><ion-icon name="chevron-forward"></ion-icon></div>
+    </div>
+
+    <div class="item">
+      <div class="item-left">
+        <div class="icon"><ion-icon name="time"></ion-icon></div>
+        <div><p>History</p></div>
+      </div>
+      <div class="arrow"><ion-icon name="chevron-forward"></ion-icon></div>
+    </div>
+
+    <div class="item">
+      <div class="item-left">
+        <div class="icon"><ion-icon name="cog"></ion-icon></div>
+        <div><p>Settings</p></div>
+      </div>
+      <div class="arrow"><ion-icon name="chevron-forward"></ion-icon></div>
+    </div>
+
+    <div class="item">
+      <div class="item-left">
+        <div class="icon"><ion-icon name="help-circle"></ion-icon></div>
+        <div><p>Help</p></div>
+      </div>
+      <div class="arrow"><ion-icon name="chevron-forward"></ion-icon></div>
+    </div>
   </div>
 </template>
 <script>
@@ -50,5 +89,57 @@ export default {
   font-weight: bold;
   font-size: 12px;
   margin-top: 2px;
+}
+#switch-section {
+  margin: 40px 0;
+  padding: 0 18px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+.item {
+  padding: 0 6px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.item-left {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+.item .icon {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  place-content: center;
+  color: #ffc857;
+  font-size: 20px;
+}
+.item .arrow {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  place-content: center;
+  font-size: 20px;
+}
+#switch {
+  width: 50px;
+  height: 26px;
+  border-radius: 13px;
+  background-color: #ffc857;
+  display: flex;
+  padding: 2px;
+  justify-content: flex-end;
+}
+#switch-btn {
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 12.5px;
 }
 </style>
