@@ -28,6 +28,11 @@
                 </div>
 
                 <Control />
+
+                <div id="bottom-actionbar">
+                    <div><ion-icon name="heart-outline"></ion-icon></div>
+                    <div @click="collapse"><ion-icon name="chevron-down-outline"></ion-icon></div>
+                </div>
             </div>
             <div id="pp" @click="changePlayingState">
                 <ion-icon v-if="!player.isPlaying" name="play"></ion-icon>
@@ -53,7 +58,8 @@ export default {
     },
     data: function() {
         return {
-            typeActive: true
+            typeActive: true,
+            collapsed: true
         }
     },
     mounted() {
@@ -96,18 +102,41 @@ export default {
         },
 
         expand: function() {
+            if (this.collapsed){
+                this.collapsed = false
+                let wp = document.getElementById('wrapper-player')
+                let avatar = document.getElementById('song--avatar')
+                wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%;background-color:#1B1A18";
+                avatar.style = "width: 80%; height: auto; border-radius: 5px";
+                document.getElementById('darbar').classList.add('col')
+                document.getElementById('pp').style = "width: 0; height:0;"
+                document.getElementById('song-title').style = "font-size: 24px;text-align:center"
+                document.getElementById('song-by').style = "text-align:center"
+                document.getElementById('player--control--wrapper').style = "display:flex"
+                document.getElementById('playing--top-nav').style = "position:relative; display: flex; opacity:1"
+                document.getElementById('progressbar-wrapper').style = "display: flex"
+                document.getElementById('bottom-actionbar').style = "display: flex"
+                document.getElementsByClassName("center")[0].style = "margin-top: 14px"
+            }
+        },
+
+        collapse: function() {
             let wp = document.getElementById('wrapper-player')
             let avatar = document.getElementById('song--avatar')
-            wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%;background-color:#1B1A18";
-            avatar.style = "width: 80%; height: auto; border-radius: 5px";
-            document.getElementById('darbar').classList.add('col')
-            document.getElementById('pp').style = "width: 0; height:0;"
-            document.getElementById('song-title').style = "font-size: 24px;text-align:center"
-            document.getElementById('song-by').style = "text-align:center"
-            document.getElementById('player--control--wrapper').style = "display:flex"
-            document.getElementById('playing--top-nav').style = "position:relative; display: flex"
-            document.getElementById('progressbar-wrapper').style = "display: flex !important"
-            document.getElementsByClassName("center")[0].style = "margin-top: 46px"
+            wp.style = ""
+            avatar.style = ""
+            this.$el.querySelector('#darbar').classList.remove('col')
+            document.getElementById('pp').style = " ";
+            document.getElementById('song-title').style = " "
+            document.getElementById('song-by').style = " "
+            document.getElementById('player--control--wrapper').style = " "
+            document.getElementById('playing--top-nav').style = " "
+            document.getElementById('progressbar-wrapper').style = " "
+            document.getElementById('bottom-actionbar').style = ""
+            document.getElementsByClassName("center")[0].style = " "
+            setTimeout(()=>{
+                this.collapsed = true
+            },900)
         }
     },
     computed: mapState(["song","player"])
@@ -242,15 +271,15 @@ audio{
     color: #ffc857
 }
 #playing--top-nav {
-    position: absolute;
     display: none;
+    opacity: 0;
+    position: absolute;
     width: 94%;
     display: flex;
     place-content: space-between;
     align-items: center;
     min-height: 46px;
-    margin: 36px 0;
-    font-size: 16px;
+    margin: 10px 0;
 }
 #playing--top-nav div{
     min-height: 46px;
@@ -258,7 +287,7 @@ audio{
     display: flex;
     place-items: center;
     place-content: center;
-    font-size: 22px;
+    font-size: 30px;
 }
 #playing--top-nav div span{
     font-size: 10px;
@@ -273,7 +302,7 @@ audio{
 #progressbar-wrapper {
     display: none;
     width: 84%;
-    margin: 23px 0;
+    margin: 0px 0;
     padding: 23px 0;
     justify-content: center;
 }
@@ -288,6 +317,21 @@ audio{
     height: 5px;
     background-color: #ffc857;
     border-radius: 2.5px;
+}
+#bottom-actionbar {
+    display: none;
+    position: fixed;
+    bottom: 18px;
+    width: 94%;
+    place-content: space-between;
+}
+#bottom-actionbar div {
+    min-width: 46px;
+    min-height: 46px;
+    font-size: 30px;
+    display: flex;
+    place-content: center;
+    place-items: center;
 }
 @media screen and (min-width: 728px){
 .bplayer{
