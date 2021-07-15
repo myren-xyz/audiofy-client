@@ -24,6 +24,9 @@ export default {
     Side,
     BottomPlayer,
     BottomNav
+  },
+  created(){
+    this.$store.commit('setProfile');
   }
 }
 </script>
