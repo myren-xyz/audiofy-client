@@ -24,8 +24,12 @@ export default {
     },
     methods: {
         play: function(song){
-            this.$store.commit('setSong', song);
-            console.log(this.$store.state.song.hlsURL);
+            var currentSong = this.$store.state.song
+            if (song.id == currentSong.id) {
+                this.$store.commit('changePlayingState')
+            }else{
+                this.$store.commit('setSong', song);
+            }
         }
     }
 }

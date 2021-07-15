@@ -4,6 +4,15 @@
     <div id="audiofy-player">
         <div id="gesture">
             <div id="darbar" class="flex" @click="expand">
+                <div id="playing--top-nav">
+                    <div><ion-icon name="share-outline"></ion-icon></div>
+                    <div>
+                        <span :class="{typeActive: typeActive}">AUDIO</span>
+                        <span :class="{typeActive: !typeActive}">VIDEO</span>
+                    </div>
+                    <div><ion-icon name="ellipsis-horizontal"></ion-icon></div>
+                </div>
+
                 <div class="avatar" id="song--avatar">
                     <img :src="song.picURL" >
                 </div>
@@ -11,6 +20,13 @@
                     <h5 id="song-title">{{song.title}}</h5>
                     <p id="song-by">{{song.by}}</p>
                 </div>
+
+                <div id="progressbar-wrapper" @click="seekto">
+                    <div id="progressbar">
+                        <div id="progressbar-now"></div>
+                    </div>
+                </div>
+
                 <Control />
             </div>
             <div id="pp" @click="changePlayingState">
@@ -23,21 +39,27 @@
 </template>
 
 <script>
+import store from '../store/index'
 import {mapState} from 'vuex';
 import Hls from 'hls.js';
 import Control from '@/components/BottomPlayer/Control.vue'
 
 const au = new Audio();
+var hls = new Hls();
 au.preload = "metadata";
 export default {
     components: {
         Control
     },
-
+    data: function() {
+        return {
+            typeActive: true
+        }
+    },
     mounted() {
+        
         this.$store.subscribe((mutation)=>{
             if(mutation.type === 'setSong') {
-                var hls = new Hls();
                 var stream = this.$store.state.song.hlsURL;
                 var audio = au;
 
@@ -47,12 +69,11 @@ export default {
                 }else if(audio.canPlayType('application/x-mpegURL') || audio.canPlayType('application/vnd.apple.mpegurl')){
                     audio.src = stream;
                 }
-                
-                // au.play()
-                this.$store.commit('changePlayingState')
+
+                this.$store.commit('setPlayingState', true)
             }
 
-            if(mutation.type == 'changePlayingState') {
+            if(mutation.type == 'changePlayingState' || mutation.type == 'setPlayingState') {
                 if (this.player.isPlaying){
                     au.play()
                 } else {
@@ -60,14 +81,10 @@ export default {
                 }
             }
         })
-        // au.addEventListener('timeupdate', ()=>{
-        //     this.$el.querySelector('#len-inner').style.width = `${(au.currentTime/au.duration)*100}vw`;
-        // })
-        
     },
     methods:{
         seekto: function(e){
-            au.currentTime = au.duration*e.layerX/this.$el.clientWidth
+            au.currentTime = au.duration*e.offsetX/this.$el.querySelector('#progressbar-wrapper').clientWidth
         },
 
         changeRepeatState: function(){
@@ -81,23 +98,28 @@ export default {
         expand: function() {
             let wp = document.getElementById('wrapper-player')
             let avatar = document.getElementById('song--avatar')
-            wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%";
+            wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%;background-color:#1B1A18";
             avatar.style = "width: 80%; height: auto; border-radius: 5px";
             document.getElementById('darbar').classList.add('col')
             document.getElementById('pp').style = "width: 0; height:0;"
             document.getElementById('song-title').style = "font-size: 24px;text-align:center"
             document.getElementById('song-by').style = "text-align:center"
             document.getElementById('player--control--wrapper').style = "display:flex"
+            document.getElementById('playing--top-nav').style = "position:relative; display: flex"
+            document.getElementById('progressbar-wrapper').style = "display: flex !important"
         }
     },
     computed: mapState(["song","player"])
 }
-import store from '../store/index'
+
+au.addEventListener('timeupdate', ()=>{
+    document.getElementById('progressbar-now').style.width = `${(au.currentTime/au.duration)*100}%`;
+})
 
 au.addEventListener('ended', ()=>{
     let currentSongId = store.state.song.id +1;
     let nextSong = store.state.songs.filter(song => song.id == currentSongId);
-    let repeat = store.state.player.repeat;
+    let repeat = store.state.player.isRepeating;
     if(nextSong[0] != null && repeat == false){
         store.commit('setSong', nextSong[0])
     }
@@ -217,6 +239,54 @@ audio{
 }
 .active {
     color: #ffc857
+}
+#playing--top-nav {
+    position: absolute;
+    display: none;
+    width: 94%;
+    display: flex;
+    place-content: space-between;
+    align-items: center;
+    min-height: 46px;
+    margin: 36px 0;
+    font-size: 16px;
+}
+#playing--top-nav div{
+    min-height: 46px;
+    min-width: 46px;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    font-size: 22px;
+}
+#playing--top-nav div span{
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+.typeActive {
+    border: 1px solid #ffc857;
+    color: #ffc857
+}
+
+#progressbar-wrapper {
+    display: none;
+    width: 84%;
+    margin: 23px 0;
+    padding: 23px 0;
+    justify-content: center;
+}
+#progressbar {
+    width: 100%;
+    height: 5px;
+    border-radius: 2.5px;
+    background-color: #D8D8D8;
+}
+#progressbar-now {
+    width: 0%;
+    height: 5px;
+    background-color: #ffc857;
+    border-radius: 2.5px;
 }
 @media screen and (min-width: 728px){
 .bplayer{
