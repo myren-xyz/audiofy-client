@@ -23,7 +23,6 @@ export default {
         },
 
         changePlayingState: function() {
-            console.log(this);
             this.$store.commit('changePlayingState')
         }
     },
