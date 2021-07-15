@@ -203,6 +203,7 @@ audio{
 }
 .center {
     padding: 5px;
+    margin-top: 46px;
 }
 #pp {
     width: 54px;
