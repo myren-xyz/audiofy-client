@@ -1,30 +1,67 @@
 <template>
   <div class="wallet">
+    <div id="topper">
+      <div>
+        <h3>$0.0</h3>
+        <p>Balance Estimate</p>
+      </div>
+    </div>
+
     <div class="coin">
       <div class="coin-inner">
         <div class="coin-l">
           <div class="round">
             <strike><h4>Basil</h4></strike>
           </div>
+          <div class="">
+            <p class="sym">BZL</p>
+            <p class="t-name">Basil</p>
+          </div>
         </div>
-        <div class="coin-r"><p>0.0bzl</p><p>0.0USD</p></div>
+        <div class="coin-r"><p>0.0</p><p>$0.00</p></div>
       </div>
     </div>
+
     <div class="coin">
       <div class="coin-inner">
         <div class="coin-l">
-          <div class="round green">
-            <strike><h4>USDT</h4></strike>
+          <div class="round">
+            <h4>USDT</h4>
+          </div>
+          <div class="">
+            <p class="sym">USDT</p>
+            <p class="t-name">Tether USD</p>
           </div>
         </div>
-        <div class="coin-r"><p>0.0USDT</p><p>0.0USD</p></div>
+        <div class="coin-r"><p>0.0</p><p>$0.00</p></div>
       </div>
     </div>
+
     <p class="to" align="center"> Ads reward distribution starts after "Cyrus Phase" in roadmap below</p>
     <a href="https://roadmap.myren.xyz">roadmap.myren.xyz</a>
   </div>
 </template>
 <style scoped>
+.wallet {
+  padding-bottom: 100px;
+}
+#topper {
+  background-color: #282828;
+  height: 30vh;
+  width: 100vw;
+  display: flex;
+  place-items: center;
+  place-content: center;
+}
+#topper div h3{
+  text-align: center;
+  font-size: 48px;
+  color: #ffc857
+}
+#topper div p {
+  text-align: center;
+  font-size: 12px;
+}
 .to{
   margin: 64px auto 0;
   width: 80%;
@@ -41,6 +78,20 @@ a{
   margin-top: 16px;
   margin-bottom: 16px;
   padding: 8px;
+}
+.coin-l {
+  display: flex;
+  align-items: center;
+}
+.coin-l p{
+  margin-left: 8px;
+}
+.sym {
+  font-size: 14px;
+  font-weight: bold;
+}
+.t-name {
+  font-size: 11px;
 }
 .coin-inner{
   display: flex;
