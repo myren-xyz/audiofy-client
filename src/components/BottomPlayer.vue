@@ -180,6 +180,7 @@ au.addEventListener('ended', ()=>{
     place-content: center;
     place-items: center;
     transition: 0.6s all ease-in-out;
+    aspect-ratio: 1;
 }
 .avatar img {
     height: 100%;
