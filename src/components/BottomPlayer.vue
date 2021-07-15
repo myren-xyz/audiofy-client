@@ -107,6 +107,7 @@ export default {
             document.getElementById('player--control--wrapper').style = "display:flex"
             document.getElementById('playing--top-nav').style = "position:relative; display: flex"
             document.getElementById('progressbar-wrapper').style = "display: flex !important"
+            document.getElementsByClassName("center")[0].style = "margin-top: 46px"
         }
     },
     computed: mapState(["song","player"])
@@ -203,7 +204,6 @@ audio{
 }
 .center {
     padding: 5px;
-    margin-top: 46px;
 }
 #pp {
     width: 54px;
