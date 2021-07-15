@@ -37,12 +37,13 @@ const store = new Vuex.Store({
     changePlayingState(state) {
       state.player.isPlaying = !state.player.isPlaying
     },
+    setPlayingState(state, value) {
+      state.player.isPlaying = value
+    },
 
     setProfile(state){
       axios.get('https://accounts.myren.xyz/api/v1/getProfile', {withCredentials: true})
         .then(function (response) {
-          // handle success
-          console.log(response);
           if (response.data.ok){
             state.profile = response.data
           }
