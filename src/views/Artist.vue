@@ -15,7 +15,7 @@
             <h3>Top Songs</h3>
             <div class="tracks-wrapper">
                 <div class="slider">
-                    <Song v-for="song in songs" :song="song" :key="song.id"/>
+                    <Song v-for="song in artist_songs" :song="song" :key="song.id"/>
                 </div>
             </div>
 
@@ -24,24 +24,28 @@
 </template>
 <script>
 import Song from '@/components/Song.vue'
+import {mapState} from 'vuex';
 
 export default {
     components: {
         Song
     },
-    data: function(){
+    data() {
         return {
-            artist: {
-                username: this.$route.params.username,
-                title: 'Mohammad Reza Shajarian'
-            }
+            username: this.$route.params.username,
+            artist:  {},
+            artist_songs: {}
         }
     },
-    computed: {
-        songs(){
-            return this.$store.state.songs.filter(song => song.artist_id == 9121010000)
-        }
-    }
+    computed: mapState(['songs', 'artists']),
+    mounted() {
+        this.artist = this.artists.filter(artist => artist.username == this.username)[0]
+        this.artist_songs = this.songs.filter(song => song.artist_username == this.username)
+
+        let avatar = this.$el.querySelector('#artist-avatar')
+        avatar.style = `background-image: url(${this.artist.picURL}); height: ${avatar.clientWidth}px`
+    },
+
 }
 </script>
 
@@ -60,20 +64,21 @@ export default {
 }
 #artist-avatar{
     width: 100%;
-    height: auto;
     margin: 0 auto;
     aspect-ratio: 1;
     background-repeat: no-repeat;
-    background-image: url('https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg'); 
     background-size: 100% auto;
+    background-position: center;
+    position: relative;
 }
 #artist-avatar::after {
-    content: ' ';
+    content: '';
     display: block;
-    position: relative;
+    position: absolute;
     height: 75%;
     width: 100%;
     background: linear-gradient(0deg, #1B1A18, #1b1a1885, #00000000);
+    background: -webkit-linear-gradient(90deg, #1B1A18, #1b1a1885, #00000000);
     top: 25%;
 }
 .artist-info {
