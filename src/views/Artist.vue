@@ -1,14 +1,24 @@
 <template>
     <div class="artist">
-        <div class="artist-cover"></div>
         <div class="artist-data-wrapper">
-            <div style="background-image: url('https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg')" id="artist-avatar"></div>
-            <h4 class="artist-title">{{artist.title}}</h4>
+            <div id="artist-avatar"></div>
+
+            <div class="artist-info">
+                <p>Artist</p>
+                <h4 class="artist-title">{{artist.title}}</h4>
+                <div class="bar">
+                    <p><span>60M</span> followers</p>
+                    <button>Follow</button>
+                </div>
+            </div>
+
+            <h3>Top Songs</h3>
             <div class="tracks-wrapper">
                 <div class="slider">
                     <Song v-for="song in songs" :song="song" :key="song.id"/>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
@@ -48,46 +58,57 @@ export default {
   padding: 8px 0 16px 0;
   margin-bottom: 16px;
 }
-.artist-cover{
-    height: 200px;
-    width: 100%;
-    background: linear-gradient(45deg, #5a418a, #3d3d3d);
-}
-.artist-data-wrapper{
-    position: relative;
-    top: -80px;
-}
 #artist-avatar{
-    width: 160px;
-    height: 160px;
-    /* background: linear-gradient(45deg, #2a2a2a, #0d0d0d); */
-    border-radius: 50%;
-    position: relative;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
-    background-size: 160px;
-    border: 1px solid #eee;
+    aspect-ratio: 1;
+    background-repeat: no-repeat;
+    background-image: url('https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg'); 
+    background-size: 100% auto;
 }
-.artist-title{
-    padding-block-start: 16px;
-    text-align: center;
+#artist-avatar::after {
+    content: ' ';
+    display: block;
+    position: relative;
+    height: 75%;
+    width: 100%;
+    background: linear-gradient(0deg, #1B1A18, #1b1a1885, #00000000);
+    top: 25%;
 }
-@media screen and (min-width:728px){
-.artist-data-wrapper{
-  padding: 0 64px;
+.artist-info {
+    position: relative;
+    margin-top: -22%;
+    z-index: 50;
+    margin-bottom: 24px;
 }
-.slider::-webkit-scrollbar{
-  background-color: rgb(12, 11, 11);
-  height: 8px;
+p {
+    font-size: 12px;
+    color: #BFBFBF;
 }
-.slider::-webkit-scrollbar-button{
-  display: none;
+.artist-title {
+    font-size: 18px;
 }
-.slider::-webkit-scrollbar-track-piece{
-  background-color: rgb(31, 29, 43);
+.bar {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
 }
-.slider::-webkit-scrollbar-thumb{
-  background-color: #707070;
-  border-radius: 4px;
+.bar button {
+    background-color: #bfbfbf;
+    border:none;
+    outline: none;
+    border-radius: 10px;
+    min-width: 140px;
+    min-height: 38px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    margin-right: 16px;
 }
+.bar p {
+    font-size: 12px;
+}
+.bar p span {
+    color: #ffc857
 }
 </style>
