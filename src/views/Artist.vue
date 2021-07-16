@@ -64,7 +64,7 @@ export default {
     margin: 0 auto;
     aspect-ratio: 1;
     background-repeat: no-repeat;
-    background-image: url('https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg'); 
+    background-image: url('https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg'); 
     background-size: 100% auto;
 }
 #artist-avatar::after {
