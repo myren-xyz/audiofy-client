@@ -2,7 +2,8 @@
     <div class="song-wrapper">
         <div class="song" id="song-pic" :data-pic="song.picURL">
             <span @click="play(song)">
-                <ion-icon name="play-circle-outline"></ion-icon>
+                <ion-icon v-if="!this.isPlaying" name="play-circle-outline"></ion-icon>
+                <ion-icon v-if="this.isPlaying" name="pause-circle"></ion-icon>
             </span>
         </div>
         <h4>{{song.title}}</h4>
@@ -12,6 +13,11 @@
 <script>
 export default {
     props: ['song'],
+    data(){
+        return {
+            isPlaying: false
+        }
+    },
     mounted(){
         let songPic = this.$el.querySelector('#song-pic');
         var bgOptions;
@@ -21,6 +27,41 @@ export default {
             bgOptions = "linear-gradient(45deg, #2a2a2a, rgb(87, 87, 87))";
         }
         songPic.style.background = bgOptions;
+
+        this.$store.subscribe((mutation)=>{
+            if(mutation.type === 'setSong') {
+                let currentSongId = this.$store.state.song.id
+                if ((this.song.id == currentSongId)) {
+                    this.isPlaying = true
+                }else{
+                    this.isPlaying = false
+                }
+            }else if(mutation.type == 'changePlayingState') {
+                let currentSongId = this.$store.state.song.id
+                if ((this.song.id == currentSongId)) {
+                    this.isPlaying = this.$store.state.player.isPlaying
+                }else if (!this.$store.state.player.isPlaying) {
+                    this.isPlaying = false
+                }
+            }else if(mutation.type == 'setPlayingState'){
+                let currentSongId = this.$store.state.song.id
+                if ((this.song.id == currentSongId)) {
+                    this.isPlaying = this.$store.state.player.isPlaying
+                }else if (!this.$store.state.player.isPlaying) {
+                    this.isPlaying = false
+                }
+            }
+        })
+    },
+
+    created() {
+        if (this.song.id == this.$store.state.song.id){
+            if(this.$store.state.player.isPlaying){
+                this.isPlaying = true
+            }else{
+                this.isPlaying = false
+            }
+        }
     },
     methods: {
         play: function(song){
