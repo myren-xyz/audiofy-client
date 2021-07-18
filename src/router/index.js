@@ -8,6 +8,7 @@ import Wallet from '../views/Wallet.vue'
 import Library from '../views/Library.vue'
 import Profile from '../views/Profile.vue'
 import Artist from '../views/Artist.vue'
+import Album from '../views/Album.vue'
 
 
 Vue.use(VueRouter)
@@ -42,6 +43,11 @@ const routes = [
     path: '/artist/:username',
     name: 'Artist',
     component: Artist
+  },
+  {
+    path: '/album/:album_identifier',
+    name: 'Album',
+    component: Album
   }
 ]
 
