@@ -1,3 +1,5 @@
 <template>
-    <div class="album"></div>
+    <div class="album">
+        
+    </div>
 </template>
