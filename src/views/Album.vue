@@ -131,6 +131,6 @@
     color: #818181;
 }
 .track-single p {
-    margin: 0 10px 0 10px;
+    margin: 0 11px 0 11px;
 }
 </style>
