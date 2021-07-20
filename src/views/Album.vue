@@ -23,6 +23,13 @@
             <button class="btn-main"><ion-icon name="play"></ion-icon>PLAY</button>
             <button><ion-icon name="shuffle"></ion-icon>SHUFFLE</button>
         </div>
+        <div class="bottom-section">
+            <div id="album-tracks">
+                <div class="track">
+                    <h4 class="track-single"><div><span>id</span><p>track title</p></div><span>time</span></h4>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -107,5 +114,23 @@
     font-weight: bold;
     margin-bottom: 8px;
     text-transform: capitalize;
+}
+.track-single {
+    height: 46px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.track-single div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.track-single span {
+    color: #818181;
+}
+.track-single p {
+    margin: 0 10px 0 10px;
 }
 </style>
