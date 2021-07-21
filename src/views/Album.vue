@@ -26,12 +26,41 @@
         <div class="bottom-section">
             <div id="album-tracks">
                 <div class="track">
-                    <h4 class="track-single"><div><span>id</span><p>track title</p></div><span>time</span></h4>
+                    <h4 v-for="song in this.album.songs" :key="song.id" class="track-single"><div><span>{{parseInt(song.id)+1}}</span><p>{{song.title}}</p></div><span>time</span></h4>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import {mapState} from 'vuex';
+
+export default {
+    computed: mapState(['albums', 'artists']),
+
+    data() {
+        return {
+            album_identifier: this.$route.params.album_identifier,
+            album: {},
+            album_songs: {}
+        }
+    },
+
+    mounted() {
+        this.album =  this.albums.filter(album => album.identifier == this.album_identifier)[0]
+        console.log(this.album);
+
+        let artist_avatar = this.$el.querySelector('#artist-avatar')
+        let picURL = this.artists.filter(artist => artist.username == this.album.username)[0].picURL
+        artist_avatar.style = `background-image: url(${picURL});}px`
+
+        let avatar = this.$el.querySelector('#avatar')
+        let cover = this.album.cover_url
+        avatar.style = `background-image: url(${cover}); height: ${avatar.clientWidth}px`
+    },
+}
+</script>
 
 <style scoped>
 .album {
@@ -103,7 +132,6 @@
     width: 34px;
     height: 34px;
     border-radius: 50%;
-    background-image: url('https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg');
     background-size: 34px;
     background-position: center;
     margin-right: 8px;
