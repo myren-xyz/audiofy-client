@@ -63,4 +63,12 @@
     font-family: 'Poppins', sans-serif;
     font-weight: normal;
 }
+@media screen and (min-width: 728px){
+  .search {
+    padding: 0;
+  }
+  #search-action {
+      display: none;
+  }
+}
 </style>

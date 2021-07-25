@@ -48,7 +48,7 @@
 #topper {
   background-color: #282828;
   height: 30vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   place-items: center;
   place-content: center;
@@ -123,8 +123,8 @@ a{
   background-color: rgb(77, 211, 133);
 }
 @media screen and (min-width: 728px){
-.wallet{
-  padding: 0 64px;
-}
+  .wallet{
+    padding: 0;
+  }
 }
 </style>
