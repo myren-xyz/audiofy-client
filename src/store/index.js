@@ -20,7 +20,7 @@ const store = new Vuex.Store({
     ],
     song: {},
     profile: {
-      user_firstname: 'Guest',
+      user_firstname: 'No',
       user_lastname: 'User'
     },
     artists: [
