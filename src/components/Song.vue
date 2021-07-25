@@ -110,4 +110,12 @@ h4 {
 .song span ion-icon{
     font-size: 58px;
 }
+@media screen and (min-width:728px){
+  .song{
+    width: 134px;
+    height: 134px;
+    background-size: 134px !important;
+    border-radius: 5px;
+}
+}
 </style>
