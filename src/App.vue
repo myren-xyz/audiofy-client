@@ -2,12 +2,13 @@
   <div id="app">
     <Header/>
     <div id="wrapper">
-    <div id="side-wrapper">
-    <Side/>
-    </div>
-    <div id="main">
-    <router-view/>
-    </div>
+      <div id="side-wrapper">
+        <Side/>
+      </div>
+      <div id="main">
+        <HeaderDesktop/>
+        <router-view/>
+      </div>
     </div>
     <BottomPlayer/>
     <BottomNav/>
@@ -15,11 +16,13 @@
 </template>
 <script>
 import Header from './components/Header.vue'
+import HeaderDesktop from './components/HeaderDesktop.vue'
 import Side from './components/Side.vue'
 import BottomPlayer from './components/BottomPlayer.vue';
 import BottomNav from './components/BottomNav.vue'
 export default {
   components: {
+    HeaderDesktop,
     Header,
     Side,
     BottomPlayer,
@@ -31,6 +34,10 @@ export default {
 }
 </script>
 <style>
+:root {
+  --weight-semibold: 600;
+}
+
 *, *::after, *::before{
   margin:0;
   padding: 0;
@@ -62,21 +69,17 @@ a, p, span, input{
 @media screen and (min-width: 728px){
 #wrapper{
   width: 100%;
-  height: calc(100vh-48px);
+  height: 100%;
   display: flex;
   justify-content: space-between;
 }
 #main{
   position: relative;
-  top:48px;
-  left: 16%;
-  width: 84%;
-  padding: 0 0px 80px 0px ;
+  padding: 0 30px;
+  width: calc(100% - 200px);
 }
 #side-wrapper{
-  top:48px;
-  width: 16%;
-  position: fixed;
+  width: 200px;
 }
 }
 </style>
