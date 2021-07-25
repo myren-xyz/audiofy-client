@@ -1,5 +1,7 @@
 # audiofy-client
 
+![Docker Image Build](https://github.com/myren-xyz/accounts-client/actions/workflows/docker-image.yml/badge.svg)
+
 ## Project setup
 ```
 npm install
