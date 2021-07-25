@@ -1,10 +1,5 @@
-language: node_js
-
 service:
   - docker
-
-node_js:
-  - 14.*
 
 script:
   - docker build -t blackestwhite/audiofy-client .
