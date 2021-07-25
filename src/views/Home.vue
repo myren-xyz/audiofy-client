@@ -74,22 +74,22 @@ export default {
 }
 
 @media screen and (min-width:728px){
-.home{
-  padding: 0 64px;
-}
-.slider::-webkit-scrollbar{
-  background-color: rgb(12, 11, 11);
-  height: 8px;
-}
-.slider::-webkit-scrollbar-button{
-  display: none;
-}
-.slider::-webkit-scrollbar-track-piece{
-  background-color: rgb(31, 29, 43);
-}
-.slider::-webkit-scrollbar-thumb{
-  background-color: #707070;
-  border-radius: 4px;
-}
+  .home{
+    padding: 0;
+  }
+  .slider::-webkit-scrollbar{
+    background-color: #1B1A18;
+    height: 8px;
+  }
+  .slider::-webkit-scrollbar-button{
+    display: none;
+  }
+  .slider::-webkit-scrollbar-track-piece{
+    border-radius: 4px;
+  }
+  .slider::-webkit-scrollbar-thumb{
+    background-color: rgb(46, 46, 46);
+    border-radius: 4px;
+  }
 }
 </style>
