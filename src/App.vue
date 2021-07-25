@@ -77,6 +77,7 @@ a, p, span, input{
   position: relative;
   padding: 0 30px;
   width: calc(100% - 200px);
+  height: 100vh;
 }
 #side-wrapper{
   width: 200px;
