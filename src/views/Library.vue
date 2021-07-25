@@ -36,6 +36,7 @@
   padding: 16px 16px 100px 16px;
 }
 .library h2 {
+  margin-block-start: 16px;
   font-size: 18px;
   font-weight: 600;
 }
@@ -59,7 +60,11 @@
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
 }
-
+@media screen and (min-width:728px){
+  .library {
+    padding: 0;
+  }
+}
 </style>
 
 <script>
