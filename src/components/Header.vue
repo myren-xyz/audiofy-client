@@ -30,4 +30,9 @@
         height: 48px;
         padding-top: 8px;
     }
+    @media screen and (min-width: 728px){
+        header{
+            display: none;
+        }
+    }
 </style>
