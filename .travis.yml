@@ -7,7 +7,7 @@ node_js:
   - 14.*
 
 script:
-  - docker build -t blackestwhite/ci .
+  - docker build -t blackestwhite/audiofy-client .
 
 deploy:
   provider: script
