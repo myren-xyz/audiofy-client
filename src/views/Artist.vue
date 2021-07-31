@@ -44,8 +44,8 @@ export default {
 
         let avatar = this.$el.querySelector('#artist-avatar')
         avatar.style = `background-image: url(${this.artist.picURL}); height: ${avatar.clientWidth}px`
-    },
-
+        document.title = `Audiofy | Artist ${this.artist.title}`
+    }
 }
 </script>
 

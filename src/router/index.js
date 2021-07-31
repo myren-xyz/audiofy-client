@@ -1,15 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import { component } from 'vue/types/umd'
-
-import Home from '../views/Home.vue'
-import Search from '../views/Search.vue'
-import Wallet from '../views/Wallet.vue'
-import Library from '../views/Library.vue'
-import Profile from '../views/Profile.vue'
-import Artist from '../views/Artist.vue'
-import Album from '../views/Album.vue'
-
 
 Vue.use(VueRouter)
 
@@ -17,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('../views/Home.vue'),
     meta: {
       title: 'Audiofy Homepage'
     }
@@ -25,7 +15,7 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: Search,
+    component: () => import('../views/Search.vue'),
     meta: {
       title: 'Audiofy | Search'
     }
@@ -33,7 +23,7 @@ const routes = [
   {
     path: '/wallet',
     name: 'Wallet',
-    component: Wallet,
+    component: () => import('../views/Wallet.vue'),
     meta: {
       title: 'Audiofy | Wallet'
     }
@@ -41,7 +31,7 @@ const routes = [
   {
     path: '/library',
     name: 'Library',
-    component: Library,
+    component: ()=> import('../views/Library.vue'),
     meta: {
       title: 'Audiofy | Your Library'
     }
@@ -49,7 +39,7 @@ const routes = [
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile,
+    component: ()=> import('../views/Profile.vue'),
     meta: {
       title: 'Audiofy | Your Profile'
     }
@@ -57,12 +47,12 @@ const routes = [
   {
     path: '/artist/:username',
     name: 'Artist',
-    component: Artist,
+    component: ()=> import('../views/Artist.vue'),
   },
   {
     path: '/album/:album_identifier',
     name: 'Album',
-    component: Album
+    component: ()=> import('../views/Album.vue')
   }
 ]
 
@@ -71,5 +61,13 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.afterEach((to) => {
+  Vue.nextTick(() => {
+    if (to.meta.title) {
+      document.title = to.meta.title;
+    }
+  });
+});
 
 export default router
