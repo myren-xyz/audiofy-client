@@ -17,32 +17,47 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      title: 'Audiofy Homepage'
+    }
   },
   {
     path: '/search',
     name: 'Search',
-    component: Search
+    component: Search,
+    meta: {
+      title: 'Audiofy | Search'
+    }
   },
   {
     path: '/wallet',
     name: 'Wallet',
-    component: Wallet
+    component: Wallet,
+    meta: {
+      title: 'Audiofy | Wallet'
+    }
   },
   {
     path: '/library',
     name: 'Library',
-    component: Library
+    component: Library,
+    meta: {
+      title: 'Audiofy | Your Library'
+    }
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      title: 'Audiofy | Your Profile'
+    }
   },
   {
     path: '/artist/:username',
     name: 'Artist',
-    component: Artist
+    component: Artist,
   },
   {
     path: '/album/:album_identifier',
