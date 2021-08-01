@@ -11,6 +11,7 @@
       </div>
     </div>
     <BottomPlayer/>
+    <BottomPlayerDesktop/>
     <BottomNav/>
   </div>
 </template>
@@ -19,6 +20,7 @@ import Header from './components/Header.vue'
 import HeaderDesktop from './components/HeaderDesktop.vue'
 import Side from './components/Side.vue'
 import BottomPlayer from './components/BottomPlayer.vue';
+import BottomPlayerDesktop from './components/BottomPlayerDesktop.vue';
 import BottomNav from './components/BottomNav.vue'
 export default {
   components: {
@@ -26,6 +28,7 @@ export default {
     Header,
     Side,
     BottomPlayer,
+    BottomPlayerDesktop,
     BottomNav
   },
   created(){
