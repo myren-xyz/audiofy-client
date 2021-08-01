@@ -1,13 +1,25 @@
 <template>
-    <div id="player-container">
+    <div v-show="song.title" id="player-container">
         <div id="container">
             <div id="progressbar-container">
                 <div id="progressbar-ds"></div>
             </div>
             <div id="player-controls-container">
-                <div>avatar</div>
+                <div class="flex">
+                    <img class="avatar-now" :src="song.picURL" />
+                    <div class="song-data">
+                        <h3>{{song.title}}</h3>
+                        <p>{{song.by}}</p>
+                    </div>
+                </div>
                 <div><Control /></div>
-                <div></div>
+                <div class="flex hide">
+                    <img class="avatar-now" :src="song.picURL" />
+                    <div class="song-data">
+                        <h3>{{song.title}}</h3>
+                        <p>{{song.by}}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -55,6 +67,9 @@ export default {
     #player-container {
         display: none;
     }
+    .hide {
+        opacity: 0;
+    }
     @media screen and (min-width: 728px) {
         #player-container {
             display: block;
@@ -81,6 +96,29 @@ export default {
         #player-controls-container {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            height: calc(100% - 5px);
+            padding: 0 30px;
+        }
+        .avatar-now {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+        }
+        .song-data {
+            margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .song-data h3 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .song-data p {
+            font-size: 12px;
+            font-weight: 300;
+            color: #969696;
         }
     }
 </style>
