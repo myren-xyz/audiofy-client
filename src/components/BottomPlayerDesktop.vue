@@ -1,7 +1,7 @@
 <template>
     <div v-show="song.title" id="player-container">
         <div id="container">
-            <div id="progressbar-container">
+            <div id="progressbar-container" @click="seekto">
                 <div id="progressbar-ds"></div>
             </div>
             <div id="player-controls-container">
@@ -41,7 +41,7 @@ export default {
     },
     methods:{
         seekto: function(e){
-            let currentTime = e.offsetX/this.$el.querySelector('#progressbar-wrapper').clientWidth
+            let currentTime = e.offsetX/this.$el.querySelector('#progressbar-container').clientWidth
             this.$store.commit('setCurrentTime', currentTime)
         },
 
