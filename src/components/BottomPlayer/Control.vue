@@ -49,4 +49,9 @@ export default {
 .active {
     color: #ffc857
 }
+@media screen and (min-width: 728px) {
+    #player--control--wrapper {
+        display: flex;
+    }
+}
 </style>
