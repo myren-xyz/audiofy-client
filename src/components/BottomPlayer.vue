@@ -337,6 +337,7 @@ audio{
 @media screen and (min-width: 728px){
 .bplayer{
     bottom: 0px;
+    display: none;
 }
 }
 </style>
