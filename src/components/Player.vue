@@ -41,7 +41,6 @@ export default {
             }
 
             if(mutation.type == 'setCurrentTime') {
-                console.log(mutation);
                 au.currentTime = mutation.payload*au.duration
             }
         })

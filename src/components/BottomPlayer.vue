@@ -1,6 +1,5 @@
 <template>
 <div v-show="song.title" class="bplayer" id="wrapper-player">
-    <!-- <audio id="aud" ref="audio" controls></audio> -->
     <div id="audiofy-player">
         <div id="gesture">
             <div id="darbar" class="flex" @click="expand">
