@@ -3,7 +3,7 @@
         <div></div>
         <div id="searchbox">
             <input id="box" type="text" placeholder="Search for songs, artists, etc" v-model="search"/>
-            <button @click="search"><ion-icon name="search-outline"></ion-icon></button>
+            <button><ion-icon name="search-outline"></ion-icon></button>
         </div>
         <div class="flex">
             <div id="notification"><ion-icon name="notifications"></ion-icon></div>
@@ -13,7 +13,11 @@
 </template>
 <script>
 export default {
-    
+    data () {
+        return {
+            search: ''
+        }
+    },
 }
 </script>
 <style scoped>

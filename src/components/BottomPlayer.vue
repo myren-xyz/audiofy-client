@@ -44,14 +44,8 @@
 </template>
 
 <script>
-import store from '../store/index'
 import {mapState} from 'vuex';
-import Hls from 'hls.js';
 import Control from '@/components/BottomPlayer/Control.vue'
-
-const au = new Audio();
-var hls = new Hls();
-au.preload = "metadata";
 export default {
     components: {
         Control
@@ -62,35 +56,10 @@ export default {
             collapsed: true
         }
     },
-    mounted() {
-        
-        this.$store.subscribe((mutation)=>{
-            if(mutation.type === 'setSong') {
-                var stream = this.$store.state.song.hlsURL;
-                var audio = au;
-
-                if(Hls.isSupported()){
-                    hls.loadSource(stream);
-                    hls.attachMedia(audio);
-                }else if(audio.canPlayType('application/x-mpegURL') || audio.canPlayType('application/vnd.apple.mpegurl')){
-                    audio.src = stream;
-                }
-
-                this.$store.commit('setPlayingState', true)
-            }
-
-            if(mutation.type == 'changePlayingState' || mutation.type == 'setPlayingState') {
-                if (this.player.isPlaying){
-                    au.play()
-                } else {
-                    au.pause()
-                }
-            }
-        })
-    },
     methods:{
         seekto: function(e){
-            au.currentTime = au.duration*e.offsetX/this.$el.querySelector('#progressbar-wrapper').clientWidth
+            let currentTime = e.offsetX/this.$el.querySelector('#progressbar-wrapper').clientWidth
+            this.$store.commit('setCurrentTime', currentTime)
         },
 
         changeRepeatState: function(){
@@ -139,26 +108,15 @@ export default {
             },900)
         }
     },
-    computed: mapState(["song","player"])
+    computed: mapState(["song","player"]),
+    mounted() {
+        this.$store.subscribe((mutation)=>{
+            if(mutation.type == 'timeupdate'){
+                document.getElementById('progressbar-now').style.width = mutation.payload;
+            }
+        })
+    }
 }
-
-au.addEventListener('timeupdate', ()=>{
-    document.getElementById('progressbar-now').style.width = `${(au.currentTime/au.duration)*100}%`;
-})
-
-au.addEventListener('ended', ()=>{
-    let currentSongId = store.state.song.id +1;
-    let nextSong = store.state.songs.filter(song => song.id == currentSongId);
-    let repeat = store.state.player.isRepeating;
-    if(nextSong[0] != null && repeat == false){
-        store.commit('setSong', nextSong[0])
-    }
-    if(nextSong[0] != null && repeat == true){
-        au.currentTime = 0;
-        au.play();
-    }
-    console.log(nextSong);
-})
 
 </script>
 
@@ -314,6 +272,7 @@ audio{
     background-color: #D8D8D8;
 }
 #progressbar-now {
+    transition: 0.2s all ease-in-out;
     width: 0%;
     height: 5px;
     background-color: #ffc857;

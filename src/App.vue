@@ -10,12 +10,14 @@
         <router-view/>
       </div>
     </div>
+    <Player/>
     <BottomPlayer/>
     <BottomPlayerDesktop/>
     <BottomNav/>
   </div>
 </template>
 <script>
+import Player from './components/Player.vue'
 import Header from './components/Header.vue'
 import HeaderDesktop from './components/HeaderDesktop.vue'
 import Side from './components/Side.vue'
@@ -24,6 +26,7 @@ import BottomPlayerDesktop from './components/BottomPlayerDesktop.vue';
 import BottomNav from './components/BottomNav.vue'
 export default {
   components: {
+    Player,
     HeaderDesktop,
     Header,
     Side,

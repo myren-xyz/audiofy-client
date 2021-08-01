@@ -7,6 +7,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     player:{
+      percentage: null,
+      currentTime: 0,
       isPlaying: false,
       isRepeating: false,
     },
@@ -49,6 +51,12 @@ const store = new Vuex.Store({
     ],
   },
   mutations: {
+    timeupdate(state, percentage) {
+      state.player.percentage = percentage
+    },
+    setCurrentTime(state, currentTime) {
+      state.player.currentTime = currentTime;
+    },
     setSong (state, song) {
       state.song = song;
     },
@@ -75,7 +83,7 @@ const store = new Vuex.Store({
         })
         .then(function () {
 
-  });
+    });
     }
   }
 })
