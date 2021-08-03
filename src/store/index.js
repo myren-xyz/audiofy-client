@@ -19,16 +19,7 @@ const store = new Vuex.Store({
       {id: 3, artist_username: "mrshajarian", title:"Dar Khial", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/003/outputlist.m3u8"},
       {id: 4, artist_username: "mrshajarian", title:"Bebar Ey Baroon", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/004/outputlist.m3u8"},
       {id: 5, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 6, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 7, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 8, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 9, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 10, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 11, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 12, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 13, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 14, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
-      {id: 15, artist_username: "mrshajarian", title:"Delroba", by:"M.Reza Shajarian", picURL:"https://music-fa.com/wp-content/uploads/2020/10/MohammadReza-Shajaryan-Doosh-Doosh-Music-fa.com_.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010000/005/outputlist.m3u8"},
+      {id: 6, artist_username: "naserabdollahi", title:"Mano Bebakhs", by:"Naser Abdollahi", picURL:"https://i1.sndcdn.com/artworks-000059053599-hl1bls-t500x500.jpg", hlsURL:"https://s2rj.myren.xyz/b/9121010001/000/outputlist.m3u8"},
     ],
     song: {},
     profile: {
@@ -36,7 +27,8 @@ const store = new Vuex.Store({
       user_lastname: 'User'
     },
     artists: [
-      {id: 0, title:'Mohammad Reza Shajariaan', username:'mrshajarian', picURL:'https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg'}
+      {id: 0, title:'Mohammad Reza Shajariaan', username:'mrshajarian', picURL:'https://musico.ir/wp-content/uploads/2019/08/%DB%8C%D8%B3.jpg'},
+      {id: 1, title:'Naser Abdollahi', username:'naserabdollahi', picURL:'https://i1.sndcdn.com/artworks-000059053599-hl1bls-t500x500.jpg'}
     ],
     // should be fetched api/v1/getAlbums
     albums: [
