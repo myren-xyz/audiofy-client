@@ -53,6 +53,11 @@ const routes = [
     path: '/album/:album_identifier',
     name: 'Album',
     component: ()=> import('../views/Album.vue')
+  },
+  {
+    path: '/admin/dashboard',
+    name: 'Dashboard',
+    component: ()=> import('../views/admin/dashboard.vue')
   }
 ]
 
