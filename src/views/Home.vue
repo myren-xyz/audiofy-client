@@ -17,7 +17,7 @@
     <h2>Popular Artists</h2>
     <div class="slider">
       <div v-for="artist in artists" :key="artist.id">
-        <router-link to="artist/mrshajarian">
+        <router-link :to="`artist/`+artist.username">
         <Artist :artist="artist"/>
         </router-link>
       </div>
