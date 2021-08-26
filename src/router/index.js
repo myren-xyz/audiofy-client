@@ -58,6 +58,22 @@ const routes = [
     path: '/admin/dashboard',
     name: 'Dashboard',
     component: ()=> import('../views/admin/dashboard.vue')
+  },
+  {
+    path: '/admin/songs',
+    name: 'Songs',
+    component: ()=> import('../views/admin/songs.vue')
+  },
+  {
+    path: '/admin/songs/upload',
+    name: 'Upload Song',
+    component: ()=> import('../views/admin/songs/upload.vue')
+  }
+  ,
+  {
+    path: '/admin/artists/create',
+    name: 'Create Artist',
+    component: ()=> import('../views/admin/artists/create.vue')
   }
 ]
 
