@@ -1,7 +1,10 @@
 <template>
     <div>
         <div id="topper">
-            <div id="artist-avatar"></div>
+            <div id="artist-avatar" @click="chooseCover" @mouseenter="enter" @mouseleave="leave">
+                <ion-icon v-if="showUploadIcon" name="cloud-upload-outline"></ion-icon>
+            </div>
+            <input type="file" id="avatar-file-input"/>
             <div id="artist-display">
                 <h2>{{ artist.name }}</h2>
                 <h3>{{ artist.username }}</h3>
@@ -23,12 +26,42 @@ export default {
             artist: {
                 name: 'Artist Name',
                 username: 'Username'
-            }
+            },
+            showUploadIcon: null
         }
     },
+    methods: {
+        chooseCover() {
+            this.$el.querySelector('#avatar-file-input').click()
+        },
+        enter() {
+            this.showUploadIcon = true
+            // var avatar = this.$el.querySelector('#artist-avatar')
+
+        },
+        leave() {
+            var avatar = this.$el.querySelector('#artist-avatar')
+            if (avatar.style.backgroundImage) {this.showUploadIcon = false}
+        }
+    },
+    mounted() {
+        var avatarInput = this.$el.querySelector('#avatar-file-input')
+        var avatar = this.$el.querySelector('#artist-avatar')
+        if (!avatar.style.backgroundImage) this.showUploadIcon = true
+
+        avatarInput.addEventListener('change', () => {
+            let file = avatarInput.files[0]
+            this.showUploadIcon = false
+            let url = URL.createObjectURL(file)
+            avatar.style.backgroundImage = `url(${url})`
+        })
+    }
 }
 </script>
 <style scoped>
+#avatar-file-input {
+    display: none;
+}
 #topper {
     display: flex;
     margin-bottom: 40px;
@@ -40,6 +73,9 @@ export default {
     justify-content: center;
 }
 #artist-avatar {
+    display: flex;
+    place-items: center;
+    place-content: center;
     width: 160px;
     height: 160px;
     border-radius: 5px;
@@ -47,6 +83,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    overflow: hidden;
 }
 #artist-name, #artist-username {
     display: block;
@@ -92,5 +129,10 @@ button {
     background-color: transparent;
     color: #ffc857;
     margin-left: 20px;
+}
+#artist-avatar ion-icon {
+    color: #1B1A18;
+    font-size: 38px;
+    /* z-index: 100; */
 }
 </style>
