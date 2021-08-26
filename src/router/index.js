@@ -74,7 +74,12 @@ const routes = [
     path: '/admin/artists/create',
     name: 'Create Artist',
     component: ()=> import('../views/admin/artists/create.vue')
-  }
+  },
+  {
+    path: '/admin/artists/edit/:username',
+    name: 'Edit Artist',
+    component: ()=> import('../views/admin/artists/create.vue')
+  },
 ]
 
 const router = new VueRouter({
