@@ -11,8 +11,8 @@
             </div>
         </div>
 
-        <input type="text" v-model="artist.name" id="artist-name">
-        <input type="text" v-model="artist.username" id="artist-username">
+        <input type="text" v-model="artist.name" id="artist-name" spellcheck="false">
+        <input type="text" v-model="artist.username" id="artist-username" spellcheck="false">
 
         <button id="save">SAVE</button>
         <button id="delete">DELETE</button>
