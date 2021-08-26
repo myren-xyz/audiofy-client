@@ -2,34 +2,34 @@
   <div>
     <div id="avatar-wrapper"><h3>GU</h3></div>
     <h2 class="user-firstname">{{profile.user_firstname}} {{profile.user_lastname}}</h2>
-    <div class="u-info">
+    <!-- <div class="u-info">
       <div class="ffl"><p class="counter">1M</p><p class="lbl">Followers</p></div>
       <div class="ffl"><p class="counter">15</p><p class="lbl">Following</p></div>
       <div class="ffl"><p class="counter">15</p><p class="lbl">Likes</p></div>
-    </div>
+    </div> -->
 
-    <div id="switch-section">
+    <!-- <div id="switch-section">
       <h3>Switch To Artist Account</h3>
       <div id="switch">
         <div id="switch-btn"></div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="item">
+    <!-- <div class="item">
       <div class="item-left">
         <div class="icon"><ion-icon name="person"></ion-icon></div>
         <div><p>Edit Account</p></div>
       </div>
       <div class="arrow"><ion-icon name="chevron-forward"></ion-icon></div>
-    </div>
+    </div> -->
 
-    <div class="item">
+    <!-- <div class="item">
       <div class="item-left">
         <div class="icon"><ion-icon name="time"></ion-icon></div>
         <div><p>History</p></div>
       </div>
       <div class="arrow"><ion-icon name="chevron-forward"></ion-icon></div>
-    </div>
+    </div> -->
 
     <div class="item">
       <div class="item-left">
