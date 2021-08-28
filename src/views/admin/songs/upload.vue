@@ -3,25 +3,31 @@
         <div id="trackCover" @click="selectCover"></div>
         <input type="file" id="cover">
         <input type="text" id="trackTitle" v-model="trackTitle" placeholder="Track Title">
-        <input type="text" id="trackArtist" v-model="trackArtist" placeholder="Track Artist">
+        <input type="text" id="trackArtist" v-model="trackArtists" placeholder="Track Artist: separate by ,">
         <input type="file" id="track">
         <button @click="upload">upload</button>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     data() {
         return {
             trackTitle: '',
-            trackArtist: ''
+            trackArtists: ''
         }
     },
     methods: {
         upload() {
-            // audiofy.myren.xyz/api/v1/uploadSong?avatar=&
-        },
+            let formData = new FormData();
+            formData.append('trackFile', this.$el.querySelector('#track').files[0]);
+            formData.append('trackAvatar', this.$el.querySelector('#cover').files[0]);
+            axios.post(`https://audiofy.myren.xyz/api/v1/uploadSong?title=${this.trackTitle}&artists=${this.trackArtists}`, formData, {withCredentials: true}).then(response => {
+                console.log(response);
+            })
+        },  
         selectCover() {
             let input = this.$el.querySelector('#cover')
             input.click()
