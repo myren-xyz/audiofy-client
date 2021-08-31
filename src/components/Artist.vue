@@ -1,9 +1,9 @@
 <template>
     <div class="artist">
         <div class="artist-wrapper">
-            <div :data-src="artist.picURL" id="avatar"></div>
+            <div :data-src="artist.avatar_url" id="avatar"></div>
         </div>
-        <p class="artist-title">{{artist.title}}</p>
+        <p class="artist-title">{{artist.nic}}</p>
     </div>
 </template>
 <script>
