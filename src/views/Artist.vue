@@ -5,7 +5,7 @@
 
             <div class="artist-info">
                 <p>Artist</p>
-                <h4 class="artist-title">{{artist.title}}</h4>
+                <h4 class="artist-title">{{artist.nic}}</h4>
                 <div class="bar">
                     <p><span>60M</span> followers</p>
                     <button>Follow</button>
@@ -43,8 +43,8 @@ export default {
         this.artist_songs = this.songs.filter(song => song.artist_username == this.username)
 
         let avatar = this.$el.querySelector('#artist-avatar')
-        avatar.style = `background-image: url(${this.artist.picURL}); height: ${avatar.clientWidth}px`
-        document.title = `Audiofy | Artist ${this.artist.title}`
+        avatar.style = `background-image: url(${this.artist.avatar_url}); height: ${avatar.clientWidth}px`
+        document.title = `Audiofy | Artist ${this.artist.nic}`
     }
 }
 </script>
