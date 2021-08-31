@@ -21,13 +21,19 @@ export default {
     },
     methods: {
         upload() {
+            let url = `https://audiofy.myren.xyz/api/v1/uploadSong?title=${this.trackTitle}&artists=${this.trackArtists}`
+
             let formData = new FormData();
             formData.append('trackFile', this.$el.querySelector('#track').files[0]);
-            formData.append('trackAvatar', this.$el.querySelector('#cover').files[0]);
-            axios.post(`https://audiofy.myren.xyz/api/v1/uploadSong?title=${this.trackTitle}&artists=${this.trackArtists}`, formData, {withCredentials: true}).then(response => {
+            formData.append('avatarFile', this.$el.querySelector('#cover').files[0]);
+
+            axios.post(url, formData, {withCredentials: true}).then(response => {
                 console.log(response);
+            }).catch(error => {
+                console.log(error);
             })
-        },  
+        },
+
         selectCover() {
             let input = this.$el.querySelector('#cover')
             input.click()
