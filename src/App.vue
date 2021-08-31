@@ -38,6 +38,7 @@ export default {
     this.$store.commit('setProfile');
     this.$store.commit('getSongs');
     this.$store.commit('getArtists');
+    this.$store.commit('getPlayerState');
   }
 }
 </script>
