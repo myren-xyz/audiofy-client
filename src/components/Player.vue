@@ -19,7 +19,12 @@ export default {
     mounted() {
         this.$store.subscribe((mutation)=>{
             if(mutation.type === 'setSong') {
-                var stream = this.$store.state.song.hlsURL;
+                let url = this.$store.state.song.track_url
+                // change file name to outputlist.m3u8
+                let fileName = url.split('/').pop()
+                let newUrl = url.replace(fileName, 'outputlist.m3u8')
+
+                var stream = newUrl
                 var audio = au;
 
                 if(Hls.isSupported()){

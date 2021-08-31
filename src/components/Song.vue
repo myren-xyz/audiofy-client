@@ -1,13 +1,13 @@
 <template>
     <div class="song-wrapper">
-        <div class="song" id="song-pic" :data-pic="song.picURL">
+        <div class="song" id="song-pic" :data-pic="song.avatar_url">
             <span @click="play(song)">
                 <ion-icon v-if="!this.isPlaying" name="play-circle-outline"></ion-icon>
                 <ion-icon v-if="this.isPlaying" name="pause-circle"></ion-icon>
             </span>
         </div>
         <h4>{{song.title}}</h4>
-        <a href="#" class="songBy">{{song.by}}</a>
+        <a href="#" class="songBy" v-for="artist in song.artists" :key="artist">{{artist}}</a>
     </div>
 </template>
 <script>
@@ -30,22 +30,22 @@ export default {
 
         this.$store.subscribe((mutation)=>{
             if(mutation.type === 'setSong') {
-                let currentSongId = this.$store.state.song.id
-                if ((this.song.id == currentSongId)) {
+                let currentSongId = this.$store.state.song._id
+                if ((this.song._id == currentSongId)) {
                     this.isPlaying = true
                 }else{
                     this.isPlaying = false
                 }
             }else if(mutation.type == 'changePlayingState') {
-                let currentSongId = this.$store.state.song.id
-                if ((this.song.id == currentSongId)) {
+                let currentSongId = this.$store.state.song._id
+                if ((this.song._id == currentSongId)) {
                     this.isPlaying = this.$store.state.player.isPlaying
                 }else if (!this.$store.state.player.isPlaying) {
                     this.isPlaying = false
                 }
             }else if(mutation.type == 'setPlayingState'){
-                let currentSongId = this.$store.state.song.id
-                if ((this.song.id == currentSongId)) {
+                let currentSongId = this.$store.state.song._id
+                if ((this.song._id == currentSongId)) {
                     this.isPlaying = this.$store.state.player.isPlaying
                 }else if (!this.$store.state.player.isPlaying) {
                     this.isPlaying = false
@@ -55,7 +55,7 @@ export default {
     },
 
     created() {
-        if (this.song.id == this.$store.state.song.id){
+        if (this.song._id == this.$store.state.song._id){
             if(this.$store.state.player.isPlaying){
                 this.isPlaying = true
             }else{
@@ -66,7 +66,7 @@ export default {
     methods: {
         play: function(song){
             var currentSong = this.$store.state.song
-            if (song.id == currentSong.id) {
+            if (song._id == currentSong._id) {
                 this.$store.commit('changePlayingState')
             }else{
                 this.$store.commit('setSong', song);

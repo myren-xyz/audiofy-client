@@ -6,20 +6,22 @@
             </div>
             <div id="player-controls-container">
                 <div class="flex">
-                    <img class="avatar-now" :src="song.picURL" />
+                    <img class="avatar-now" :src="song.avatar_url" />
                     <div class="song-data">
                         <h3>{{song.title}}</h3>
-                        <p>{{song.by}}</p>
+                        <p v-for="artist in song.artists" :key="artist">{{artist}}</p>
                     </div>
                 </div>
                 <div><Control /></div>
+
                 <div class="flex hide">
-                    <img class="avatar-now" :src="song.picURL" />
+                    <img class="avatar-now" :src="song.avatar_url" />
                     <div class="song-data">
                         <h3>{{song.title}}</h3>
-                        <p>{{song.by}}</p>
+                        <p v-for="artist in song.artists" :key="artist">{{artist}}</p>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

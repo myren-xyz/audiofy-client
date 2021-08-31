@@ -13,11 +13,11 @@
                 </div>
 
                 <div class="avatar" id="song--avatar">
-                    <img :src="song.picURL" >
+                    <img :src="song.avatar_url" >
                 </div>
                 <div class="center">
                     <h5 id="song-title">{{song.title}}</h5>
-                    <p id="song-by">{{song.by}}</p>
+                    <p id="song-by" v-for="artist in song.artists" :key="artist">{{artist}}</p>
                 </div>
 
                 <div id="progressbar-wrapper" @click="seekto">
