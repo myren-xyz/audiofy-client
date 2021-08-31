@@ -29,7 +29,10 @@
                 <Control />
 
                 <div id="bottom-actionbar">
-                    <div><ion-icon name="heart-outline"></ion-icon></div>
+                    <div @click="like(song._id)">
+                        <ion-icon v-if="!isLiked" name="heart-outline"></ion-icon>
+                        <ion-icon v-if="isLiked" name="heart"></ion-icon>
+                    </div>
                     <div @click="collapse"><ion-icon name="chevron-down-outline"></ion-icon></div>
                 </div>
             </div>
@@ -43,6 +46,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import {mapState} from 'vuex';
 import Control from '@/components/BottomPlayer/Control.vue'
 export default {
@@ -52,10 +56,26 @@ export default {
     data: function() {
         return {
             typeActive: true,
-            collapsed: true
+            collapsed: true,
+            isLiked: null
         }
     },
     methods:{
+        like(id){
+            if(!this.isLiked){
+                let url = `https://audiofy.myren.xyz/api/v1/likeSong?song_id=${id}`;
+                axios.get(url, {withCredentials: true}).then(res => {
+                    console.log(res.data);
+                    this.isLiked = !this.isLiked;
+                })
+            }else{
+                let url = `https://audiofy.myren.xyz/api/v1/unlikeSong?song_id=${id}`;
+                axios.get(url, {withCredentials: true}).then(res => {
+                    console.log(res.data);
+                    this.isLiked = !this.isLiked;
+                })
+            }
+        },
         seekto: function(e){
             let currentTime = e.offsetX/this.$el.querySelector('#progressbar-wrapper').clientWidth
             this.$store.commit('setCurrentTime', currentTime)
@@ -109,6 +129,15 @@ export default {
     },
     computed: mapState(["song","player"]),
     mounted() {
+        // get liked songs
+        let url = `https://audiofy.myren.xyz/api/v1/getLikedSongs`;
+        axios.get(url, {withCredentials: true}).then(res => {
+            console.log(res.data);
+            let likedSongs = res.data.data.liked_songs
+            this.isLiked = likedSongs.some(song => song._id === this.song._id)
+        })
+
+
         this.$store.subscribe((mutation)=>{
             if(mutation.type == 'timeupdate'){
                 document.getElementById('progressbar-now').style.width = mutation.payload;
