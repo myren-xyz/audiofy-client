@@ -2,14 +2,14 @@
   <div class="home">
     <h2>New Songs</h2>
     <div class="slider">
-        <Song v-for="song in songs" :song="song" :key="song.id"/>
+        <Song v-for="song in songs" :song="song" :key="song._id"/>
     </div>
 
     <Divider/>
 
     <h2>Top Albums</h2>
     <div class="slider">
-        <Song v-for="song in songs" :song="song" :key="song.id"/>
+        <Song v-for="song in songs" :song="song" :key="song._id"/>
     </div>
     
     <Divider/>
