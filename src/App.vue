@@ -36,6 +36,7 @@ export default {
   },
   created(){
     this.$store.commit('setProfile');
+    this.$store.commit('getArtists');
   }
 }
 </script>
