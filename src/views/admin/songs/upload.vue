@@ -12,6 +12,27 @@
 <script>
 import axios from 'axios'
 
+function convert(data, issuer) {
+    let trackUrl = data.Track.url
+    let path = trackUrl.split('/').slice(4,7).join('/')
+    let newUrl = `https://utils.myren.xyz/ffmpeg/api/v1/convert?file_url=${trackUrl}&upload_path=${path}&issuer=${issuer}`
+    // GET to newUrl
+    console.log(newUrl)
+    axios.get(newUrl, {withCredentials: true}).then(res => {
+        console.log(res)
+        subscribe(res.data.job_id)
+    })
+}
+
+function subscribe(job_id) {
+    // subscribe to SSE stream
+    let url = `https://utils.myren.xyz/ffmpeg/api/v1/subscribe?job_id=${job_id}`
+    let source = new EventSource(url)
+    source.onmessage = function(e) {
+        console.log(e.data)
+    }
+}
+
 export default {
     data() {
         return {
@@ -28,7 +49,12 @@ export default {
             formData.append('avatarFile', this.$el.querySelector('#cover').files[0]);
 
             axios.post(url, formData, {withCredentials: true}).then(response => {
-                console.log(response);
+                console.log(response.data);
+                let data = response.data.data
+                if (response.data.ok) {
+                    console.log(this.$store.state.profile.id);
+                    convert(data, this.$store.state.profile.id)
+                }
             }).catch(error => {
                 console.log(error);
             })
