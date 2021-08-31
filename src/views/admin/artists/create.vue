@@ -14,12 +14,13 @@
         <input type="text" v-model="artist.name" id="artist-name" spellcheck="false">
         <input type="text" v-model="artist.username" id="artist-username" spellcheck="false">
 
-        <button id="save">SAVE</button>
+        <button id="save" @click="save">SAVE</button>
         <button id="delete">DELETE</button>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
@@ -42,6 +43,22 @@ export default {
         leave() {
             var avatar = this.$el.querySelector('#artist-avatar')
             if (avatar.style.backgroundImage) {this.showUploadIcon = false}
+        },
+        save() {
+            let url = `https://audiofy.myren.xyz/api/v1/createArtist?name=${this.artist.name}&username=${this.artist.username}`
+            // post artistAvatar to url
+            let formData = new FormData()
+            formData.append('artistAvatar', this.$el.querySelector('#avatar-file-input').files[0])
+            let config = {
+                withCredentials: true,
+            }
+            axios.post(url, formData, config)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         }
     },
     mounted() {
