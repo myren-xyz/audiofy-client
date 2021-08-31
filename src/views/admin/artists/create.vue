@@ -12,7 +12,7 @@
         </div>
 
         <input type="text" v-model="artist.name" id="artist-name" spellcheck="false">
-        <input type="text" v-model="artist.username" id="artist-username" spellcheck="false">
+        <input type="text" v-model="artist.username" id="artist-username" spellcheck="false" @keyup="lower">
 
         <button id="save" @click="save">SAVE</button>
         <button id="delete">DELETE</button>
@@ -26,7 +26,7 @@ export default {
         return {
             artist: {
                 name: 'Artist Name',
-                username: 'Username'
+                username: 'username'
             },
             showUploadIcon: null
         }
@@ -43,6 +43,9 @@ export default {
         leave() {
             var avatar = this.$el.querySelector('#artist-avatar')
             if (avatar.style.backgroundImage) {this.showUploadIcon = false}
+        },
+        lower() {
+            this.artist.username = this.artist.username.toLowerCase()
         },
         save() {
             let url = `https://audiofy.myren.xyz/api/v1/createArtist?name=${this.artist.name}&username=${this.artist.username}`
