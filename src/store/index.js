@@ -51,7 +51,6 @@ const store = new Vuex.Store({
     getArtists(state) {
       let url = 'https://audiofy.myren.xyz/api/v1/getArtists'
       axios.get(url).then(response => {
-        console.log(response.data.data)
         state.artists = JSON.parse(response.data.data)
       })
     },
