@@ -40,6 +40,7 @@ const store = new Vuex.Store({
     },
     changeRepeatingState(state) {
       state.player.isRepeating = !state.player.isRepeating
+      localStorage.setItem('isRepeating', state.player.isRepeating)
     },
     changePlayingState(state) {
       state.player.isPlaying = !state.player.isPlaying
@@ -55,10 +56,14 @@ const store = new Vuex.Store({
       })
     },
 
+    getPlayerState(state) {
+      // read from local storage
+      state.player.isRepeating = localStorage.getItem('isRepeating')
+    },
+
     getSongs(state) {
       let url = 'https://audiofy.myren.xyz/api/v1/getSongs'
       axios.get(url).then(response => {
-        console.log(response.data.data)
         state.songs = JSON.parse(response.data.data)
       })
     },
