@@ -7,7 +7,7 @@
 
     <Divider/>
 
-    <h2>Top Playlists</h2>
+    <h2>Top Albums</h2>
     <div class="slider">
         <Song v-for="song in songs" :song="song" :key="song.id"/>
     </div>
