@@ -17,7 +17,7 @@ export default {
 </script>
 <style scoped>
 .artist{
-    width: 160px;
+    width: 120px;
     text-align: center;
 }
 .artist-wrapper{
