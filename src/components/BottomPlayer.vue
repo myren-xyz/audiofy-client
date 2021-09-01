@@ -95,7 +95,7 @@ export default {
                 let wp = document.getElementById('wrapper-player')
                 let avatar = document.getElementById('song--avatar')
                 wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%;background-color:#1B1A18";
-                avatar.style = "width: 80%; height: auto; border-radius: 5px";
+                avatar.style = "width: 80%; height: auto !important; border-radius: 5px";
                 document.getElementById('darbar').classList.add('col')
                 document.getElementById('pp').style = "width: 0; height:0;"
                 document.getElementById('song-title').style = "font-size: 24px;text-align:center"
