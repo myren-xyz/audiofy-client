@@ -8,7 +8,10 @@
                 <h4 class="artist-title">{{artist.nic}}</h4>
                 <div class="bar">
                     <p><span>{{followersCount}}</span> followers</p>
-                    <button @click="follow">Follow</button>
+                    <button @click="follow" :class="{active: !following}">
+                        <span v-if="!following">Follow</span>
+                        <span v-else>Following</span>
+                    </button>
                 </div>
             </div>
 
@@ -47,6 +50,7 @@ export default {
                 axios.get(unfollowURL, {withCredentials: true}).then(res => {
                     if (res.data.ok) {
                         this.following = false;
+                        this.followersCount--;
                     }
                 })
             } else {
@@ -54,6 +58,7 @@ export default {
                 axios.get(followURL, {withCredentials: true}).then(res => {
                     if (res.data.ok) {
                         this.following = true;
+                        this.followersCount++;
                     }
                 })
             }
@@ -168,5 +173,9 @@ p {
 }
 .bar p span {
     color: #ffc857
+}
+.active {
+    background-color: #ffc857 !important;
+    font-weight: bold;
 }
 </style>
