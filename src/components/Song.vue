@@ -86,6 +86,7 @@ h4 {
 }
 .song-wrapper{
     margin-right: 16px;
+    max-width: 116px;
 }
 .song{
     display: flex;
