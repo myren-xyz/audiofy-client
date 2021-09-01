@@ -93,7 +93,7 @@ h4 {
     place-content: center;
     width: 116px;
     height: 116px;
-    background-size: 116px !important;
+    background-size: cover !important;
     border-radius: 5px;
 }
 .songBy{
@@ -114,7 +114,7 @@ h4 {
   .song{
     width: 134px;
     height: 134px;
-    background-size: 134px !important;
+    background-size: cover !important;
     border-radius: 5px;
 }
 }
