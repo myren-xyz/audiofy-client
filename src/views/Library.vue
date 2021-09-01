@@ -1,9 +1,9 @@
 <template>
   <div class="library">
-    <h2>Listening History</h2>
+    <!-- <h2>Listening History</h2>
     <div class="slider">
-        <Song v-for="song in songs" :song="song" :key="song.id"/>
-    </div>
+        <Song v-for="song in songs" :song="song" :key="song._id"/>
+    </div> -->
     
     <h2 class="sec-title">Library</h2>
     <div class="item">
@@ -68,10 +68,10 @@
 </style>
 
 <script>
-import Song from '@/components/Song.vue'
+// import Song from '@/components/Song.vue'
 export default {
   components: {
-    Song
+    // Song
   },
   computed: {
     songs: function(){
