@@ -94,6 +94,8 @@ export default {
                 this.collapsed = false
                 let wp = document.getElementById('wrapper-player')
                 let avatar = document.getElementById('song--avatar')
+                let image = document.getElementById('insider')
+                image.style.borderRadius = `5px`;
                 wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%;background-color:#1B1A18";
                 avatar.style = "width: 80%; height: auto !important; background-size: cover !important;border-radius: 15px;";
                 document.getElementById('darbar').classList.add('col')
@@ -111,6 +113,8 @@ export default {
         collapse: function() {
             let wp = document.getElementById('wrapper-player')
             let avatar = document.getElementById('song--avatar')
+            let image = document.getElementById('insider')
+            image.style.borderRadius = `5px`;
             wp.style = ""
             avatar.style = ""
             this.$el.querySelector('#darbar').classList.remove('col')
@@ -295,11 +299,7 @@ audio{
     place-content: center;
     place-items: center;
 }
-#insider {
-    border-radius: 5px;
-    width: 100%;
-    height: 100%;
-}
+
 @media screen and (min-width: 728px){
 .bplayer{
     bottom: 0px;
