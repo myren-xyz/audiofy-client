@@ -7,8 +7,8 @@
                 <p>Artist</p>
                 <h4 class="artist-title">{{artist.nic}}</h4>
                 <div class="bar">
-                    <p><span>60M</span> followers</p>
-                    <button>Follow</button>
+                    <p><span>{{followersCount}}</span> followers</p>
+                    <button @click="follow">Follow</button>
                 </div>
             </div>
 
@@ -25,6 +25,7 @@
 <script>
 import Song from '@/components/Song.vue'
 import {mapState} from 'vuex';
+import axios from 'axios';
 
 export default {
     components: {
@@ -34,17 +35,69 @@ export default {
         return {
             username: this.$route.params.username,
             artist:  {},
-            artist_songs: {}
+            artist_songs: {},
+            followersCount: null,
+            following: false
+        }
+    },
+    methods: {
+        follow() {
+            if (this.following) {
+                let unfollowURL = `https://audiofy.myren.xyz/api/v1/unfollow?user_id=${this.artist._id}`
+                axios.get(unfollowURL, {withCredentials: true}).then(res => {
+                    if (res.data.ok) {
+                        this.following = false;
+                    }
+                })
+            } else {
+                let followURL = `https://audiofy.myren.xyz/api/v1/follow?user_id=${this.artist._id}`
+                axios.get(followURL, {withCredentials: true}).then(res => {
+                    if (res.data.ok) {
+                        this.following = true;
+                    }
+                })
+            }
         }
     },
     computed: mapState(['songs', 'artists']),
     mounted() {
-        this.artist = this.artists.filter(artist => artist.username == this.username)[0]
-        this.artist_songs = this.songs.filter(song => song.artist_username == this.username)
+        let url = `https://audiofy.myren.xyz/api/v1/artistExists?username=${this.username}`
+        axios.get(url, {withCredentials: true}).then(res => {
+            if (res.data.ok) {
+                console.table(JSON.parse(res.data.data.message));
+                this.artist = JSON.parse(res.data.data.message);
 
-        let avatar = this.$el.querySelector('#artist-avatar')
-        avatar.style = `background-image: url(${this.artist.avatar_url}); height: ${avatar.clientWidth}px`
-        document.title = `Audiofy | Artist ${this.artist.nic}`
+                let avatar = this.$el.querySelector('#artist-avatar')
+                avatar.style = `background-image: url(${this.artist.avatar_url}); height: ${avatar.clientWidth}px`
+                document.title = `Audiofy | Artist ${this.artist.nic}`   
+            }
+        }).then(() => {
+            let getFollowersUrl = `https://audiofy.myren.xyz/api/v1/getFollowers?user_id=${this.artist._id}`
+            axios.get(getFollowersUrl, {withCredentials: true}).then(res => {
+                if (res.data.ok) {
+                    this.followersCount = res.data.data.count;
+                }
+            })
+        }).then(() => {
+            let getSongsUrl = `https://audiofy.myren.xyz/api/v1/getSongsByArtist?username=${this.username}`
+            axios.get(getSongsUrl, {withCredentials: true}).then(res => {
+                if (res.data.ok) {
+                    this.artist_songs = JSON.parse(res.data.data)
+                }
+            })
+        }).then(() => {
+            let getFollowingUrl = `https://audiofy.myren.xyz/api/v1/getFollowings?user_id=${this.$store.state.profile.id}`
+            axios.get(getFollowingUrl, {withCredentials: true}).then(res => {
+                if (res.data.ok) {
+                    let followings = res.data.data.followings;
+                    if (followings === null || typeof followings === 'undefined') {
+                        this.following = false
+                    } else {
+                        this.following = followings.some(artist => artist == this.artist._id)
+                    }
+                }
+            })
+        })
     }
 }
 </script>
