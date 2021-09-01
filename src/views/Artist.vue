@@ -92,6 +92,7 @@ export default {
                 }
             })
         }).then(() => {
+            if (!this.$store.state.profile._id) return
             let getFollowingUrl = `https://audiofy.myren.xyz/api/v1/getFollowings?user_id=${this.$store.state.profile.id}`
             axios.get(getFollowingUrl, {withCredentials: true}).then(res => {
                 if (res.data.ok) {
