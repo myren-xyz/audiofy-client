@@ -10,7 +10,7 @@ const store = new Vuex.Store({
       percentage: null,
       currentTime: 0,
       isPlaying: false,
-      isRepeating: false,
+      isRepeating: null,
     },
     songs:[
       
@@ -40,7 +40,7 @@ const store = new Vuex.Store({
     },
     changeRepeatingState(state) {
       state.player.isRepeating = !state.player.isRepeating
-      localStorage.setItem('isRepeating', state.player.isRepeating)
+      localStorage.setItem('isRepeating', Boolean(state.player.isRepeating))
     },
     changePlayingState(state) {
       state.player.isPlaying = !state.player.isPlaying
@@ -58,7 +58,8 @@ const store = new Vuex.Store({
 
     getPlayerState(state) {
       // read from local storage
-      state.player.isRepeating = localStorage.getItem('isRepeating')
+      console.log(typeof localStorage.getItem('isRepeating'));
+      state.player.isRepeating = Boolean(localStorage.getItem('isRepeating'))
     },
 
     getSongs(state) {

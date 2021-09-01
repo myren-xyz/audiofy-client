@@ -58,14 +58,14 @@ au.addEventListener('timeupdate', ()=>{
 
 au.addEventListener('ended', ()=>{
     
-    let currentSongId = store.state.song.id;
+    let currentSongId = store.state.song._id;
     // get indext of current song in store.state.songs
-    let currentSongIndex = store.state.songs.findIndex(song => song.id === currentSongId);
+    let currentSongIndex = store.state.songs.findIndex(song => song._id === currentSongId);
     // get next song
     let nextSong = store.state.songs[currentSongIndex + 1]
     let repeat = store.state.player.isRepeating;
     
-    if(nextSong != null && repeat == false){
+    if(nextSong !== null && repeat === false && nextSong !== undefined) {
         store.commit('setSong', nextSong)
     }else{
         store.commit('setSong', store.state.song)

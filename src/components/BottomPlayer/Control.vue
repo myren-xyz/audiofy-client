@@ -18,27 +18,34 @@ export default {
     computed: mapState(["song","player"]),
 
     methods: {
-        changeRepeatingState: function() {
+        changeRepeatingState() {
             this.$store.commit('changeRepeatingState')
         },
 
-        changePlayingState: function() {
+        changePlayingState() {
             this.$store.commit('changePlayingState')
         },
 
-        next: function() {
-            let songId = this.$store.state.song.id +1;
-            let nextSong = this.$store.state.songs.filter(song => song.id == songId);
-            if(nextSong[0] != null){
-                this.$store.commit('setSong', nextSong[0])
+        next() {
+           let currentSongId = this.$store.state.song._id;
+            // get index of current song in store.state.songs
+            let currentSongIndex = this.$store.state.songs.findIndex(song => song._id === currentSongId);
+            // get next song
+            let nextSong = this.$store.state.songs[currentSongIndex + 1]
+            console.log(nextSong);
+            if(nextSong !== null && nextSong !== undefined) {
+                this.$store.commit('setSong', nextSong)
             }
         },
 
-        previous: function() {
-            let songId = this.$store.state.song.id -1;
-            let prevSong = this.$store.state.songs.filter(song => song.id == songId);
-            if(prevSong[0] != null){
-                this.$store.commit('setSong', prevSong[0])
+        previous() {
+            let currentSongId = this.$store.state.song._id;
+            // get indext of current song in store.state.songs
+            let currentSongIndex = this.$store.state.songs.findIndex(song => song._id === currentSongId);
+            // get next song
+            let prevSong = this.$store.state.songs[currentSongIndex - 1]
+            if(prevSong !== null && prevSong !== undefined) {
+                this.$store.commit('setSong', prevSong)
             }
         }
     },
