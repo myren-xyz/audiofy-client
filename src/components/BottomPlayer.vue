@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="avatar" id="song--avatar">
-                    <img :src="song.avatar_url" >
+                    <img :src="song.avatar_url" id="insider">
                 </div>
                 <div class="center">
                     <h5 id="song-title">{{song.title}}</h5>
@@ -95,7 +95,7 @@ export default {
                 let wp = document.getElementById('wrapper-player')
                 let avatar = document.getElementById('song--avatar')
                 wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%;background-color:#1B1A18";
-                avatar.style = "width: 80%; height: auto !important; border-radius: 5px";
+                avatar.style = "width: 80%; height: auto !important; background-size: cover !important;border-radius: 15px;";
                 document.getElementById('darbar').classList.add('col')
                 document.getElementById('pp').style = "width: 0; height:0;"
                 document.getElementById('song-title').style = "font-size: 24px;text-align:center"
@@ -148,6 +148,8 @@ export default {
 </script>
 
 <style>
+
+
 #darbar{
     width: 100%;
 }
@@ -292,6 +294,11 @@ audio{
     display: flex;
     place-content: center;
     place-items: center;
+}
+#insider {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
 }
 @media screen and (min-width: 728px){
 .bplayer{
