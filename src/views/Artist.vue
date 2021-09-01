@@ -73,8 +73,9 @@ export default {
             if (res.data.ok) {
                 console.table(JSON.parse(res.data.data.message));
                 this.artist = JSON.parse(res.data.data.message);
-
-                this.$el.querySelector('#artist-avatar').style.backgroundImage = `url(${this.artist.avatar_url})`;
+                let avatar = this.$el.querySelector('#artist-avatar')
+                avatar.style.backgroundImage = `url(${this.artist.avatar_url})`;
+                avatar.style.height = avatar.clientWidth + 'px';
                 document.title = `Audiofy | Artist ${this.artist.nic}`   
             }
         }).then(() => {
