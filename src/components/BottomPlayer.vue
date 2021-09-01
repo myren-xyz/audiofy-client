@@ -62,7 +62,7 @@ export default {
     },
     methods:{
         like(id){
-            if (!this.$store.state.profile._id) return
+            if (!this.$store.state.profile._id) {this.$store.commit('setActionPopup', true); return}
             if(!this.isLiked){
                 let url = `https://audiofy.myren.xyz/api/v1/likeSong?song_id=${id}`;
                 axios.get(url, {withCredentials: true}).then(res => {
