@@ -1,7 +1,9 @@
 <template>
     <div class="artist">
         <div class="artist-data-wrapper">
-            <div id="artist-avatar"></div>
+            <div id="artist-avatar">
+                
+            </div>
 
             <div class="artist-info">
                 <p>Artist</p>
@@ -127,6 +129,7 @@ export default {
     background-size: cover !important;
     background-position: center;
     position: relative;
+    object-fit: cover;
 }
 #artist-avatar::after {
     content: '';
