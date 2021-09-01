@@ -6,6 +6,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    popups: {
+      action: false
+    },
     player:{
       percentage: null,
       currentTime: 0,
@@ -70,6 +73,10 @@ const store = new Vuex.Store({
       axios.get(url).then(response => {
         state.songs = JSON.parse(response.data.data)
       })
+    },
+
+    setActionPopup(state, value) {
+      state.popups.action = value
     },
 
     setProfile(state){

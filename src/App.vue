@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Acookie/>
+    <Aaction/>
     <Header/>
     <div id="wrapper">
       <div id="side-wrapper">
@@ -26,6 +27,7 @@ import BottomPlayer from './components/BottomPlayer.vue';
 import BottomPlayerDesktop from './components/BottomPlayerDesktop.vue';
 import BottomNav from './components/BottomNav.vue'
 import Acookie from './components/pops/Acookie.vue'
+import Aaction from './components/pops/Aaction.vue'
 
 export default {
   components: {
@@ -36,7 +38,8 @@ export default {
     BottomPlayer,
     BottomPlayerDesktop,
     BottomNav,
-    Acookie
+    Acookie,
+    Aaction
   },
   created(){
     this.$store.commit('setProfile');

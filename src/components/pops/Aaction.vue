@@ -1,21 +1,24 @@
 <template>
-    <div class="" v-if="!accepted">
+    <div class="" v-if="this.$store.state.popups.action">
         <!-- we use cookies popups -->
         <div class="cookie-popup">
             <div class="cookie-popup__content">
                 <div class="cookie-popup__text">
                     <p>
                         <span>
-                            This website uses cookies to ensure you get the best experience on our website.
+                            This functionality is only available for users who have signed up for the service.
                         </span>
                         <span>
-                            By continuing to use this site you agree to our use of cookies.
+                            Sign Up / Log in to access this functionality.
                         </span>
                     </p>
                 </div>
                 <div class="cookie-popup__buttons">
-                    <button class="cookie-popup__button" @click="accept">
-                        Accept
+                    <button class="cookie-popup__button" @click="sign">
+                        Sign Up / Log In
+                    </button>
+                    <button class="cookie-popup__button" @click="close">
+                        Maybe Later
                     </button>
                 </div>
             </div>
@@ -24,32 +27,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-    name: 'Acookie',
-    data() {
-        return {
-            accepted: false,
-        }
-    },
+    name: 'Aaction',
     methods: {
-        accept() {
-            this.accepted = true;
-            // set to localstorage
-            localStorage.setItem('cookieAccepted', true);
+        sign() {
+            this.$store.commit('setActionPopup', false)
+            // go to https://accounts.myren.xyz
+            window.location.href = 'https://accounts.myren.xyz';
+        },
 
-            // close the popup
-            this.$emit('close')
+        close() {
+            this.$store.commit('setActionPopup', false)
         }
     },
-    mounted() {
-        let acc = localStorage.getItem('cookieAccepted');
 
-        if (acc === 'false' || acc === null || acc === undefined) {
-            this.accepted = false;
-        } else {
-            this.accepted = true;
-        }
-    },
+    computed: mapState['popups']
 }
 </script>
 
@@ -94,10 +87,12 @@ export default {
 }
 .cookie-popup__buttons {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .cookie-popup__button {
+    width: 90%;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -110,5 +105,9 @@ export default {
     font-weight: bold;
     cursor: pointer;
     margin-top: 20px;
+}
+.cookie-popup__button:nth-child(2) {
+    background-color: #2a2a2a;
+    color: #ffc857;
 }
 </style>
