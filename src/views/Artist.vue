@@ -72,8 +72,7 @@ export default {
                 console.table(JSON.parse(res.data.data.message));
                 this.artist = JSON.parse(res.data.data.message);
 
-                let avatar = this.$el.querySelector('#artist-avatar')
-                avatar.style = `background-image: url(${this.artist.avatar_url}); height: auto`
+                this.$el.querySelector('#artist-avatar').style.backgroundImage = `url(${this.artist.avatar_url})`;
                 document.title = `Audiofy | Artist ${this.artist.nic}`   
             }
         }).then(() => {
@@ -123,9 +122,9 @@ export default {
 #artist-avatar{
     width: 100%;
     margin: 0 auto;
-    aspect-ratio: 1;
+    aspect-ratio: 1/1;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover !important;
     background-position: center;
     position: relative;
 }
