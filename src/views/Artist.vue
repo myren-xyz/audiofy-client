@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         follow() {
-            if (!this.$store.state.profile._id) {this.$store.commit('setActionPopup', true); return}
+            if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
             if (this.following) {
                 let unfollowURL = `https://audiofy.myren.xyz/api/v1/unfollow?user_id=${this.artist._id}`
                 axios.get(unfollowURL, {withCredentials: true}).then(res => {
@@ -94,7 +94,7 @@ export default {
                 }
             })
         }).then(() => {
-            if (!this.$store.state.profile._id) return
+            if (!this.$store.state.profile.id) return
             let getFollowingUrl = `https://audiofy.myren.xyz/api/v1/getFollowings?user_id=${this.$store.state.profile.id}`
             axios.get(getFollowingUrl, {withCredentials: true}).then(res => {
                 if (res.data.ok) {

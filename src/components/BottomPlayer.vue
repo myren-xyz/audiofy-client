@@ -62,7 +62,7 @@ export default {
     },
     methods:{
         like(id){
-            if (!this.$store.state.profile._id) {this.$store.commit('setActionPopup', true); return}
+            if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
             if(!this.isLiked){
                 let url = `https://audiofy.myren.xyz/api/v1/likeSong?song_id=${id}`;
                 axios.get(url, {withCredentials: true}).then(res => {
@@ -135,11 +135,13 @@ export default {
     computed: mapState(["song","player"]),
     mounted() {
         // get liked songs
-        if (this.$store.state.profile._id){
+        if (this.$store.state.profile.id){
             let url = `https://audiofy.myren.xyz/api/v1/getLikedSongs`;
             axios.get(url, {withCredentials: true}).then(res => {
                 let likedSongs = res.data.data.liked_songs
-                if (likedSongs) this.isLiked = likedSongs.some(song => song._id === this.song._id)
+                console.log(likedSongs);
+                if (likedSongs) this.isLiked = likedSongs.some(song => song === this.song._id)
+                console.log(this.isLiked);
             })
         }
 
