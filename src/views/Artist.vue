@@ -123,6 +123,7 @@ export default {
 }
 #artist-avatar{
     width: 100%;
+    height: auto;
     margin: 0 auto;
     aspect-ratio: 1/1;
     background-repeat: no-repeat;
