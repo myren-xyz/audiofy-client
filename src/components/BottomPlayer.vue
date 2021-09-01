@@ -132,9 +132,8 @@ export default {
         // get liked songs
         let url = `https://audiofy.myren.xyz/api/v1/getLikedSongs`;
         axios.get(url, {withCredentials: true}).then(res => {
-            console.log(res.data);
             let likedSongs = res.data.data.liked_songs
-            this.isLiked = likedSongs.some(song => song._id === this.song._id)
+            if (likedSongs) this.isLiked = likedSongs.some(song => song._id === this.song._id)
         })
 
 

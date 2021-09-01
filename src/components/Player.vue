@@ -64,7 +64,7 @@ au.addEventListener('ended', ()=>{
     // get next song
     let nextSong = store.state.songs[currentSongIndex + 1]
     let repeat = store.state.player.isRepeating;
-    console.log(nextSong, repeat);
+    
     if(nextSong != null && repeat == false){
         store.commit('setSong', nextSong)
     }else{
