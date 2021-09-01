@@ -7,7 +7,7 @@
             </span>
         </div>
         <h4>{{song.title}}</h4>
-        <a href="#" class="songBy" v-for="artist in song.artists" :key="artist">{{artist}}</a>
+        <router-link class="songBy" v-for="artist in song.artists" :key="artist" :to="'/artist/'+artist">{{artist}}</router-link>
     </div>
 </template>
 <script>
