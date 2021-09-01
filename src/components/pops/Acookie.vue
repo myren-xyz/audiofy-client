@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="" v-if="!accepted">
         <!-- we use cookies popups -->
         <div class="cookie-popup">
             <div class="cookie-popup__content">
@@ -36,11 +36,15 @@ export default {
             this.accepted = true;
             // set to localstorage
             localStorage.setItem('cookieAccepted', true);
+
+            // close the popup
+            this.$emit('close')
         }
     },
     mounted() {
         let acc = localStorage.getItem('cookieAccepted');
-        if (acc === 'false') {
+
+        if (acc === 'false' || acc === null || acc === undefined) {
             this.accepted = false;
         } else {
             this.accepted = true;
