@@ -9,7 +9,7 @@
 
     <h2>Top Albums</h2>
     <div class="slider">
-        <Song v-for="song in songs" :song="song" :key="song._id"/>
+        <!-- <Song v-for="song in songs" :song="song" :key="song._id"/> -->
     </div>
     
     <Divider/>
