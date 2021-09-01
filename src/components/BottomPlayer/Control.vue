@@ -33,7 +33,7 @@ export default {
             // get next song
             let nextSong = this.$store.state.songs[currentSongIndex + 1]
             console.log(nextSong);
-            if(nextSong !== null && nextSong !== undefined) {
+            if(nextSong !== null && typeof nextSong !== undefined && nextSong !== undefined) {
                 this.$store.commit('setSong', nextSong)
             }
         },
@@ -44,7 +44,7 @@ export default {
             let currentSongIndex = this.$store.state.songs.findIndex(song => song._id === currentSongId);
             // get next song
             let prevSong = this.$store.state.songs[currentSongIndex - 1]
-            if(prevSong !== null && prevSong !== undefined) {
+            if(prevSong !== null && typeof prevSong !== undefined && prevSong !== undefined) {
                 this.$store.commit('setSong', prevSong)
             }
         }
