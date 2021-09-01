@@ -29,7 +29,9 @@ export default {
     width: 91px;
     height: 91px;
     border-radius: 50%;
-    background-size: 91px !important;
+    background-size: cover !important;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .artist-title{
     margin-top: 6px;
