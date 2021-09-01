@@ -19,6 +19,11 @@ export default {
     mounted() {
         this.$store.subscribe((mutation)=>{
             if(mutation.type === 'setSong') {
+                if (this.$store.state.liked_songs) {
+                    let isLiked = this.$store.state.liked_songs.some(song => song === this.$store.state.song._id)
+                    this.$store.commit('setLiked', isLiked)
+                }
+
                 let url = this.$store.state.song.track_url
                 // change file name to outputlist.m3u8
                 let fileName = url.split('/').pop()

@@ -30,8 +30,8 @@
 
                 <div id="bottom-actionbar">
                     <div @click="like(song._id)">
-                        <ion-icon v-if="!isLiked" name="heart-outline"></ion-icon>
-                        <ion-icon v-if="isLiked" name="heart"></ion-icon>
+                        <ion-icon v-if="!this.player.isLiked" name="heart-outline"></ion-icon>
+                        <ion-icon v-if="this.player.isLiked" name="heart"></ion-icon>
                     </div>
                     <div @click="collapse"><ion-icon name="chevron-down-outline"></ion-icon></div>
                 </div>
@@ -57,23 +57,22 @@ export default {
         return {
             typeActive: true,
             collapsed: true,
-            isLiked: null
         }
     },
     methods:{
         like(id){
             if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
-            if(!this.isLiked){
+            if(!this.player.isLiked){
                 let url = `https://audiofy.myren.xyz/api/v1/likeSong?song_id=${id}`;
                 axios.get(url, {withCredentials: true}).then(res => {
                     console.log(res.data);
-                    this.isLiked = !this.isLiked;
+                    this.$store.commit('setLiked', !this.player.isLiked);
                 })
             }else{
                 let url = `https://audiofy.myren.xyz/api/v1/unlikeSong?song_id=${id}`;
                 axios.get(url, {withCredentials: true}).then(res => {
                     console.log(res.data);
-                    this.isLiked = !this.isLiked;
+                    this.$store.commit('setLiked', !this.player.isLiked);
                 })
             }
         },
@@ -134,18 +133,7 @@ export default {
     },
     computed: mapState(["song","player"]),
     mounted() {
-        // get liked songs
-        if (this.$store.state.profile.id){
-            let url = `https://audiofy.myren.xyz/api/v1/getLikedSongs`;
-            axios.get(url, {withCredentials: true}).then(res => {
-                let likedSongs = res.data.data.liked_songs
-                console.log(likedSongs);
-                if (likedSongs) this.isLiked = likedSongs.some(song => song === this.song._id)
-                console.log(this.isLiked);
-            })
-        }
-
-
+        console.log(this.player.isLiked);
         this.$store.subscribe((mutation)=>{
             if(mutation.type == 'timeupdate'){
                 document.getElementById('progressbar-now').style.width = mutation.payload;

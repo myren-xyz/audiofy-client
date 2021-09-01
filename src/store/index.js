@@ -27,29 +27,40 @@ const store = new Vuex.Store({
       
     ],
     // should be fetched api/v1/getAlbums
-    albums: [
-      
-    ],
+    albums: [],
+    liked_songs: []
   },
   mutations: {
     timeupdate(state, percentage) {
-      state.player.percentage = percentage
+      state.player = {
+        ...state.player,
+        percentage: percentage,
+      }
     },
     setCurrentTime(state, currentTime) {
-      state.player.currentTime = currentTime;
+      state.player = {
+        ...state.player,
+        currentTime: currentTime,
+      }
     },
     setSong (state, song) {
-      state.song = song;
+      state.song = Object.assign({}, song)
     },
     changeRepeatingState(state) {
       state.player.isRepeating = !state.player.isRepeating
       localStorage.setItem('isRepeating', state.player.isRepeating)
     },
     changePlayingState(state) {
-      state.player.isPlaying = !state.player.isPlaying
+      state.player = {
+        ...state.player,
+        isPlaying: !state.player.isPlaying
+      }
     },
     setPlayingState(state, value) {
-      state.player.isPlaying = value
+      state.player = {
+        ...state.player,
+        isPlaying: value
+      }
     },
 
     getArtists(state) {
@@ -84,15 +95,19 @@ const store = new Vuex.Store({
         .then(function (response) {
           if (response.data.ok){
             state.profile = response.data
+            let url = `https://audiofy.myren.xyz/api/v1/getLikedSongs`;
+            axios.get(url, {withCredentials: true}).then(res => {
+                state.liked_songs = res.data.data.liked_songs
+                console.table(state.liked_songs)
+            })
           }
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-
-    });
+        }).catch(function (error) {console.log(error)})
+    }, // end of set profile
+    setLiked(state, val) {
+      state.player = {
+        ...state.player,
+        isLiked: val
+      }
     }
   }
 })
