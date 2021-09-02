@@ -42,6 +42,7 @@ export default {
     Aaction
   },
   created(){
+    // wt test
     this.$store.commit('setProfile');
     this.$store.commit('getSongs');
     this.$store.commit('getArtists');
