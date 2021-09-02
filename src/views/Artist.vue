@@ -17,10 +17,12 @@
                 </div>
             </div>
 
-            <h3 class="header">Top Songs</h3>
-            <div class="tracks-wrapper">
-                <div class="slider">
-                    <Song v-for="song in artist_songs" :song="song" :key="song.id"/>
+            <div class="mtop">
+                <h3 class="header">Top Songs</h3>
+                <div class="tracks-wrapper">
+                    <div class="slider">
+                        <Song v-for="song in artist_songs" :song="song" :key="song.id"/>
+                    </div>
                 </div>
             </div>
 
@@ -195,6 +197,12 @@ p {
     }
     .artist-info {
         padding-left: 20px;
+        margin-top: -25%;
+    }
+    .mtop {
+        padding: 0 30px;
+        position: relative;
+        z-index: 55;
     }
     .artist-info p {
         font-size: 18px;
@@ -216,7 +224,7 @@ p {
         margin-top: 30px;
     }
     .header {
-        margin-top: 120px;
+        margin-top: 30px;
     }
     #artist-avatar::after {
         content: '';
