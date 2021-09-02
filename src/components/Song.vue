@@ -112,11 +112,15 @@ h4 {
     font-size: 58px;
 }
 @media screen and (min-width:728px){
-  .song{
+.song{
     width: 134px;
     height: 134px;
     background-size: cover !important;
     border-radius: 5px;
 }
+.song-wrapper{
+    margin-right: 36px;
+}
+
 }
 </style>
