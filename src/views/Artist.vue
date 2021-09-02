@@ -197,7 +197,7 @@ p {
     }
     .artist-info {
         padding-left: 20px;
-        /* margin-top: -25%; */
+        margin-top: calc(-390px / 1.3);
     }
     .mtop {
         padding: 0 30px;
