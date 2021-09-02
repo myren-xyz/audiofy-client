@@ -42,7 +42,7 @@ export default {
     Aaction
   },
   created(){
-    // wt test
+    // wt test ouro
     this.$store.commit('setProfile');
     this.$store.commit('getSongs');
     this.$store.commit('getArtists');
