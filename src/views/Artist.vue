@@ -11,13 +11,13 @@
                 <div class="bar">
                     <p><span>{{followersCount}}</span> followers</p>
                     <button @click="follow" :class="{active: !following}">
-                        <span v-if="!following">Follow</span>
-                        <span v-else>Following</span>
+                        <span v-if="!following">FOLLOW</span>
+                        <span v-else>FOLLOWING</span>
                     </button>
                 </div>
             </div>
 
-            <h3>Top Songs</h3>
+            <h3 class="header">Top Songs</h3>
             <div class="tracks-wrapper">
                 <div class="slider">
                     <Song v-for="song in artist_songs" :song="song" :key="song.id"/>
@@ -183,5 +183,61 @@ p {
 .active {
     background-color: #ffc857 !important;
     font-weight: bold;
+}
+
+@media screen and (min-width: 728px) {
+    #artist-avatar {
+        width: 100%;
+        height: 390px !important;
+        background-size: auto 410px !important;
+        background-position: right;
+        border-radius: 15px;
+    }
+    .artist-info {
+        padding-left: 20px;
+    }
+    .artist-info p {
+        font-size: 18px;
+    }
+    .artist-title {
+        font-size: 36px;
+    }
+    .bar {
+        display: block;
+    }
+    .bar p {
+        font-size: 18px;
+    }
+    .bar button {
+        width: 155px;
+        height: 40px;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+    .header {
+        margin-top: 120px;
+    }
+    #artist-avatar::after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        /* background: linear-gradient(90deg, #1B1A18, #1b1a1885, #00000000); */
+        background: -webkit-linear-gradient(
+            0deg,
+            #000000,
+            #000000,
+            #000000,
+            #000000,
+            #000000,
+            #000000,
+            rgba(0,0,0,0.90),
+            rgba(0,0,0,0.60),
+            #00000000) !important;
+        top: 0%;
+        border-radius: 15px;
+    }
 }
 </style>
