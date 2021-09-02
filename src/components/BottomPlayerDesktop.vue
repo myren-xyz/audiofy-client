@@ -11,6 +11,10 @@
                         <h3>{{song.title}}</h3>
                         <p v-for="artist in song.artists" :key="artist">{{artist}}</p>
                     </div>
+                    <div class="like-wrapper" @click="like(song._id)">
+                        <ion-icon v-if="!this.player.isLiked" name="heart-outline"></ion-icon>
+                        <ion-icon v-if="this.player.isLiked" name="heart"></ion-icon>
+                    </div>
                 </div>
                 <div><Control /></div>
 
@@ -27,7 +31,7 @@
     </div>
 </template>
 <script>
-
+import axios from 'axios'
 import {mapState} from 'vuex';
 import Control from '@/components/BottomPlayer/Control.vue'
 
@@ -42,6 +46,22 @@ export default {
         }
     },
     methods:{
+        like(id){
+            if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
+            if(!this.player.isLiked){
+                let url = `https://audiofy.myren.xyz/api/v1/likeSong?song_id=${id}`;
+                axios.get(url, {withCredentials: true}).then(res => {
+                    console.log(res.data);
+                    this.$store.commit('setLiked', !this.player.isLiked);
+                })
+            }else{
+                let url = `https://audiofy.myren.xyz/api/v1/unlikeSong?song_id=${id}`;
+                axios.get(url, {withCredentials: true}).then(res => {
+                    console.log(res.data);
+                    this.$store.commit('setLiked', !this.player.isLiked);
+                })
+            }
+        },
         seekto: function(e){
             let currentTime = e.offsetX/this.$el.querySelector('#progressbar-container').clientWidth
             this.$store.commit('setCurrentTime', currentTime)
@@ -121,6 +141,17 @@ export default {
             font-size: 12px;
             font-weight: 300;
             color: #969696;
+        }
+        .like-wrapper {
+            width: 46px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+        .like-wrapper ion-icon {
+            font-size: 20px;
         }
     }
 </style>
