@@ -77,10 +77,9 @@ export default {
     },
     computed: mapState(["song","player"]),
     mounted() {
-        this.$store.subscribe((mutation)=>{
-            if(mutation.type == 'timeupdate'){
-                this.$el.querySelector('#progressbar-ds').style.width = mutation.payload;
-            }
+        let au = this.$store.state.el
+        au.addEventListener('timeupdate', ()=>{
+            this.$el.querySelector('#progressbar-ds').style.width = `${(au.currentTime/au.duration)*100}%`;
         })
     }
 }

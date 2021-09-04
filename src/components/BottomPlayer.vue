@@ -133,10 +133,9 @@ export default {
     },
     computed: mapState(["song","player"]),
     mounted() {
-        this.$store.subscribe((mutation)=>{
-            if(mutation.type == 'timeupdate'){
-                document.getElementById('progressbar-now').style.width = mutation.payload;
-            }
+        let au = this.$store.state.el
+        au.addEventListener('timeupdate', ()=>{
+            this.$el.querySelector('#progressbar-now').style.width = `${(au.currentTime/au.duration)*100}%`;
         })
     }
 }

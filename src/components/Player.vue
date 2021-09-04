@@ -13,6 +13,7 @@ import store from '../store/index'
 const au = new Audio();
 var hls = new Hls();
 au.preload = "metadata";
+store.state.el = au;
 
 export default {
     computed: mapState(["song","player"]),
@@ -32,10 +33,16 @@ export default {
                 var stream = newUrl
                 var audio = au;
 
+                
+
                 if(Hls.isSupported()){
                     hls.loadSource(stream);
                     hls.attachMedia(audio);
+                    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                        audio.play();
+                    });
                 }else if(audio.canPlayType('application/x-mpegURL') || audio.canPlayType('application/vnd.apple.mpegurl')){
+                    audio.pause();
                     audio.src = stream;
                 }
 
@@ -56,10 +63,6 @@ export default {
         })
     },
 }
-
-au.addEventListener('timeupdate', ()=>{
-    store.commit('timeupdate', `${(au.currentTime/au.duration)*100}%`)
-})
 
 au.addEventListener('ended', ()=>{
     

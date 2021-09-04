@@ -26,17 +26,12 @@ const store = new Vuex.Store({
     artists: [
       
     ],
+    el: null,
     // should be fetched api/v1/getAlbums
     albums: [],
     liked_songs: []
   },
   mutations: {
-    timeupdate(state, percentage) {
-      state.player = {
-        ...state.player,
-        percentage: percentage,
-      }
-    },
     setCurrentTime(state, currentTime) {
       state.player = {
         ...state.player,
