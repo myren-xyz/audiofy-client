@@ -133,7 +133,6 @@ export default {
     },
     computed: mapState(["song","player"]),
     mounted() {
-        console.log(this.player.isLiked);
         this.$store.subscribe((mutation)=>{
             if(mutation.type == 'timeupdate'){
                 document.getElementById('progressbar-now').style.width = mutation.payload;
