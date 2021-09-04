@@ -75,6 +75,11 @@ const routes = [
     component: ()=> import('../views/admin/songs/upload.vue')
   },
   {
+    path: '/admin/artists',
+    name: 'Artists',
+    component: ()=> import('../views/admin/artists.vue')
+  },
+  {
     path: '/admin/artists/create',
     name: 'Create Artist',
     component: ()=> import('../views/admin/artists/create.vue')
