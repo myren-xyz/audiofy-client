@@ -2,9 +2,11 @@
     <div>
         <div id="trackCover" @click="selectCover"></div>
         <input type="file" id="cover">
+        <input v-if="editMode" type="url" id="cover-url" v-model="coverUrl"/>
         <input type="text" id="trackTitle" v-model="trackTitle" placeholder="Track Title">
         <input type="text" id="trackArtist" v-model="trackArtists" placeholder="Track Artist: separate by ,">
         <input type="file" id="track">
+        <input v-if="editMode" type="url" id="track-url" v-model="trackUrl"/>
         <label for="track" id="track-label">
             <div id="track-file-info">
                 <p id="track-file-name">No Track Selected</p>
@@ -12,9 +14,9 @@
             </div>
         </label>
         <div class="buttons">
-            <button @click="upload">
-                <Aloader size="26"/>
-                UPLOAD
+            <button @click="cta">
+                <Aloader size="26" v-if="wating"/>
+                {{ctaTitle}}
             </button>
             <button>DELETE</button>
         </div>
@@ -52,28 +54,22 @@ export default {
     },
     data() {
         return {
+            ctaTitle: 'UPLOAD',
+            wating: false,
+            editMode: false,
             trackTitle: '',
-            trackArtists: ''
+            trackArtists: '',
+            trackUrl: '',
+            coverUrl: '',
         }
     },
     methods: {
-        upload() {
-            let url = `https://audiofy.myren.xyz/api/v1/uploadSong?title=${this.trackTitle}&artists=${this.trackArtists}`
-
-            let formData = new FormData();
-            formData.append('trackFile', this.$el.querySelector('#track').files[0]);
-            formData.append('avatarFile', this.$el.querySelector('#cover').files[0]);
-
-            axios.post(url, formData, {withCredentials: true}).then(response => {
-                console.log(response.data);
-                let data = response.data.data
-                if (response.data.ok) {
-                    console.log(this.$store.state.profile.id);
-                    convert(data, this.$store.state.profile.id)
-                }
-            }).catch(error => {
-                console.log(error);
-            })
+        cta() {
+            if (this.editMode) {
+                update(this)
+            }else{
+                upload(this)
+            }
         },
 
         selectCover() {
@@ -82,12 +78,7 @@ export default {
         }
     },
     mounted() {
-        setTimeout(() => {
-            this.$el.querySelector('.aloader').classList.add('hide-loader')
-            setTimeout(() => {
-                this.$el.querySelector('.aloader').classList.add('none')
-            }, 601)
-        }, 3000);
+        if (this.$route.params.id) loadSongs(this)
 
         let coverFileInput = this.$el.querySelector('#cover');
         let trackFileInput = this.$el.querySelector('#track');
@@ -104,6 +95,54 @@ export default {
             this.$el.querySelector('#track-file-size').innerText = filesize + ' MB';
         });
     }
+}
+
+function loadSongs(vm) {
+    let getSongByIdURL = `https://audiofy.myren.xyz/api/v1/getSongById?id=${vm.$route.params.id}`
+    axios.get(getSongByIdURL, {withCredentials: true}).then(response => {
+        vm.editMode = true
+        vm.ctaTitle = 'UPDATE'
+        if (response.data.ok) fillInputs(vm, response.data.data)
+    })
+}
+
+function fillInputs(vm, data) {
+    let fields = JSON.parse(data)
+    vm.trackTitle = fields.title
+    vm.trackArtists = fields.artists
+    vm.$el.querySelector('#trackCover').style.backgroundImage = `url(${fields.avatar_url})`
+    vm.coverUrl = fields.avatar_url
+    vm.trackUrl = fields.track_url
+}
+
+function update(vm){
+    vm.wating = true
+    let updateSongURL = `https://audiofy.myren.xyz/api/v1/updateSong?id=${vm.$route.params.id}&track_url=${vm.trackUrl}&avatar_url=${vm.coverUrl}&title=${vm.trackTitle}&artists=${vm.trackArtists}`
+    axios.get(updateSongURL, {withCredentials: true}).then(response => {
+        if (response.data.ok) {
+            vm.wating = false
+            vm.ctaTitle = 'UPDATED'
+        }
+    })
+}
+
+function upload(vm) {
+    let url = `https://audiofy.myren.xyz/api/v1/uploadSong?title=${vm.trackTitle}&artists=${vm.trackArtists}`
+
+    let formData = new FormData();
+    formData.append('trackFile', vm.$el.querySelector('#track').files[0]);
+    formData.append('avatarFile', vm.$el.querySelector('#cover').files[0]);
+
+    axios.post(url, formData, {withCredentials: true}).then(response => {
+        console.log(response.data);
+        let data = response.data.data
+        if (response.data.ok) {
+            console.log(vm.$store.state.profile.id);
+            convert(data, vm.$store.state.profile.id)
+        }
+    }).catch(error => {
+        console.log(error);
+    })
 }
 </script>
 
@@ -133,7 +172,7 @@ export default {
     font-size: 12px;
     font-weight: 100;
 }
-#trackTitle, #trackArtist {
+#trackTitle, #trackArtist, #cover-url, #track-url {
     display: block;
     background-color: #282828;
     border-radius: 5px;
@@ -143,6 +182,12 @@ export default {
     min-height: 38px;
     padding: 10px 16px;
     min-width: 370px;
+}
+#trackTitle {
+    margin-top: 10px;
+}
+#track-url {
+    margin-bottom: 10px;
 }
 #trackArtist {
     margin-top: 10px;
