@@ -12,11 +12,34 @@
     </header>
 </template>
 <script>
+import axios from 'axios';
 export default {
     data () {
         return {
             search: ''
         }
+    },
+    mounted () {
+        var timer
+        let searchbox = document.getElementById('box');
+        searchbox.addEventListener('keyup', () => {
+            // if user is not in /search page then redirect to /search page
+            if (this.$route.path !== '/search') {
+                this.$router.push('/search');
+            }
+            // if user is in /search page then search
+            if (searchbox.value.length > 2) {
+                if(timer){
+                    clearTimeout(timer);
+                }
+                timer = setTimeout(() => {
+                    let searchURL = `https://audiofy.myren.xyz/api/v1/search?query=${this.search}&songs=true&artists=true`;
+                    axios.get(searchURL).then(res => {
+                        console.log(res.data);
+                    })
+                }, 1000);
+            }
+        })
     },
 }
 </script>
@@ -38,7 +61,11 @@ header {
     #searchbox {
         display: flex;
     }
+    #searchbox input:focus {
+        color: #fff;
+    }
     #box {
+        transition: 0.3s color;
         border: none;
         outline: none;
         border-radius: 3px 0 0 3px;
