@@ -98,7 +98,6 @@ const store = new Vuex.Store({
             let url = `https://audiofy.myren.xyz/api/v1/getLikedSongs`;
             axios.get(url, {withCredentials: true}).then(res => {
                 state.liked_songs = res.data.data.liked_songs
-                console.table(state.liked_songs)
             })
           }
         }).catch(function (error) {console.log(error)})
