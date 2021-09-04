@@ -68,8 +68,12 @@ const routes = [
     path: '/admin/songs/upload',
     name: 'Upload Song',
     component: ()=> import('../views/admin/songs/upload.vue')
-  }
-  ,
+  },
+  {
+    path: '/admin/songs/edit/:id',
+    name: 'Edit Song',
+    component: ()=> import('../views/admin/songs/upload.vue')
+  },
   {
     path: '/admin/artists/create',
     name: 'Create Artist',
