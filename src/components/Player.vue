@@ -10,7 +10,7 @@
 import Hls from 'hls.js';
 import {mapState} from 'vuex';
 import store from '../store/index'
-const au = new Audio();
+var au = new Audio();
 var hls = new Hls();
 au.preload = "metadata";
 store.state.el = au;
@@ -31,19 +31,21 @@ export default {
                 let newUrl = url.replace(fileName, 'outputlist.m3u8')
 
                 var stream = newUrl
-                var audio = au;
 
                 
 
                 if(Hls.isSupported()){
-                    hls.loadSource(stream);
-                    hls.attachMedia(audio);
+                    hls.destroy();
+                    hls = new Hls();
+                    hls.detachMedia(au)
+                    hls.loadSource(stream)
+                    hls.attachMedia(au)
                     hls.on(Hls.Events.MANIFEST_PARSED,function() {
-                        audio.play();
+                        au.play();
                     });
-                }else if(audio.canPlayType('application/x-mpegURL') || audio.canPlayType('application/vnd.apple.mpegurl')){
-                    audio.pause();
-                    audio.src = stream;
+                }else if(au.canPlayType('application/x-mpegURL') || au.canPlayType('application/vnd.apple.mpegurl')){
+                    au.pause();
+                    au.src = stream;
                 }
 
                 this.$store.commit('setPlayingState', true)
