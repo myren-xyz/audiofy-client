@@ -5,6 +5,18 @@
             <div id="search-btn"><ion-icon name="search-outline"></ion-icon></div>
         </div>
 
+        <Aslider v-if="searchResult">
+            <Song v-for="song in this.searchResult.Songs" :song="song" :key="song._id"/>
+        </Aslider>
+
+        <Aslider v-if="searchResult">
+            <div v-for="artist in searchResult.Artists" :key="artist._id">
+                <router-link :to="`artist/`+artist.username">
+                <Artist :artist="artist"/>
+                </router-link>
+            </div>
+        </Aslider>
+
         <div class="item">
             <p>Set Genre</p>
             <div class="icon"><ion-icon name="chevron-forward"></ion-icon></div>
@@ -15,6 +27,23 @@
         </div>
     </div>
 </template>
+
+<script>
+import Song from '@/components/Song.vue'
+import Aslider from '@/components/others/Aslider.vue'
+import Artist from '@/components/Artist.vue'
+import { mapState } from 'vuex'
+export default {
+    components: {
+        Aslider,
+        Song,
+        Artist
+    },
+
+    computed: mapState(['searchResult'])
+}
+</script>
+
 <style scoped>
 .search{
     padding: 12px 12px 100px 12px;

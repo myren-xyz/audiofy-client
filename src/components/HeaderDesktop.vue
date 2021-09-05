@@ -28,16 +28,16 @@ export default {
                 this.$router.push('/search');
             }
             // if user is in /search page then search
-            if (searchbox.value.length > 2) {
-                if(timer){
-                    clearTimeout(timer);
-                }
+            if (searchbox.value.length >= 1) {
+                if (timer) clearTimeout(timer)
+                
                 timer = setTimeout(() => {
                     let searchURL = `https://audiofy.myren.xyz/api/v1/search?query=${this.search}&songs=true&artists=true`;
                     axios.get(searchURL).then(res => {
-                        console.log(res.data);
+                        console.table(res.data.data);
+                        if (res.data.ok) this.$store.commit('setSearchResult', res.data.data);
                     })
-                }, 1000);
+                }, 369);
             }
         })
     },

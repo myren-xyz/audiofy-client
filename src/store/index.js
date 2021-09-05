@@ -29,9 +29,14 @@ const store = new Vuex.Store({
     el: null,
     // should be fetched api/v1/getAlbums
     albums: [],
-    liked_songs: []
+    liked_songs: [],
+    searchResult: {}
   },
   mutations: {
+    setSearchResult(state, payload){
+      state.searchResult = payload
+    },
+
     setCurrentTime(state, currentTime) {
       state.player = {
         ...state.player,
