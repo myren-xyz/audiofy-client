@@ -104,6 +104,7 @@ export default {
             background-color: #282828;
         }
         #progressbar-container {
+            cursor: pointer;
             height: 5px;
             width: 100%;
             background: #282828;
