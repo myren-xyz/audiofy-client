@@ -256,6 +256,7 @@ audio{
 }
 
 #progressbar-wrapper {
+    cursor: pointer;
     display: none;
     width: 84%;
     margin: 0px 0;
