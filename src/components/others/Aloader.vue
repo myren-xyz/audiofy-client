@@ -1,5 +1,5 @@
 <template>
-    <div class="aloader"></div>
+    <div class="aloader hide-loader none"></div>
 </template>
 
 <script>

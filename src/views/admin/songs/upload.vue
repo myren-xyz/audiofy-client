@@ -15,7 +15,7 @@
         </label>
         <div class="buttons">
             <button @click="cta">
-                <Aloader size="26" v-if="wating"/>
+                <Aloader size="26" v-show="wating"/>
                 {{ctaTitle}}
             </button>
             <button>DELETE</button>
@@ -27,7 +27,8 @@
 import axios from 'axios'
 import Aloader from '@/components/others/Aloader.vue'
 
-function convert(data, issuer) {
+function convert(data, issuer, vm) {
+    vm.ctaTitle = 'CONVERTING'
     let trackUrl = data.Track.url
     let path = trackUrl.split('/').slice(4,7).join('/')
     let newUrl = `https://utils.myren.xyz/ffmpeg/api/v1/convert?file_url=${trackUrl}&upload_path=${path}&issuer=${issuer}`
@@ -35,16 +36,20 @@ function convert(data, issuer) {
     console.log(newUrl)
     axios.get(newUrl, {withCredentials: true}).then(res => {
         console.log(res)
-        subscribe(res.data.job_id)
+        subscribe(res.data.job_id, vm)
     })
 }
 
-function subscribe(job_id) {
+function subscribe(job_id, vm) {
     // subscribe to SSE stream
     let url = `https://utils.myren.xyz/ffmpeg/api/v1/subscribe?job_id=${job_id}`
     let source = new EventSource(url)
     source.onmessage = function(e) {
-        console.log(e.data)
+        console.log(e.data, typeof e.data, e.data == "uploaded")
+        if (e.data == "\"uploaded\"") {
+            hideLoader(vm)
+            vm.ctaTitle = 'UPLOADED'
+        }
     }
 }
 
@@ -116,17 +121,19 @@ function fillInputs(vm, data) {
 }
 
 function update(vm){
-    vm.wating = true
+    showLoader(vm)
     let updateSongURL = `https://audiofy.myren.xyz/api/v1/updateSong?id=${vm.$route.params.id}&track_url=${vm.trackUrl}&avatar_url=${vm.coverUrl}&title=${vm.trackTitle}&artists=${vm.trackArtists}`
     axios.get(updateSongURL, {withCredentials: true}).then(response => {
         if (response.data.ok) {
-            vm.wating = false
+            hideLoader(vm)
             vm.ctaTitle = 'UPDATED'
         }
     })
 }
 
 function upload(vm) {
+    showLoader(vm)
+    vm.ctaTitle = 'UPLOADING'
     let url = `https://audiofy.myren.xyz/api/v1/uploadSong?title=${vm.trackTitle}&artists=${vm.trackArtists}`
 
     let formData = new FormData();
@@ -137,12 +144,31 @@ function upload(vm) {
         console.log(response.data);
         let data = response.data.data
         if (response.data.ok) {
+            vm.ctaTitle = 'UPLOADED'
             console.log(vm.$store.state.profile.id);
-            convert(data, vm.$store.state.profile.id)
+            convert(data, vm.$store.state.profile.id, vm)
         }
     }).catch(error => {
         console.log(error);
     })
+}
+
+function hideLoader(vm) {
+    let loader = vm.$el.querySelector('.aloader')
+    loader.classList.add('hide-loader')
+    setTimeout(() => {
+        loader.classList.add('none')
+        setTimeout(() => vm.wating = false, 601)
+    }, 601)
+}
+
+function showLoader(vm) {
+    vm.wating = true
+    let loader = vm.$el.querySelector('.aloader')
+    loader.classList.remove('none')
+    setTimeout(() => {
+        loader.classList.remove('hide-loader')
+    }, 601)
 }
 </script>
 
