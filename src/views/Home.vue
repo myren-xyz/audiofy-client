@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <h2>New Songs</h2>
-    <div class="slider">
+    <Aslider>
         <Song v-for="song in songs" :song="song" :key="song._id"/>
-    </div>
+    </Aslider>
 
     <Divider/>
 
@@ -15,13 +15,13 @@
     <Divider/>
 
     <h2>Popular Artists</h2>
-    <div class="slider">
+    <Aslider>
       <div v-for="artist in artists" :key="artist._id">
         <router-link :to="`artist/`+artist.username">
         <Artist :artist="artist"/>
         </router-link>
       </div>
-    </div>
+    </Aslider>
 
   </div>
 </template>
@@ -31,6 +31,7 @@
 import Song from '@/components/Song.vue'
 import Artist from '@/components/Artist.vue'
 import Divider from '@/components/Divider.vue'
+import Aslider from '@/components/others/Aslider.vue'
 
 export default {
   name: 'Home',
@@ -38,7 +39,8 @@ export default {
   components: {
     Song,
     Artist,
-    Divider
+    Divider,
+    Aslider
   },
   computed: {
     songs: function(){
@@ -65,31 +67,10 @@ export default {
   padding-block-end: 8px;
   font-size: 18px;
 }
-.slider{
-  width: 100%;
-  display: flex;
-  overflow-x: scroll;
-  padding: 8px 0 16px 0;
-  margin-bottom: 16px;
-}
 
 @media screen and (min-width:728px){
   .home{
     padding: 0;
-  }
-  .slider::-webkit-scrollbar{
-    background-color: #1B1A18;
-    height: 8px;
-  }
-  .slider::-webkit-scrollbar-button{
-    display: none;
-  }
-  .slider::-webkit-scrollbar-track-piece{
-    border-radius: 4px;
-  }
-  .slider::-webkit-scrollbar-thumb{
-    background-color: rgb(46, 46, 46);
-    border-radius: 4px;
   }
 }
 </style>

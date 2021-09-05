@@ -20,9 +20,9 @@
             <div class="mtop">
                 <h3 class="header">Top Songs</h3>
                 <div class="tracks-wrapper">
-                    <div class="slider">
+                    <Aslider>
                         <Song v-for="song in artist_songs" :song="song" :key="song.id"/>
-                    </div>
+                    </Aslider>
                 </div>
             </div>
 
@@ -31,12 +31,14 @@
 </template>
 <script>
 import Song from '@/components/Song.vue'
+import Aslider from '@/components/others/Aslider.vue'
 import {mapState} from 'vuex';
 import axios from 'axios';
 
 export default {
     components: {
-        Song
+        Song,
+        Aslider
     },
     data() {
         return {
