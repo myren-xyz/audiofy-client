@@ -1,7 +1,7 @@
 <template>
     <div class="search">
         <div id="search-action">
-            <input type="text" id="searchbox" placeholder="Search for Songs, Artists, etc">
+            <input type="text" id="searchbox" placeholder="Search for Songs, Artists, etc" v-model="search">
             <div id="search-btn"><ion-icon name="search-outline"></ion-icon></div>
         </div>
 
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Song from '@/components/Song.vue'
 import Aslider from '@/components/others/Aslider.vue'
 import Artist from '@/components/Artist.vue'
@@ -40,7 +41,35 @@ export default {
         Artist
     },
 
-    computed: mapState(['searchResult'])
+    data() {
+        return {
+            search: '',
+        }
+    },
+
+    computed: mapState(['searchResult']),
+
+    mounted() {
+        var timer
+        let searchbox = this.$el.querySelector('#searchbox');
+        searchbox.addEventListener('keyup', () => {
+            // if user is not in /search page then redirect to /search page
+            if (this.$route.path !== '/search') this.$router.push('/search')
+            
+            // if user is in /search page then search
+            if (searchbox.value.length >= 1) {
+                if (timer) clearTimeout(timer)
+                
+                timer = setTimeout(() => {
+                    let searchURL = `https://audiofy.myren.xyz/api/v1/search?query=${this.search}&songs=true&artists=true`;
+                    axios.get(searchURL).then(res => {
+                        console.table(res.data.data);
+                        if (res.data.ok) this.$store.commit('setSearchResult', res.data.data);
+                    })
+                }, 369);
+            }
+        })
+    }
 }
 </script>
 
