@@ -1,8 +1,8 @@
 <template>
     <div class="dash">
-        <router-link to="/admin/access"> 
+        <!-- <router-link to="/admin/access"> 
             manage access
-        </router-link>
+        </router-link> -->
 
         <router-link to="/admin/artists">
             manage artists
