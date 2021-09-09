@@ -7,7 +7,7 @@
         </div>
         <div class="flex">
             <div id="notification"><ion-icon name="notifications"></ion-icon></div>
-            <div id="account"></div>
+            <div id="account">{{letter}}</div>
         </div>
     </header>
 </template>
@@ -16,7 +16,8 @@ import axios from 'axios';
 export default {
     data () {
         return {
-            search: ''
+            search: '',
+            letter: '',
         }
     },
     mounted () {
@@ -40,6 +41,8 @@ export default {
                 }, 369);
             }
         })
+
+        if (this.$store.state.profile.id) this.letter = this.$store.state.profile.user_firstname.charAt(0);
     },
 }
 </script>
@@ -108,6 +111,12 @@ header {
         height: 38px;
         border-radius: 50%;
         background-color: #C4C4C4;
+        color: #282828;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 900;
+        display: flex;
+        place-items: center;
+        place-content: center;
     }
 }
 </style>
