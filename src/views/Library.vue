@@ -9,30 +9,40 @@
 
     <router-link to="/me/liked">
       <div class="item">
-        <div class="icon"></div>
+        <div class="icon">
+          <ion-icon name="heart"></ion-icon>
+        </div>
         <p>Liked Songs</p>
       </div>
     </router-link>
     
     <router-link to="/me/follows">
       <div class="item">
-        <div class="icon"></div>
+        <div class="icon">
+          <ion-icon name="people-circle"></ion-icon>
+        </div>
         <p>Followed Artists</p>
       </div>
     </router-link>
 
     <div class="item">
-      <div class="icon"></div>
+      <div class="icon">
+        <ion-icon name="albums"></ion-icon>
+      </div>
       <p>Liked Albums</p>
     </div>
 
     <h2 class="sec-title">Playlists</h2>
     <div class="item">
-      <div class="icon"></div>
+      <div class="icon">
+        <ion-icon name="list"></ion-icon>
+      </div>
       <p>Liked Playlists</p>
     </div>
     <div class="item">
-      <div class="icon"></div>
+      <div class="icon">
+        <ion-icon name="add"></ion-icon>
+      </div>
       <p>Create Playlist</p>
     </div>
 
@@ -58,7 +68,7 @@
 .item .icon {
   width: 58px;
   height: 58px;
-  background-color: #f2f2f2;
+  background-color: #2a2a2a;
   border-radius: 4px;
 }
 .item p {
@@ -66,6 +76,13 @@
   font-size: 12px;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffc857;
+  font-size: 1.5rem;
 }
 @media screen and (min-width:728px){
   .library {
