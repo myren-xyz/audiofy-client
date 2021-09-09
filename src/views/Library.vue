@@ -76,6 +76,7 @@
   font-size: 12px;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
+  color: #c1c1c1;
 }
 .icon {
   display: flex;
