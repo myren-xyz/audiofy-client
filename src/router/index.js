@@ -89,6 +89,11 @@ const routes = [
     name: 'Edit Artist',
     component: ()=> import('../views/admin/artists/create.vue')
   },
+  {
+    path: '/me/liked',
+    name: 'Liked Songs',
+    component: ()=> import('../views/me/likes.vue')
+  },
 ]
 
 const router = new VueRouter({

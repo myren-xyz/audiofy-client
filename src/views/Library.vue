@@ -6,10 +6,14 @@
     </div> -->
     
     <h2 class="sec-title">Library</h2>
-    <div class="item">
-      <div class="icon"></div>
-      <p>Liked Songs</p>
-    </div>
+
+    <router-link to="/me/liked">
+      <div class="item">
+        <div class="icon"></div>
+        <p>Liked Songs</p>
+      </div>
+    </router-link>
+    
     <div class="item">
       <div class="icon"></div>
       <p>Followed Artists</p>
