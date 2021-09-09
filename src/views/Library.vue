@@ -14,10 +14,13 @@
       </div>
     </router-link>
     
-    <div class="item">
-      <div class="icon"></div>
-      <p>Followed Artists</p>
-    </div>
+    <router-link to="/me/follows">
+      <div class="item">
+        <div class="icon"></div>
+        <p>Followed Artists</p>
+      </div>
+    </router-link>
+
     <div class="item">
       <div class="icon"></div>
       <p>Liked Albums</p>
