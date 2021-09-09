@@ -51,7 +51,7 @@ export default {
 
 <style scoped>
 .likes {
-    padding: 18px;
+    padding: 16px;
 }
 .back-icon {
     display: flex;
