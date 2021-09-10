@@ -30,9 +30,15 @@ const store = new Vuex.Store({
     // should be fetched api/v1/getAlbums
     albums: [],
     liked_songs: [],
-    searchResult: {}
+    searchResult: {},
+    listening_history: [],
   },
+
   mutations: {
+    pushToHistory(state, payload) {
+      state.listening_history.push(payload)
+    },
+
     setSearchResult(state, payload){
       state.searchResult = payload
     },

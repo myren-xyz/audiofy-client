@@ -1,9 +1,9 @@
 <template>
   <div class="library">
     <h2>Listening History</h2>
-    <!-- <div class="slider">
-        <Song v-for="song in songs" :song="song" :key="song._id"/>
-    </div> -->
+    <Aslider>
+        <Song v-for="song in listening_history" :song="song" :key="song._id"/>
+    </Aslider>
     
     <h2 class="sec-title">Library</h2>
 
@@ -48,6 +48,21 @@
 
   </div>
 </template>
+
+<script>
+import Aslider from '@/components/others/Aslider.vue'
+import Song from '@/components/Song.vue'
+import { mapState } from 'vuex'
+export default {
+  name: 'Library',
+  components: {
+    Song,
+    Aslider
+  },
+  computed: mapState(['listening_history'])
+}
+</script>
+
 <style scoped>
 .library {
   padding: 16px 16px 100px 16px;
@@ -91,17 +106,3 @@
   }
 }
 </style>
-
-<script>
-// import Song from '@/components/Song.vue'
-export default {
-  components: {
-    // Song
-  },
-  computed: {
-    songs: function(){
-      return this.$store.state.songs
-    },
-  }
-}
-</script>

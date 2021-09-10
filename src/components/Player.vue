@@ -32,7 +32,7 @@ export default {
 
                 var stream = newUrl
 
-                
+                this.$store.commit('pushToHistory', this.$store.state.song)
 
                 if(Hls.isSupported()){
                     hls.destroy();

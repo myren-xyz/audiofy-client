@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="avatar-wrapper"><h3>GU</h3></div>
+    <div id="avatar-wrapper"><h3>{{profile.user_firstname.charAt(0)}}{{profile.user_lastname.charAt(0)}}</h3></div>
     <h2 class="user-firstname">{{profile.user_firstname}} {{profile.user_lastname}}</h2>
     <!-- <div class="u-info">
       <div class="ffl"><p class="counter">1M</p><p class="lbl">Followers</p></div>

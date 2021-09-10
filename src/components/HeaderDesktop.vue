@@ -7,12 +7,13 @@
         </div>
         <div class="flex">
             <div id="notification"><ion-icon name="notifications"></ion-icon></div>
-            <div id="account">{{letter}}</div>
+            <div id="account">{{profile.user_firstname.charAt(0)}}</div>
         </div>
     </header>
 </template>
 <script>
 import axios from 'axios';
+import { mapState } from 'vuex';
 export default {
     data () {
         return {
@@ -41,9 +42,9 @@ export default {
                 }, 369);
             }
         })
-
-        if (this.$store.state.profile.id) this.letter = this.$store.state.profile.user_firstname.charAt(0);
     },
+
+    computed: mapState(['profile'])
 }
 </script>
 <style scoped>
