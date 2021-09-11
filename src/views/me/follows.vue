@@ -62,6 +62,7 @@ export default {
     font-size: 1.5rem;
     padding-right: 10px;
     margin-right: 8px;
+    cursor: pointer;
 }
 .follows-title{
     display: flex;
