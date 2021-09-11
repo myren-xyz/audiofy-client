@@ -7,23 +7,19 @@
     
     <h2 class="sec-title">Library</h2>
 
-    <router-link to="/me/liked">
-      <div class="item">
-        <div class="icon">
-          <ion-icon name="heart"></ion-icon>
-        </div>
-        <p>Liked Songs</p>
+    <div class="item" @click="toLiked">
+      <div class="icon">
+        <ion-icon name="heart"></ion-icon>
       </div>
-    </router-link>
+      <p>Liked Songs</p>
+    </div>
     
-    <router-link to="/me/follows">
-      <div class="item">
-        <div class="icon">
-          <ion-icon name="people-circle"></ion-icon>
-        </div>
-        <p>Followed Artists</p>
+    <div class="item" @click="toFollows">
+      <div class="icon">
+        <ion-icon name="people-circle"></ion-icon>
       </div>
-    </router-link>
+      <p>Followed Artists</p>
+    </div>
 
     <div class="item">
       <div class="icon">
@@ -57,9 +53,21 @@ export default {
   name: 'Library',
   components: {
     Song,
-    Aslider
+    Aslider,
   },
-  computed: mapState(['listening_history'])
+
+  computed: mapState(['listening_history']),
+
+  methods: {
+    toLiked() {
+      if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
+      this.$router.push('/me/liked')
+    },
+    toFollows() {
+      if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
+      this.$router.push('/me/follows')
+    }
+  }
 }
 </script>
 
@@ -76,6 +84,7 @@ export default {
   display: flex;
   align-items: center;
   margin: 8px 0;
+  cursor: pointer;
 }
 .sec-title {
   margin-top: 44px;

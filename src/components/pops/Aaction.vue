@@ -33,8 +33,7 @@ export default {
     methods: {
         sign() {
             this.$store.commit('setActionPopup', false)
-            // go to https://accounts.myren.xyz
-            window.location.href = 'https://accounts.myren.xyz';
+            window.location.href = `https://accounts.myren.xyz/?to=${window.location.href}`;
         },
 
         close() {
