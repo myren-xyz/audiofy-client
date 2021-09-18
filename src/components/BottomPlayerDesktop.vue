@@ -93,6 +93,8 @@ export default {
     }
     @media screen and (min-width: 728px) {
         #player-container {
+            position: relative;
+            z-index: 56;
             display: block;
         }
         #container {
