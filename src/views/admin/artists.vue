@@ -1,10 +1,16 @@
 <template>
     <div class="artists-list">
-        <div class="su-topper">
-            <input type="text" id="artist-searchbox" v-model="query" placeholder="search for username or name"/>
-            <p class="su-create-artist" @click="createArtist">New Artist</p>
+        <div class="left-side">
+            <div class="su-topper">
+                <input type="text" id="artist-searchbox" v-model="query" placeholder="search for username or name"/>
+                <p class="su-create-artist" @click="createArtist">New Artist</p>
+            </div>
+            <singleArtist v-for="artist in artists" :key="artist._id" :artist="artist" />
         </div>
-        <singleArtist v-for="artist in artists" :key="artist._id" :artist="artist" />
+    
+        <div class="right-side">
+            
+        </div>
     </div>
 </template>
 
@@ -54,6 +60,19 @@ function pushArtists(vm, data) {
 </script>
 
 <style scoped>
+.artists-list {
+    display: flex;
+}
+.left-side {
+    width: 66%;
+    height: calc(100vh - 102px);
+    border-right: 2px solid rgba(71,71,71,0.22);
+    padding-right: 20px;
+}
+.right-side {
+    width: 34%;
+    padding-left: 20px;
+}
 .su-topper {
     margin: 20px 0 20px 0;
     display: flex;

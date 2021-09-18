@@ -1,10 +1,14 @@
 <template>
     <div class="song-list">
-        <div class="ss-topper">
-            <input type="text" id="song-searchbox" v-model="query" placeholder="search for song name"/>
-            <p class="ss-create-artist" @click="createSong">New Song</p>
+        <div class="left-side">
+            <div class="ss-topper">
+                <input type="text" id="song-searchbox" v-model="query" placeholder="search for song name"/>
+                <p class="ss-create-artist" @click="createSong">New Song</p>
+            </div>
+            <singleSong v-for="song in songs" :key="song._id" :song="song" />
         </div>
-        <singleSong v-for="song in songs" :key="song._id" :song="song" />
+
+        <div class="right-side"></div>
     </div>
 </template>
 
@@ -54,6 +58,19 @@ function pushSongs(vm, data) {
 </script>
 
 <style scoped>
+.songs-list {
+    display: flex;
+}
+.left-side {
+    width: 66%;
+    height: calc(100vh - 102px);
+    border-right: 2px solid rgba(71,71,71,0.22);
+    padding-right: 20px;
+}
+.right-side {
+    width: 34%;
+    padding-left: 20px;
+}
 .ss-topper {
     margin: 20px 0 20px 0;
     display: flex;
