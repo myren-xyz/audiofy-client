@@ -145,7 +145,6 @@ export default {
 <style>
 #wrapper-player {
     position: relative;
-    z-index: 56;
 }
 #darbar{
     width: 100%;
