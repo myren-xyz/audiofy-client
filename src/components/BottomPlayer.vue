@@ -143,9 +143,6 @@ export default {
 </script>
 
 <style>
-#wrapper-player {
-    position: relative;
-}
 #darbar{
     width: 100%;
 }
