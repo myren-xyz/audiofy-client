@@ -5,11 +5,17 @@
         </router-link> -->
 
         <router-link to="/admin/artists">
-            manage artists
+            <div class="link-wrapper">
+                <ion-icon name="cog-outline"></ion-icon>
+                <p>manage artists </p>
+            </div>
         </router-link>
 
         <router-link to="/admin/songs">
-            manage songs
+            <div class="link-wrapper">
+                <ion-icon name="cog-outline"></ion-icon>
+                <p>manage songs </p>
+            </div>
         </router-link>
     </div>
 </template>
@@ -19,5 +25,16 @@
     color: #eee;
     padding: 10px;
     text-decoration: none;
+}
+.link-wrapper {
+    display: flex;
+    place-items: center;
+    font-size: 18px;
+}
+.link-wrapper p {
+    margin-left: 10px;
+}
+.link-wrapper ion-icon {
+    color: #ffc857
 }
 </style>
