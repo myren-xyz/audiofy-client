@@ -71,7 +71,7 @@ export default {
             }
         }// end of follow
     },
-    computed: mapState(['songs', 'artists']),
+    computed: mapState(['songs', 'artists', 'playlist']),
     mounted() {
         let url = `https://audiofy.myren.xyz/api/v1/artistExists?username=${this.username}`
         axios.get(url, {withCredentials: true}).then(res => {
@@ -95,6 +95,8 @@ export default {
             axios.get(getSongsUrl, {withCredentials: true}).then(res => {
                 if (res.data.ok) {
                     this.artist_songs = JSON.parse(res.data.data)
+                    // push songs to playlist
+                    this.$store.commit('addToPlaylist', this.artist_songs)
                 }
             })
         }).then(() => {

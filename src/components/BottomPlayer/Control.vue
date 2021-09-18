@@ -15,7 +15,7 @@
 import {mapState} from 'vuex';
 
 export default {
-    computed: mapState(["song","player"]),
+    computed: mapState(["song","player", "playlist"]),
 
     methods: {
         changeRepeatingState() {
@@ -29,9 +29,9 @@ export default {
         next() {
            let currentSongId = this.$store.state.song._id;
             // get index of current song in store.state.songs
-            let currentSongIndex = this.$store.state.songs.findIndex(song => song._id === currentSongId);
+            let currentSongIndex = this.playlist.findIndex(song => song._id === currentSongId);
             // get next song
-            let nextSong = this.$store.state.songs[currentSongIndex + 1]
+            let nextSong = this.playlist[currentSongIndex + 1]
             console.log(nextSong);
             if(nextSong !== null && typeof nextSong !== undefined && nextSong !== undefined) {
                 this.$store.commit('setSong', nextSong)
@@ -41,9 +41,9 @@ export default {
         previous() {
             let currentSongId = this.$store.state.song._id;
             // get indext of current song in store.state.songs
-            let currentSongIndex = this.$store.state.songs.findIndex(song => song._id === currentSongId);
+            let currentSongIndex = this.playlist.findIndex(song => song._id === currentSongId);
             // get next song
-            let prevSong = this.$store.state.songs[currentSongIndex - 1]
+            let prevSong = this.playlist[currentSongIndex - 1]
             if(prevSong !== null && typeof prevSong !== undefined && prevSong !== undefined) {
                 this.$store.commit('setSong', prevSong)
             }

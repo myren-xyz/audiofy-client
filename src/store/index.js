@@ -15,9 +15,8 @@ const store = new Vuex.Store({
       isPlaying: false,
       isRepeating: null,
     },
-    songs:[
-      
-    ],
+    songs:[],
+    playlist:[],
     song: {},
     profile: {
       user_firstname: 'Guest',
@@ -35,6 +34,12 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    addToPlaylist (state, songs) {
+      state.playlist = [
+        ...songs
+      ]
+    },
+
     pushToHistory(state, payload) {
       state.listening_history.push(payload)
     },
@@ -88,7 +93,8 @@ const store = new Vuex.Store({
     getSongs(state) {
       let url = 'https://audiofy.myren.xyz/api/v1/getSongs'
       axios.get(url).then(response => {
-        state.songs = JSON.parse(response.data.data)
+        state.songs = [...JSON.parse(response.data.data)]
+        state.playlist = [...state.songs]
       })
     },
 
