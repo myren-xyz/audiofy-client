@@ -85,7 +85,7 @@ const routes = [
     component: ()=> import('../views/admin/artists/create.vue')
   },
   {
-    path: '/admin/artists/edit/:username',
+    path: '/admin/artists/edit/:id',
     name: 'Edit Artist',
     component: ()=> import('../views/admin/artists/create.vue')
   },
