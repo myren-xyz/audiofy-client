@@ -119,6 +119,23 @@ const store = new Vuex.Store({
         ...state.player,
         isLiked: val
       }
+    },
+
+    shufflePlaylist(state) {
+      let obj = state.playlist
+      let currentIndex = obj.length,  randomIndex;
+
+      // While there remain elements to shuffle...
+      while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [obj[currentIndex], obj[randomIndex]] = [
+          obj[randomIndex], obj[currentIndex]];
+      }
     }
   }
 })
