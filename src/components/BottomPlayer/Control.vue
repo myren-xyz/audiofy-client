@@ -1,6 +1,6 @@
 <template>
     <div id="player--control--wrapper">
-        <div class="base-1"><ion-icon name="shuffle"></ion-icon></div>
+        <div class="base-1" @click="shuffle"><ion-icon name="shuffle"></ion-icon></div>
         <div class="base-2" @click="previous"><ion-icon name="play-skip-back"></ion-icon></div>
         <div class="base-3" @click="changePlayingState" :class="{active: player.isPlaying}">
             <ion-icon v-if="!player.isPlaying" name="play"></ion-icon>
@@ -24,6 +24,10 @@ export default {
 
         changePlayingState() {
             this.$store.commit('changePlayingState')
+        },
+
+        shuffle() {
+            this.$store.commit('shuffle')
         },
 
         next() {
