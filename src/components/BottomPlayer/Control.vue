@@ -27,7 +27,7 @@ export default {
         },
 
         shuffle() {
-            this.$store.commit('shuffle')
+            this.$store.commit('shufflePlaylist')
         },
 
         next() {
