@@ -97,7 +97,12 @@ export default {
                 let image = document.getElementById('insider')
                 image.style.borderRadius = `5px`;
                 wp.style = "z-index: 1000; bottom: 0; width: 100%; height: 100%;background-color:#1B1A18";
-                avatar.style = "width: 80%; height: auto !important; background-size: cover !important;border-radius: 15px;";
+                
+                avatar.style = "width: 80%; border-radius: 0px;"
+                avatar.style.height = `${document.body.clientWidth * 0.8}px`;
+                image.style.height = `${document.body.clientWidth * 0.8}px`;
+                
+
                 document.getElementById('darbar').classList.add('col')
                 document.getElementById('pp').style = "width: 0; height:0;"
                 document.getElementById('song-title').style = "font-size: 24px;text-align:center"
@@ -114,7 +119,8 @@ export default {
             let wp = document.getElementById('wrapper-player')
             let avatar = document.getElementById('song--avatar')
             let image = document.getElementById('insider')
-            image.style.borderRadius = `5px`;
+            image.style.borderRadius = `0px`;
+            image.style.height = "";
             wp.style = ""
             avatar.style = ""
             this.$el.querySelector('#darbar').classList.remove('col')
@@ -131,7 +137,9 @@ export default {
             },900)
         }
     },
-    computed: mapState(["song","player"]),
+    computed: {
+        ...mapState(["song","player"]),
+    },
     mounted() {
         let au = this.$store.state.el
         au.addEventListener('timeupdate', ()=>{
@@ -159,15 +167,17 @@ export default {
     display: flex;
     place-content: center;
     place-items: center;
-    transition: 0.6s all ease-in-out;
+    transition: 0.4s all ease-in-out;
     aspect-ratio: 1;
 }
 .avatar img {
     height: 100%;
     width: 100%;
+    background-size: cover;
+    transition: 0.4s all ease-in-out;
 }
 .bplayer{
-    transition: 0.6s all ease-in-out;
+    transition: 0.4s all ease-in-out;
     position: fixed;
     width: 100%;
     height: 54px;
@@ -196,11 +206,11 @@ audio{
 #song-by{
     color: #969696;
     font-size: 12px;
-    transition: 0.6s all ease-in-out;
+    transition: 0.4s all ease-in-out;
 }
 #song-title{
     font-size: 14px;
-    transition: 0.6s all ease-in-out;
+    transition: 0.4s all ease-in-out;
 }
 #gesture{
     height: 54px;
