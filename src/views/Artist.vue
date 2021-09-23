@@ -179,6 +179,11 @@ p {
     font-size: 13px;
     font-family: 'Poppins', sans-serif;
     margin-right: 16px;
+    color: #1B1A18;
+}
+.bar button span {
+    color: #2a2a2a;
+    font-weight: bolder;
 }
 .bar p {
     font-size: 12px;
@@ -188,7 +193,7 @@ p {
 }
 .active {
     background-color: #ffc857 !important;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 @media screen and (min-width: 728px) {
