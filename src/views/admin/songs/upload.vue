@@ -105,7 +105,8 @@ export default {
                 let artists = res.data.data.Artists
                 artists.forEach(artist => {
                     let btn = document.createElement('button')
-                    btn.textContent = artist.username
+                    btn.setAttribute('class', 'suggestion')
+                    btn.textContent = artist.username + ' - ' + artist.nic
                     btn.addEventListener('click', () => {
                         box.innerHTML = ''
                         input.value = artist.username
@@ -208,7 +209,7 @@ function showLoader(vm) {
 }
 </script>
 
-<style scoped>
+<style>
 #track {
     display: none;
 }
@@ -253,7 +254,7 @@ function showLoader(vm) {
 }
 #trackArtist {
     margin-top: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 #trackCover {
     background-color: #c1c1c1;
@@ -301,5 +302,17 @@ function showLoader(vm) {
 }
 .aloader {
     margin-right: 10px;
+}
+#suggestionBox button{
+    border: none;
+    outline: none;
+    background-color: #eee;
+    color: #0d0d0d;
+    padding: 10px 20px;
+    border-radius: 40px;
+    margin:18px 18px 18px 0;
+}
+#suggestionBox {
+    margin-bottom: 20px;
 }
 </style>
