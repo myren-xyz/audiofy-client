@@ -15,7 +15,7 @@
                     <p class="edit-song">edit</p>
                 </router-link>
                
-                <p class="delete-song" @click="deleteArtist">delete</p>
+                <p class="delete-song" @click="deleteSong">delete</p>
             </div>
 
         </div>
@@ -23,12 +23,21 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     props: ['song'],
 
     methods: {
-        deleteArtist() {
+        deleteSong() {
             console.log('delete artist');
+            let deleteUrl = `https://audiofy.myren.xyz/api/v1/deleteSong?id=${this.song._id}`
+            axios.get(deleteUrl, {withCredentials: true})
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         }
     },
 }

@@ -23,12 +23,21 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     props: ['artist'],
 
     methods: {
         deleteArtist() {
             console.log('delete artist');
+            let deleteUrl = `https://audiofy.myren.xyz/api/v1/deleteArtist?username=${this.artist.username}`
+            axios.get(deleteUrl, {withCredentials: true})
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         }
     },
 }

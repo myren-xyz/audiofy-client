@@ -4,7 +4,8 @@
         <input type="file" id="cover">
         <input v-if="editMode" type="url" id="cover-url" v-model="coverUrl"/>
         <input type="text" id="trackTitle" v-model="trackTitle" placeholder="Track Title">
-        <input type="text" id="trackArtist" v-model="trackArtists" placeholder="Track Artist: separate by ,">
+        <input type="text" id="trackArtist" v-model="trackArtists" placeholder="Track Artist: separate by ," @keyup="autoCompleteSuggest">
+        <div id="suggestionBox"></div>
         <input type="file" id="track">
         <input v-if="editMode" type="url" id="track-url" v-model="trackUrl"/>
         <label for="track" id="track-label">
@@ -80,7 +81,40 @@ export default {
         selectCover() {
             let input = this.$el.querySelector('#cover')
             input.click()
-        }
+        },
+
+        deleteSong() {
+            console.log('delete artist');
+            let deleteUrl = `https://audiofy.myren.xyz/api/v1/deleteSong?id=${this.song._id}`
+            axios.get(deleteUrl, {withCredentials: true})
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+
+        autoCompleteSuggest() {
+            let input = this.$el.querySelector('#trackArtist')
+            let val = input.value
+            let box = this.$el.querySelector('#suggestionBox')
+            box.innerHTML = ''
+            let url = `https://audiofy.myren.xyz/api/v1/search?query=${val}&artists=true`
+            axios.get(url, {withCredentials: true}).then(res => {
+                let artists = res.data.data.Artists
+                artists.forEach(artist => {
+                    let btn = document.createElement('button')
+                    btn.textContent = artist.username
+                    btn.addEventListener('click', () => {
+                        box.innerHTML = ''
+                        input.value = artist.username
+                        input.blur()
+                    })
+                    box.appendChild(btn)
+                })
+            })
+        },
     },
     mounted() {
         if (this.$route.params.id) loadSongs(this)
@@ -123,11 +157,13 @@ function fillInputs(vm, data) {
 function update(vm){
     showLoader(vm)
     let updateSongURL = `https://audiofy.myren.xyz/api/v1/updateSong?id=${vm.$route.params.id}&track_url=${vm.trackUrl}&avatar_url=${vm.coverUrl}&title=${vm.trackTitle}&artists=${vm.trackArtists}`
+    console.log(updateSongURL);
     axios.get(updateSongURL, {withCredentials: true}).then(response => {
         if (response.data.ok) {
             hideLoader(vm)
             vm.ctaTitle = 'UPDATED'
         }
+        console.log(response.data);
     })
 }
 
