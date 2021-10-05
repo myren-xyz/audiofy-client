@@ -97,10 +97,9 @@ export default {
 
         autoCompleteSuggest() {
             let input = this.$el.querySelector('#trackArtist')
-            let val = input.value
             let box = this.$el.querySelector('#suggestionBox')
             box.innerHTML = ''
-            let url = `https://audiofy.myren.xyz/api/v1/search?query=${val}&artists=true`
+            let url = `https://audiofy.myren.xyz/api/v1/search?query=${this.trackArtists}&artists=true`
             axios.get(url, {withCredentials: true}).then(res => {
                 let artists = res.data.data.Artists
                 artists.forEach(artist => {
@@ -109,7 +108,7 @@ export default {
                     btn.textContent = artist.username + ' - ' + artist.nic
                     btn.addEventListener('click', () => {
                         box.innerHTML = ''
-                        input.value = artist.username
+                        this.trackArtists = artist.username
                         input.blur()
                     })
                     box.appendChild(btn)
