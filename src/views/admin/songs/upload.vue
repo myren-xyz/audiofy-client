@@ -19,7 +19,7 @@
                 <Aloader size="26" v-show="wating"/>
                 {{ctaTitle}}
             </button>
-            <button>DELETE</button>
+            <button v-if="editMode">DELETE</button>
         </div>
     </div>
 </template>
