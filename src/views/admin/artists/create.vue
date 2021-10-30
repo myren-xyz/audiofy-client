@@ -1,5 +1,6 @@
 <template>
     <div>
+        <popup v-if="context" :context="context"/>
         <div id="topper">
             <div id="artist-avatar" @click="chooseCover" @mouseenter="enter" @mouseleave="leave">
                 <ion-icon v-if="showUploadIcon" name="cloud-upload-outline"></ion-icon>
@@ -21,6 +22,7 @@
 
 <script>
 import axios from 'axios';
+import popup from '@/components/pops/AartistCreate.vue';
 
 function loadArtist(vm) {
     let getSongByIdURL = `https://audiofy.myren.xyz/api/v1/getArtistById?id=${vm.$route.params.id}`
@@ -57,21 +59,37 @@ function create(vm) {
     axios.post(url, formData, config)
     .then(response => {
         console.log(response)
+        let ctx = {
+            message: `Artist ${vm.artist.nic}, created successfully!`,
+            link: `https://audiofy.myren.xyz/artist/${vm.artist.username}`
+        }
+        if (response.data.ok) vm.context = ctx
     })
     .catch(error => {
         console.log(error)
+        let ctx = {
+            message: `Failed during creating artist ${vm.artist.nic}`,
+            link: null
+        }
+        vm.context = ctx
     })
 }
 
 export default {
     data() {
         return {
+            context: null,
             editMode: false,
             ctaTitle: 'CREATE',
             artist: {},
             showUploadIcon: null
         }
     },
+
+    components: {
+        popup
+    },
+
     methods: {
         chooseCover() {
             this.$el.querySelector('#avatar-file-input').click()
