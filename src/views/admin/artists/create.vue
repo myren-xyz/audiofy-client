@@ -61,7 +61,8 @@ function create(vm) {
         console.log(response)
         let ctx = {
             message: `Artist ${vm.artist.nic}, created successfully!`,
-            link: `https://audiofy.myren.xyz/artist/${vm.artist.username}`
+            link: `https://audiofy.myren.xyz/artist/${vm.artist.username}`,
+            username: vm.artist.username
         }
         if (response.data.ok) vm.context = ctx
     })
@@ -69,7 +70,7 @@ function create(vm) {
         console.log(error)
         let ctx = {
             message: `Failed during creating artist ${vm.artist.nic}`,
-            link: null
+            link: null,
         }
         vm.context = ctx
     })

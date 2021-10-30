@@ -14,6 +14,9 @@
                     <button v-if="context.link" class="cookie-popup__button" @click="jump">
                         Artist Page
                     </button>
+                    <button v-if="context.link" class="cookie-popup__button" @click="jumpTrack">
+                        Upload Tracks From this Artist
+                    </button>
                 </div>
             </div>
         </div>
@@ -33,7 +36,11 @@ export default {
         jump: function() {
             let router = this.$router;
             router.replace(this.context.link);      
-        }
+        },
+        jumpTrack: function() {
+            let router = this.$router;
+            router.replace(`https://audiofy.myren.xyz/admin/songs/upload?by=${this.context.username}`);      
+        },
     },
     mounted() {
         console.log(this.context);

@@ -118,6 +118,7 @@ export default {
     },
     mounted() {
         if (this.$route.params.id) loadSongs(this)
+        if (this.$route.query.by) this.trackArtists = this.$route.query.by
 
         let coverFileInput = this.$el.querySelector('#cover');
         let trackFileInput = this.$el.querySelector('#track');
