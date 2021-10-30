@@ -12,8 +12,8 @@
             </div>
         </div>
 
-        <input type="text" v-model="artist.nic" id="artist-name" spellcheck="false">
-        <input type="text" v-model="artist.username" id="artist-username" spellcheck="false" @keyup="lower">
+        <input type="text" v-model="artist.nic" id="artist-name" spellcheck="false" placeholder="Artist Name">
+        <input type="text" v-model="artist.username" id="artist-username" spellcheck="false" @keyup="lower" placeholder="Artist Username">
 
         <button id="save" @click="cta">{{this.ctaTitle}}</button>
         <button id="delete">DELETE</button>
