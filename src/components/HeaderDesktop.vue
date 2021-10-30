@@ -7,7 +7,7 @@
         </div>
         <div class="flex">
             <div id="notification"><ion-icon name="notifications"></ion-icon></div>
-            <div id="account">{{profile.user_firstname.charAt(0)}}</div>
+            <div id="account" @click="showPU">{{profile.user_firstname.charAt(0)}}</div>
         </div>
     </header>
 </template>
@@ -42,6 +42,13 @@ export default {
                 }, 369);
             }
         })
+    },
+
+    methods: {
+        showPU () {
+            // if user doesn't have id then show login popup
+            if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
+        }
     },
 
     computed: mapState(['profile'])
@@ -108,6 +115,7 @@ header {
         margin-right: 10px;
     }
     #account {
+        cursor: pointer;
         width: 38px;
         height: 38px;
         border-radius: 50%;
