@@ -1,5 +1,6 @@
 <template>
     <div>
+        <popup v-if="context" :context="context"/>
         <div id="trackCover" @click="selectCover"></div>
         <input type="file" id="cover">
         <input v-if="editMode" type="url" id="cover-url" v-model="coverUrl"/>
@@ -27,6 +28,7 @@
 <script>
 import axios from 'axios'
 import Aloader from '@/components/others/Aloader.vue'
+import popup from '@/components/pops/AuploadSong.vue'
 
 function convert(data, issuer, vm) {
     vm.ctaTitle = 'CONVERTING'
@@ -50,16 +52,24 @@ function subscribe(job_id, vm) {
         if (e.data == "\"uploaded\"") {
             hideLoader(vm)
             vm.ctaTitle = 'UPLOADED'
+            let ctx = {
+                message: `Track ${vm.trackTitle}, uploaded successfully!`,
+                link: `https://audiofy.myren.xyz/artist/${vm.trackArtists}`,
+                username: vm.trackArtists
+            }
+            vm.context = ctx
         }
     }
 }
 
 export default {
     components: {
-        Aloader
+        Aloader,
+        popup
     },
     data() {
         return {
+            context: null,
             ctaTitle: 'UPLOAD',
             wating: false,
             editMode: false,
