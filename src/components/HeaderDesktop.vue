@@ -48,6 +48,7 @@ export default {
         showPU () {
             // if user doesn't have id then show login popup
             if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
+            this.$router.push('/profile');
         }
     },
 
