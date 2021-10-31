@@ -34,12 +34,10 @@ export default {
     },
     methods: {
         jump: function() {
-            let router = this.$router;
-            router.replace(this.context.link);      
+            window.location.href = this.context.link
         },
         jumpTrack: function() {
-            let router = this.$router;
-            router.replace(`https://audiofy.myren.xyz/admin/songs/upload?by=${this.context.username}`);      
+            window.location.href = `https://audiofy.myren.xyz/admin/songs/upload?by=${this.context.username}`
         },
     },
     mounted() {
