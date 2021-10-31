@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: 'AartistPU',
+    name: 'AuploadPU',
     props:['context'],
     data() {
         return {
