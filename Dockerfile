@@ -1,5 +1,5 @@
 FROM node:latest as build-stage
-RUN export NODE_OPTIONS=--openssl-legacy-provider
+ENV NODE_OPTIONS=--openssl-legacy-provider
 WORKDIR /app
 COPY package.json ./
 RUN npm install
