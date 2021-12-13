@@ -1,5 +1,5 @@
 <template>
-    <div class="aplaylist">
+    <div class="aplaylist" @click="close">
         <div class="aplaylist-inner">
 
             <div class="pl-header">
@@ -7,6 +7,13 @@
             </div>
 
             <div class="pl-body">
+                <div v-if="creationState">
+                    <p class="pl-pl-title">Name</p>
+                    <form autocomplete="off">
+                        <input type="text" id="pl-pl-input" v-model="playlistName" autocomplete="nope"/>
+                    </form>
+                </div>
+
                 <div v-if="playlist.length == 0">
                     <div class="icon">
                         <ion-icon name="duplicate"></ion-icon>
@@ -14,10 +21,10 @@
                     <p class="std-p">Make Your First Playlist</p>
                 </div>
 
-                <div v-else>
+                <div v-if="playlist.length != 0 && !creationState">
                     <div class="pl-list">
                         <div v-for="(item, index) in playlist" :key="index">
-                            <div class="pl-item">
+                            <div class="pl-item" @click="addToPlaylist(item._id)">
                                 <div class="pl-item-info">
                                     <span class="pl-item-icon"><ion-icon name="copy"></ion-icon></span>
                                     <p class="pl-item-title">{{item.playlist_name}}</p>
@@ -30,8 +37,8 @@
             </div>
 
             <div class="pl-footer">
-                <button v-if="playlist.length == 0">Create Playlist</button>
-                <p class="pl-cta" v-if="playlist.length != 0">
+                <button v-if="creationState" @click="createPlaylist">Create Playlist</button>
+                <p class="pl-cta" v-else @click="creationState = true">
                     <span><ion-icon name="duplicate"></ion-icon></span>
                     Create A New Playlist
                 </p>
@@ -47,7 +54,9 @@ import axios from 'axios';
 export default {
     data() {
         return {
+            creationState: false,
             playlist: [],
+            playlistName: '',
         }
     },
     created() {
@@ -59,10 +68,60 @@ export default {
             }
         })
     },
+
+    mounted() {
+        this.$store.subscribe((mutation) => {
+            if (mutation.type == 'showPlaylistPopup') {
+                this.open()
+            }
+        })
+    },
+
+    methods: {
+        close(e) {
+            // display none
+            if (e.target.classList.contains('aplaylist')) {
+                this.$el.style.display = 'none'
+            }
+        },
+
+        open() {
+            this.$el.style.display = 'block'
+        },
+
+        addToPlaylist(id) {
+            console.log(id);
+        },
+
+        createPlaylist() {
+            let url = `https://audiofy.myren.xyz/api/v1/createPlaylist?playlist_name=${this.playlistName}`
+            axios.get(url, {withCredentials: true}).then(res => {
+                if (res.data.ok) {
+                    // reload page
+                    location.reload();
+                }
+            })
+        }
+    }
 }
 </script>
 
 <style scoped>
+    .pl-pl-title {
+        color: #ffc857;
+        margin-bottom: 8px;
+    }
+    #pl-pl-input {
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #f2f2f2;
+        background-color: #282828;
+        border: none;
+        outline: none;
+    }
     .icon {
         display: flex;
         width: 100%;
@@ -84,6 +143,7 @@ export default {
         height: 100%;
         background: rgba(47, 47, 47, 0.65);
         z-index: 9999;
+        display: none;
     }
     .aplaylist-inner {
         position: absolute;

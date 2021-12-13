@@ -35,7 +35,7 @@
       </div>
       <p>Liked Playlists</p>
     </div>
-    <div class="item">
+    <div class="item" @click="openPlaylistPU">
       <div class="icon">
         <ion-icon name="add"></ion-icon>
       </div>
@@ -66,7 +66,10 @@ export default {
     toFollows() {
       if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
       this.$router.push('/me/follows')
-    }
+    },
+    openPlaylistPU() {
+      this.$store.commit('showPlaylistPopup', true)
+    },
   }
 }
 </script>

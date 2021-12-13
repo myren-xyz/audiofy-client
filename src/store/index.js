@@ -7,7 +7,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     popups: {
-      action: false
+      action: false,
+      playlist: false,
     },
     player:{
       percentage: null,
@@ -34,6 +35,9 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    showPlaylistPopup (state, payload){
+      state.popups.playlist = payload
+    },
     addToPlaylist (state, songs) {
       state.playlist = [
         ...songs
