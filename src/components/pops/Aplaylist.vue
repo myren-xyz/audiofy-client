@@ -171,6 +171,20 @@ export default {
         overflow-y: auto;
         padding: 20px;
     }
+    .pl-body::-webkit-scrollbar {
+        background-color: #1b1a18;
+        width: 8px;
+    }
+    .pl-body::-webkit-scrollbar-thumb {
+        background-color: rgb(46,46,46);
+        border-radius: 5px;
+    }
+    .pl-body::-webkit-scrollbar-button {
+        display: none;
+    }
+    .pl-body::-webkit-scrollbar-track-piece {
+        border-radius: 4px;
+    }
     .pl-footer {
         position: relative;
         width: 100%;
