@@ -7,16 +7,34 @@
             </div>
 
             <div class="pl-body">
-                <div>
+                <div v-if="playlist.length == 0">
                     <div class="icon">
                         <ion-icon name="duplicate"></ion-icon>
                     </div>
                     <p class="std-p">Make Your First Playlist</p>
                 </div>
+
+                <div v-else>
+                    <div class="pl-list">
+                        <div v-for="(item, index) in playlist" :key="index">
+                            <div class="pl-item">
+                                <div class="pl-item-info">
+                                    <span class="pl-item-icon"><ion-icon name="copy"></ion-icon></span>
+                                    <p class="pl-item-title">{{item.playlist_name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="pl-footer">
-                <button>Create Playlist</button>
+                <button v-if="playlist.length == 0">Create Playlist</button>
+                <p class="pl-cta" v-if="playlist.length != 0">
+                    <span><ion-icon name="duplicate"></ion-icon></span>
+                    Create A New Playlist
+                </p>
             </div>
 
         </div>
@@ -24,9 +42,22 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+    data() {
+        return {
+            playlist: [],
+        }
+    },
     created() {
-        console.log('Aplaylist created');
+        let url = `https://audiofy.myren.xyz/api/v1/getPlaylists`
+        axios.get(url, {withCredentials: true}).then(res => {
+            if (res.data.ok) {
+                this.playlist = res.data.data
+                console.log(this.playlist);
+            }
+        })
     },
 }
 </script>
@@ -78,6 +109,7 @@ export default {
         width: 100%;
         height: calc(100% - 153px);
         overflow-y: auto;
+        padding: 20px;
     }
     .pl-footer {
         position: relative;
@@ -98,5 +130,33 @@ export default {
         outline: none;
         border-radius: 5px;
         height: 40px;
+    }
+    .pl-item-info {
+        display: flex;
+        place-items: center;
+    }
+    .pl-item-title {
+        font-size: 16px;
+        display: inline-block;
+        margin-left: 10px;
+    }
+    .pl-item-icon {
+        font-size: 30px;
+        color: #ffc857;
+    }
+    .pl-cta {
+        display: flex;
+        place-items: center;
+        place-content: center;
+        color: #ffc857;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 30px;
+    }
+    .pl-cta span {
+        font-size: 20px;
+        margin-right: 6px;
+        transform: translateY(2px);
     }
 </style>
