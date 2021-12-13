@@ -150,9 +150,9 @@ export default {
         top: calc(50% - 143px);
         left: calc(50% - 123px);
         width: 246px;
-        height: 286px;
+        height: 306px;
         background-color: #171715;
-        border-radius: 20.5px;
+        border-radius: 10px;
     }
     .pl-header {
         position: relative;
