@@ -3,6 +3,7 @@
     <Acookie/>
     <Aaction/>
     <Header/>
+    <Aplaylist/>
     <div id="wrapper">
       <div id="side-wrapper">
         <Side/>
@@ -28,6 +29,7 @@ import BottomPlayerDesktop from './components/BottomPlayerDesktop.vue';
 import BottomNav from './components/BottomNav.vue'
 import Acookie from './components/pops/Acookie.vue'
 import Aaction from './components/pops/Aaction.vue'
+import Aplaylist from './components/pops/Aplaylist.vue'
 
 export default {
   components: {
@@ -39,7 +41,8 @@ export default {
     BottomPlayerDesktop,
     BottomNav,
     Acookie,
-    Aaction
+    Aaction,
+    Aplaylist
   },
   created(){
     // wt test ouro
