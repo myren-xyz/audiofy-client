@@ -4,7 +4,10 @@
         <div id="gesture">
             <div id="darbar" class="flex" @click="expand">
                 <div id="playing--top-nav">
-                    <div><ion-icon name="share-outline"></ion-icon></div>
+                    <div>
+                        <!-- <ion-icon name="share-outline"></ion-icon> -->
+                        <ion-icon name="duplicate"></ion-icon>
+                    </div>
                     <div>
                         <span :class="{typeActive: typeActive}">AUDIO</span>
                         <span :class="{typeActive: !typeActive}">VIDEO</span>
