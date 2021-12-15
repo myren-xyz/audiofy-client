@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     popups: {
       action: false,
       playlist: false,
+      toBeAddedToPlaylist: null,
     },
     player:{
       percentage: null,
@@ -35,6 +36,10 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    addSongIdToPlaylist (state, songId) {
+      state.popups.toBeAddedToPlaylist = songId
+    },
+
     showPlaylistPopup (state, payload){
       state.popups.playlist = payload
     },

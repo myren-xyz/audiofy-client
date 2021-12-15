@@ -4,7 +4,7 @@
         <div id="gesture">
             <div id="darbar" class="flex" @click="expand">
                 <div id="playing--top-nav">
-                    <div>
+                    <div @click="addToPlaylist">
                         <!-- <ion-icon name="share-outline"></ion-icon> -->
                         <ion-icon name="duplicate"></ion-icon>
                     </div>
@@ -63,6 +63,10 @@ export default {
         }
     },
     methods:{
+        addToPlaylist: function() {
+            this.$store.commit('addSongIdToPlaylist', this.song._id);
+        },
+
         like(id){
             if (!this.$store.state.profile.id) {this.$store.commit('setActionPopup', true); return}
             if(!this.player.isLiked){

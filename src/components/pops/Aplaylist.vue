@@ -71,18 +71,14 @@ export default {
 
     mounted() {
         this.$store.subscribe((mutation) => {
-            if (mutation.type == 'showPlaylistPopup') {
-                this.open()
-            }
+            if (mutation.type == 'showPlaylistPopup' || mutation.type == 'addSongIdToPlaylist') this.open()
         })
     },
 
     methods: {
         close(e) {
-            // display none
-            if (e.target.classList.contains('aplaylist')) {
+            if (e.target.classList.contains('aplaylist'))
                 this.$el.style.display = 'none'
-            }
         },
 
         open() {
@@ -90,7 +86,9 @@ export default {
         },
 
         addToPlaylist(id) {
-            console.log(id);
+            let playlistID = id
+            let songID = this.$store.state.popups.toBeAddedToPlaylist
+            console.log(playlistID, songID);
         },
 
         createPlaylist() {
