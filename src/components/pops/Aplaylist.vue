@@ -62,10 +62,8 @@ export default {
     created() {
         let url = `https://audiofy.myren.xyz/api/v1/getPlaylists`
         axios.get(url, {withCredentials: true}).then(res => {
-            if (res.data.ok) {
+            if (res.data.ok)
                 this.playlist = res.data.data
-                console.log(this.playlist);
-            }
         })
     },
 
