@@ -64,6 +64,7 @@ export default {
         axios.get(url, {withCredentials: true}).then(res => {
             if (res.data.ok)
                 this.playlist = res.data.data
+                console.log(res.data.data);
         })
     },
 
@@ -86,12 +87,15 @@ export default {
         addToPlaylist(id) {
             let playlistID = id
             let songID = this.$store.state.popups.toBeAddedToPlaylist
-            
+            if (songID == null) {
+                return
+            }
+
             let url = `https://audiofy.myren.xyz/api/v1/addToPlaylist?song_id=${songID}&playlist_id=${playlistID}`
             axios.get(url, {withCredentials: true}).then(res => {
-                if (res.data.ok)
-                    location.reload();
                 this.$store.commit('removeSongIdToPlaylist')
+                if (res.data.ok)
+                    this.close()
             })
         },
 
