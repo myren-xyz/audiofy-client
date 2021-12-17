@@ -91,10 +91,9 @@ export default {
             
             let url = `https://audiofy.myren.xyz/api/v1/addToPlaylist?song_id=${songID}&playlist_id=${playlistID}`
             axios.get(url, {withCredentials: true}).then(res => {
-                if (res.data.ok) {
-                    // reload page
+                if (res.data.ok)
                     location.reload();
-                }
+                
             })
         },
 

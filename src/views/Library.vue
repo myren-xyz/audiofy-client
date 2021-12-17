@@ -29,12 +29,12 @@
     </div>
 
     <h2 class="sec-title">Playlists</h2>
-    <div class="item">
+    <!-- <div class="item">
       <div class="icon">
         <ion-icon name="list"></ion-icon>
       </div>
       <p>Liked Playlists</p>
-    </div>
+    </div> -->
     <div class="item" @click="openPlaylistPU">
       <div class="icon">
         <ion-icon name="add"></ion-icon>
