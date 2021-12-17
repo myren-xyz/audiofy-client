@@ -93,7 +93,7 @@ export default {
             axios.get(url, {withCredentials: true}).then(res => {
                 if (res.data.ok)
                     location.reload();
-                
+                this.$store.commit('removeSongIdToPlaylist')
             })
         },
 

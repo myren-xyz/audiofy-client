@@ -39,6 +39,9 @@ const store = new Vuex.Store({
     addSongIdToPlaylist (state, songId) {
       state.popups.toBeAddedToPlaylist = songId
     },
+    removeSongIdToPlaylist (state) {
+      state.popups.toBeAddedToPlaylist = null
+    },
 
     showPlaylistPopup (state, payload){
       state.popups.playlist = payload
