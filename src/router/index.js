@@ -95,6 +95,11 @@ const routes = [
     component: ()=> import('../views/me/likes.vue')
   },
   {
+    path: '/me/playlist/:playlist_identifier',
+    name: 'Liked Songs',
+    component: ()=> import('../views/me/likes.vue')
+  },
+  {
     path: '/me/follows',
     name: 'Followed Artists',
     component: ()=> import('../views/me/follows.vue')
