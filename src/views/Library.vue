@@ -29,12 +29,14 @@
     </div>
 
     <h2 class="sec-title">Playlists</h2>
-    <!-- <div class="item">
+
+    <div class="item" v-for="pl in playlist" :key="pl._id">
       <div class="icon">
         <ion-icon name="list"></ion-icon>
       </div>
-      <p>Liked Playlists</p>
-    </div> -->
+      <p>{{ pl.playlist_name }}</p>
+    </div>
+
     <div class="item" @click="openPlaylistPU">
       <div class="icon">
         <ion-icon name="add"></ion-icon>
@@ -46,6 +48,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Aslider from '@/components/others/Aslider.vue'
 import Song from '@/components/Song.vue'
 import { mapState } from 'vuex'
@@ -54,6 +57,21 @@ export default {
   components: {
     Song,
     Aslider,
+  },
+
+  data() {
+    return {
+      playlist: [],
+    }
+  },
+
+  created() {
+    let url = `https://audiofy.myren.xyz/api/v1/getPlaylists`
+      axios.get(url, {withCredentials: true}).then(res => {
+          if (res.data.ok)
+              this.playlist = res.data.data
+              console.log(res.data.data);
+      })
   },
 
   computed: mapState(['listening_history']),
