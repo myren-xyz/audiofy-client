@@ -30,7 +30,7 @@
 
     <h2 class="sec-title">Playlists</h2>
 
-    <div class="item" v-for="pl in playlist" :key="pl._id">
+    <div class="item" v-for="pl in playlist" :key="pl._id" @click="goToPlaylist(pl._id)">
       <div class="icon">
         <ion-icon name="list"></ion-icon>
       </div>
@@ -87,6 +87,9 @@ export default {
     },
     openPlaylistPU() {
       this.$store.commit('showPlaylistPopup', true)
+    },
+    goToPlaylist(id) {
+      this.$router.push(`/me/playlist/${id}`)
     },
   }
 }
