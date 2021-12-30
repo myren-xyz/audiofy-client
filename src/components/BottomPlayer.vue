@@ -4,15 +4,19 @@
         <div id="gesture">
             <div id="darbar" class="flex" @click="expand">
                 <div id="playing--top-nav">
-                    <div @click="addToPlaylist">
-                        <!-- <ion-icon name="share-outline"></ion-icon> -->
-                        <ion-icon name="duplicate"></ion-icon>
+                    <div>
+                        <ion-icon name="share-outline"></ion-icon>
                     </div>
                     <div>
                         <span :class="{typeActive: typeActive}">AUDIO</span>
                         <span :class="{typeActive: !typeActive}">VIDEO</span>
                     </div>
-                    <div><ion-icon name="ellipsis-horizontal"></ion-icon></div>
+                    <div @click="showCtx = !showCtx" id="ctxWrapper">
+                        <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        <div id="ctxMenu" v-show="showCtx">
+                            <p @click="addToPlaylist">add to playlist</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="avatar" id="song--avatar">
@@ -60,6 +64,7 @@ export default {
         return {
             typeActive: true,
             collapsed: true,
+            showCtx: false
         }
     },
     methods:{
@@ -158,6 +163,25 @@ export default {
 </script>
 
 <style>
+#ctxWrapper {
+    position: relative;
+}
+#ctxMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 30vh;
+    z-index: 1000;
+    background-color: #282828;
+    display: flex;
+    justify-content: flex-start !important;
+    padding: 18px;
+    box-shadow: 0px 0px 10px 0px #000000;
+}
+#ctxMenu p {
+    text-align: left;
+    font-size: 16px;
+}
 #darbar{
     width: 100%;
 }
