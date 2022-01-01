@@ -66,6 +66,7 @@ export default {
   },
 
   created() {
+    if (!this.$store.state.profile.id) return
     let url = `https://audiofy.myren.xyz/api/v1/getPlaylists`
       axios.get(url, {withCredentials: true}).then(res => {
           if (res.data.ok)
