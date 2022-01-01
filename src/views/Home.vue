@@ -27,7 +27,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import axios from 'axios'
 import Song from '@/components/Song.vue'
 import Artist from '@/components/Artist.vue'
 import Divider from '@/components/Divider.vue'
@@ -41,6 +41,18 @@ export default {
     Artist,
     Divider,
     Aslider
+  },
+  mounted() {
+    if (this.$route.params.song_identifier) {
+      let url = `https://audiofy.myren.xyz/api/v1/getSongById?id=${this.$route.params.song_identifier}`
+      axios.get(url, {withCredentials: true}).then( res => {
+          if (!res.data.ok) return
+          let song = JSON.parse(res.data.data)
+          let songArtists = song.artists.map(artist => artist).join(', ')
+          window.document.title = `Listen to ${song.title} By ${songArtists} On Audiofy`
+          this.$store.commit('setSong', song);
+      })
+    }
   },
   computed: {
     songs: function(){

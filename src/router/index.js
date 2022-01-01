@@ -104,6 +104,11 @@ const routes = [
     name: 'Followed Artists',
     component: ()=> import('../views/me/follows.vue')
   },
+  {
+    path: '/play/:song_identifier',
+    name: 'Play Song',
+    component: () => import('../views/Home.vue'),
+  }
 ]
 
 const router = new VueRouter({
