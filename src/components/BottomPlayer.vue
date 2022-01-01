@@ -4,7 +4,7 @@
         <div id="gesture">
             <div id="darbar" class="flex" @click="expand">
                 <div id="playing--top-nav">
-                    <div>
+                    <div @click="share">
                         <ion-icon name="share-outline"></ion-icon>
                     </div>
                     <div>
@@ -69,6 +69,16 @@ export default {
         }
     },
     methods:{
+        share() {
+            let songArtists = this.song.artists.join(', ')
+            console.log(songArtists);
+            navigator.share({
+                title: 'Audiofy',
+                text: `Listen to ${this.song.title} By ${songArtists} On Audiofy`,
+                url: `https://audiofy.myren.xyz/play/${this.song._id}`
+            })
+        },
+
         addToPlaylist: function() {
             this.$store.commit('addSongIdToPlaylist', this.song._id);
         },
