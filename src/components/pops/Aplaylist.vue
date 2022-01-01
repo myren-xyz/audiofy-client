@@ -76,7 +76,7 @@ export default {
 
     methods: {
         close(e) {
-            if (e.target.classList.contains('aplaylist'))
+            if ( e && e.target.classList.contains('aplaylist'))
                 this.$el.style.display = 'none'
         },
 
