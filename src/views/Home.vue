@@ -32,6 +32,7 @@ import Song from '@/components/Song.vue'
 import Artist from '@/components/Artist.vue'
 import Divider from '@/components/Divider.vue'
 import Aslider from '@/components/others/Aslider.vue'
+import eventBus from '@/plugins/eventBus'
 
 export default {
   name: 'Home',
@@ -51,6 +52,7 @@ export default {
           let songArtists = song.artists.map(artist => artist).join(', ')
           window.document.title = `Listen to ${song.title} By ${songArtists} On Audiofy`
           this.$store.commit('setSong', song);
+          eventBus.$emit('expand')
       })
     }
   },

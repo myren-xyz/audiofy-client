@@ -56,6 +56,7 @@
 import axios from 'axios';
 import {mapState} from 'vuex';
 import Control from '@/components/BottomPlayer/Control.vue'
+import eventBus from '@/plugins/eventBus'
 export default {
     components: {
         Control
@@ -157,7 +158,12 @@ export default {
         au.addEventListener('timeupdate', ()=>{
             this.$el.querySelector('#progressbar-now').style.width = `${(au.currentTime/au.duration)*100}%`;
         })
-    }
+        eventBus.$on('expand', ()=>{
+            setTimeout(()=>{
+                this.expand()
+            }, 1500)
+        })
+    },
 }
 
 </script>
