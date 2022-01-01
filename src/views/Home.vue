@@ -43,7 +43,17 @@ export default {
     Divider,
     Aslider
   },
-  mounted() {
+
+  computed: {
+    songs: function(){
+      return this.$store.state.songs
+    },
+    artists: function(){
+      return this.$store.state.artists
+    }
+  },
+
+  created() {
     if (this.$route.params.song_identifier) {
       let url = `https://audiofy.myren.xyz/api/v1/getSongById?id=${this.$route.params.song_identifier}`
       axios.get(url, {withCredentials: true}).then( res => {
@@ -56,14 +66,6 @@ export default {
       })
     }
   },
-  computed: {
-    songs: function(){
-      return this.$store.state.songs
-    },
-    artists: function(){
-      return this.$store.state.artists
-    }
-  }
 }
 </script>
 <style>
