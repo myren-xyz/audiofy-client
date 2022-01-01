@@ -51,7 +51,7 @@ export default {
           let song = JSON.parse(res.data.data)
           let songArtists = song.artists.map(artist => artist).join(', ')
           window.document.title = `Listen to ${song.title} By ${songArtists} On Audiofy`
-          this.$store.commit('setSong', song);
+          this.$store.commit('setSongWithoutPlay', song);
           eventBus.$emit('expand')
       })
     }

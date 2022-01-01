@@ -69,6 +69,9 @@ const store = new Vuex.Store({
     setSong (state, song) {
       state.song = Object.assign({}, song)
     },
+    setSongWithoutPlay(state, song) {
+      state.song = Object.assign({}, song)
+    },
     changeRepeatingState(state) {
       state.player.isRepeating = !state.player.isRepeating
       localStorage.setItem('isRepeating', state.player.isRepeating)

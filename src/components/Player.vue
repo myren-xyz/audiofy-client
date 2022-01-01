@@ -30,7 +30,7 @@ export default {
                 let fileName = url.split('/').pop()
                 let newUrl = url.replace(fileName, 'outputlist.m3u8')
 
-                var stream = newUrl
+                let stream = newUrl
 
                 this.$store.commit('pushToHistory', this.$store.state.song)
 
@@ -61,6 +61,36 @@ export default {
 
             if(mutation.type == 'setCurrentTime') {
                 au.currentTime = mutation.payload*au.duration
+            }
+
+            if(mutation.type == 'setSongWithoutPlay') {
+                if (this.$store.state.liked_songs) {
+                    let isLiked = this.$store.state.liked_songs.some(song => song === this.$store.state.song._id)
+                    this.$store.commit('setLiked', isLiked)
+                }
+
+                let url = this.$store.state.song.track_url
+                // change file name to outputlist.m3u8
+                let fileName = url.split('/').pop()
+                let newUrl = url.replace(fileName, 'outputlist.m3u8')
+
+                let stream = newUrl
+
+                this.$store.commit('pushToHistory', this.$store.state.song)
+
+                if(Hls.isSupported()){
+                    hls.destroy();
+                    hls = new Hls();
+                    hls.detachMedia(au)
+                    hls.loadSource(stream)
+                    hls.attachMedia(au)
+                    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                        console.log('Parsed, ready to play');
+                    });
+                }else if(au.canPlayType('application/x-mpegURL') || au.canPlayType('application/vnd.apple.mpegurl')){
+                    au.pause();
+                    au.src = stream;
+                }
             }
         })
     },
