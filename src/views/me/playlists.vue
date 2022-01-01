@@ -37,9 +37,6 @@ export default {
             let url = `https://audiofy.myren.xyz/api/v1/getPlaylist?playlist_id=${this.$route.params.playlist_identifier}`
             axios.get(url, {withCredentials: true}).then(res => {
                 if (!res.data.ok) return
-                // this.count = res.data.data.count
-                // this.liked_songs_ids = res.data.data.liked_songs
-                console.log(res.data.data);
                 this.pl = res.data.data;
                 this.songs_ids = res.data.data.songs;
             })
