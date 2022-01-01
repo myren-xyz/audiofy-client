@@ -41,6 +41,7 @@ export default {
                 // this.liked_songs_ids = res.data.data.liked_songs
                 console.log(res.data.data);
                 this.pl = res.data.data;
+                this.songs_ids = res.data.data.songs;
             })
         },
 
