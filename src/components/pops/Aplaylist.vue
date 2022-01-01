@@ -76,8 +76,12 @@ export default {
 
     methods: {
         close(e) {
-            if ( e && e.target.classList.contains('aplaylist'))
+            if (e.target.classList.contains('aplaylist'))
                 this.$el.style.display = 'none'
+        },
+
+        forceClose() {
+            this.$el.style.display = 'none'
         },
 
         open() {
@@ -95,7 +99,7 @@ export default {
             axios.get(url, {withCredentials: true}).then(res => {
                 this.$store.commit('removeSongIdToPlaylist')
                 if (res.data.ok)
-                    this.close()
+                    this.forceClose()
             })
         },
 
