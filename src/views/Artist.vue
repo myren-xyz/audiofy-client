@@ -11,8 +11,7 @@
                 <div class="bar">
                     <p><span>{{followersCount}}</span> followers</p>
                     <button @click="follow" :class="{active: !following}">
-                        <span v-if="!following">FOLLOW</span>
-                        <span v-else>FOLLOWING</span>
+                        <span>{{following_state_text}}</span>
                     </button>
                 </div>
             </div>
@@ -46,7 +45,8 @@ export default {
             artist:  {},
             artist_songs: {},
             followersCount: null,
-            following: false
+            following: false,
+            following_state_text: 'Loading'
         }
     },
     methods: {
@@ -57,6 +57,7 @@ export default {
                 axios.get(unfollowURL, {withCredentials: true}).then(res => {
                     if (res.data.ok) {
                         this.following = false;
+                        this.following_state_text = 'Follow';
                         this.followersCount--;
                     }
                 })
@@ -65,6 +66,7 @@ export default {
                 axios.get(followURL, {withCredentials: true}).then(res => {
                     if (res.data.ok) {
                         this.following = true;
+                        this.following_state_text = 'Following';
                         this.followersCount++;
                     }
                 })
@@ -107,8 +109,10 @@ export default {
                     let followings = res.data.data.followings;
                     if (followings === null || typeof followings === 'undefined') {
                         this.following = false
+                        this.following_state_text = 'Follow'
                     } else {
                         this.following = followings.some(artist => artist == this.artist._id)
+                        this.following_state_text = this.following ? 'Following' : 'Follow'
                     }
                 }
             })
