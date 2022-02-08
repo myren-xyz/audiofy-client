@@ -1,49 +1,50 @@
 <template>
   <div class="library">
-    <h2>Listening History</h2>
-    <Aslider>
-        <Song v-for="song in listening_history" :song="song" :key="song._id"/>
-    </Aslider>
-    
-    <h2 class="sec-title">Library</h2>
+    <div class="library-inner">
+      <h2>Listening History</h2>
+      <Aslider>
+          <Song v-for="song in listening_history" :song="song" :key="song._id"/>
+      </Aslider>
+      
+      <h2 class="sec-title">Library</h2>
 
-    <div class="item" @click="toLiked">
-      <div class="icon">
-        <ion-icon name="heart"></ion-icon>
+      <div class="item" @click="toLiked">
+        <div class="icon">
+          <ion-icon name="heart"></ion-icon>
+        </div>
+        <p>Liked Songs</p>
       </div>
-      <p>Liked Songs</p>
-    </div>
-    
-    <div class="item" @click="toFollows">
-      <div class="icon">
-        <ion-icon name="people-circle"></ion-icon>
+      
+      <div class="item" @click="toFollows">
+        <div class="icon">
+          <ion-icon name="people-circle"></ion-icon>
+        </div>
+        <p>Followed Artists</p>
       </div>
-      <p>Followed Artists</p>
-    </div>
 
-    <div class="item">
-      <div class="icon">
-        <ion-icon name="albums"></ion-icon>
+      <div class="item">
+        <div class="icon">
+          <ion-icon name="albums"></ion-icon>
+        </div>
+        <p>Liked Albums</p>
       </div>
-      <p>Liked Albums</p>
-    </div>
 
-    <h2 class="sec-title">Playlists</h2>
+      <h2 class="sec-title">Playlists</h2>
 
-    <div class="item" v-for="pl in playlist" :key="pl._id" @click="goToPlaylist(pl._id)">
-      <div class="icon">
-        <ion-icon name="list"></ion-icon>
+      <div class="item" @click="openPlaylistPU">
+        <div class="icon">
+          <ion-icon name="add"></ion-icon>
+        </div>
+        <p>Create Playlist</p>
       </div>
-      <p>{{ pl.playlist_name }}</p>
-    </div>
 
-    <div class="item" @click="openPlaylistPU">
-      <div class="icon">
-        <ion-icon name="add"></ion-icon>
+      <div class="item" v-for="pl in playlist" :key="pl._id" @click="goToPlaylist(pl._id)">
+        <div class="icon">
+          <ion-icon name="list"></ion-icon>
+        </div>
+        <p>{{ pl.playlist_name }}</p>
       </div>
-      <p>Create Playlist</p>
     </div>
-
   </div>
 </template>
 
@@ -98,7 +99,7 @@ export default {
 
 <style scoped>
 .library {
-  padding: 16px 16px 100px 16px;
+  padding: 16px 16px 158px 16px;
 }
 .library h2 {
   margin-block-start: 16px;
@@ -137,6 +138,11 @@ export default {
 @media screen and (min-width:728px){
   .library {
     padding: 0;
+    height: calc(100% - 82px);
+    overflow-y: scroll;
+  }
+  .library-inner {
+    padding-bottom: 158px;
   }
 }
 </style>
