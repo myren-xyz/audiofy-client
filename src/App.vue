@@ -14,6 +14,7 @@
       </div>
     </div>
     <Player/>
+    <MediaSession/>
     <BottomPlayer/>
     <BottomPlayerDesktop/>
     <BottomNav/>
@@ -21,6 +22,7 @@
 </template>
 <script>
 import Player from './components/Player.vue'
+import MediaSession from './components/MediaSession.vue'
 import Header from './components/Header.vue'
 import HeaderDesktop from './components/HeaderDesktop.vue'
 import Side from './components/Side.vue'
@@ -34,6 +36,7 @@ import Aplaylist from './components/pops/Aplaylist.vue'
 export default {
   components: {
     Player,
+    MediaSession,
     HeaderDesktop,
     Header,
     Side,

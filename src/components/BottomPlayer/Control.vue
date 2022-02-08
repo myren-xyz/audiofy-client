@@ -31,7 +31,7 @@ export default {
         },
 
         next() {
-           let currentSongId = this.$store.state.song._id;
+            let currentSongId = this.$store.state.song._id;
             // get index of current song in store.state.songs
             let currentSongIndex = this.playlist.findIndex(song => song._id === currentSongId);
             // get next song
