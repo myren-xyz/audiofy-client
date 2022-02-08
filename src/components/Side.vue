@@ -1,6 +1,6 @@
 <template>
     <div class="side">
-        <div id="logo">
+        <div id="logo" @click="goToHomePage">
             <img src="../assets/logo.png" alt="logo" />
             <h1>AUDIOFY</h1>
         </div>
@@ -22,6 +22,17 @@
         </router-link>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        goToHomePage() {
+            this.$router.push('/')
+        },
+    },    
+}
+</script>
+
 <style scoped>
 .side{
     display: none;
@@ -31,6 +42,7 @@
     #logo {
         width: 100%;
         padding: 55px 0 55px 0;
+        cursor: pointer;
     }
     #logo img {
         display: block;
