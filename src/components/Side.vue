@@ -73,6 +73,9 @@ export default {
         font-size: 14px;
         font-weight: var(--weight-semibold);
     }
+    .side h3:hover{
+        background-color: #222;
+    }
     a h3{
         transition: all 0.3s;
         color: #c1c1c1 !important;

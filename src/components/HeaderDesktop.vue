@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div></div>
+        <!-- <div></div> -->
         <div id="searchbox">
             <input id="box" type="text" placeholder="Search for songs, artists, etc" v-model="search"/>
             <button><ion-icon name="search-outline"></ion-icon></button>
@@ -65,13 +65,14 @@ header {
     }
     header {
         display: flex;
-        transform: translateX(-200px);
-        width: calc(100% + 200px);
-        padding: 22px 40px;
+        /* transform: translateX(-200px);
+        width: calc(100% + 200px); */
+        padding: 22px 0px 22px 40px;
         justify-content: space-between;
     }
     #searchbox {
         display: flex;
+        margin: 0 auto;
     }
     #searchbox input:focus {
         color: #fff;
