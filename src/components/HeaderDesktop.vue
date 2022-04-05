@@ -1,6 +1,5 @@
 <template>
     <header>
-        <!-- <div></div> -->
         <div id="searchbox">
             <input id="box" type="text" placeholder="Search for songs, artists, etc" v-model="search"/>
             <button><ion-icon name="search-outline"></ion-icon></button>
@@ -65,8 +64,6 @@ header {
     }
     header {
         display: flex;
-        /* transform: translateX(-200px);
-        width: calc(100% + 200px); */
         padding: 22px 0px 22px 40px;
         justify-content: space-between;
     }
@@ -86,11 +83,11 @@ header {
         font-family: 'Mulish', sans-serif;
         font-size: 13px;
         background-color: #282828;
+        color: #636060;
         padding: 0 16px;
         width: 25vw;
         min-width: 400px;
         max-width: 500px;
-        color: #636060;
     }
     button {
         height: 38px;
