@@ -24,7 +24,7 @@
     }
     ion-icon{
         font-size: 22px;
-        color: #ffc857;
+        color: #c1c1c1;
     }
     img{
         height: 48px;

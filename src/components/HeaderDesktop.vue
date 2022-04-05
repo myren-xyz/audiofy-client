@@ -111,7 +111,7 @@ header {
         width: 38px;
         height: 38px;
         font-size: 22px;
-        color: #ffc857;
+        color: #c1c1c1;
         display: flex;
         place-items: center;
         margin-right: 10px;
