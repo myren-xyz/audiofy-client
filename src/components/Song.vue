@@ -87,6 +87,11 @@ h4 {
 .song-wrapper{
     margin-right: 16px;
     max-width: 116px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.song-wrapper:hover{
+    transform: translateY(-2px);
 }
 .song{
     display: flex;

@@ -111,6 +111,10 @@ export default {
   align-items: center;
   margin: 8px 0;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.item:hover{
+  transform: translateY(-1px)
 }
 .sec-title {
   margin-top: 44px;
@@ -127,6 +131,10 @@ export default {
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
   color: #c1c1c1;
+  transition: all 0.2s ease-in-out;
+}
+.item:hover p{
+  color: #eeeeee;
 }
 .icon {
   display: flex;

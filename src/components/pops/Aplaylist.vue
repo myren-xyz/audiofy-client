@@ -14,7 +14,7 @@
                     </form>
                 </div>
 
-                <div v-if="playlist.length == 0">
+                <div v-if="playlist.length == 0 && !creationState">
                     <div class="icon">
                         <ion-icon name="duplicate"></ion-icon>
                     </div>
@@ -200,6 +200,7 @@ export default {
         position: relative;
         width: 100%;
         padding: auto 0 30px 0;
+        cursor: pointer;
     }
     .pl-footer button {
         display: block;
@@ -210,6 +211,7 @@ export default {
         font-size: 12px;
         font-weight: bold;
         color: #171715;
+        cursor: pointer;
 
         border: none;
         outline: none;
